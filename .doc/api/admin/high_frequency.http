@@ -1,0 +1,32 @@
+@baseUrl = {{baseUrl}}
+@contentType = application/json
+
+### read
+GET {{baseUrl}}/v1/dict/high_frequency?p_page1&p_limit10
+Accept: {{contentType}}
+
+### create
+POST {{baseUrl}}/v1/dict/high_frequency
+Content-Type: {{contentType}}
+
+{
+	"word_id": 3,
+	"project_id": 1
+}
+
+### update
+PUT {{baseUrl}}/v1/dict/high_frequency/276
+Content-Type: {{contentType}}
+
+{
+	"word_id": 5,
+	"project_id": 1
+}
+
+### multiple delete
+DELETE {{baseUrl}}/v1/dict/high_frequency
+Content-Type: {{contentType}}
+
+{
+	"ids": [276]
+}

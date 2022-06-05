@@ -1,0 +1,43 @@
+//      https://go.microsoft.com/fwlink/?linkid=830387
+// {
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "type": "go",
+//             "request": "launch",
+//             "name": "search",
+//             "program": "${workspaceRoot}/cmd/search/main.go",
+//             "args": [
+//                 "${workspaceRoot}/cmd/search/main.go"
+//             ],
+//             "stopAtEntry": false,
+//             "env": {
+//                 // "GOPATH": "${workspaceRoot}"
+//             },
+//             "cwd": "${workspaceRoot}",
+//             "console": "internalConsole",
+//             "consoleOptions": {
+//                 "stopOnEntry": false,
+//                 "fontSize": 12,
+//                 "fontFamily": "Consolas, 'Courier New', monospace",
+//                 "lineHeight": 14,
+//                 "fontLigatures": true
+//             },
+//             // "preLaunchTask": "go-build",
+//             "trace": "verbose",
+//             "showMessage": "请等待...",
+//             "showDebugInfo": true,
+//             // "preLaunchTask": "go-build",
+//             // "preLaunchTask": "go-test",
+//             // "preLaunchTask": "go-vet",
+//             // "preLaunchTask": "go-lint",
+//             "preLaunchTask": "go-fmt-cmd",
+//             // "preLaunchTask": "go-errcheck",
+//             // "preLaunchTask": "go-deadcode",
+//             // "preLaunchTask": "go-unused",
+//             // "preLaunchTask": "go-misspell",
+//             // "preLaunchTask": "go-gofmt",
+//             // "preLaunchTask": "go-imports",
+//         }
+//     ],
+// }

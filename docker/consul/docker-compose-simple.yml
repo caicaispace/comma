@@ -1,0 +1,11 @@
+version: '3'
+services:
+  consul:
+    image: consul
+    volumes:
+      - ./data:/consul/data
+      - ./config:/consul/config
+    ports:
+      - 8500:8500
+    command: agent -server -bootstrap -bind=0.0.0.0 -client=0.0.0.0 -node=consul_Server1 -bootstrap-expect=1 -ui
+    restart: always

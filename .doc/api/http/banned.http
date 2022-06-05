@@ -1,0 +1,44 @@
+@baseUrl = http://127.0.0.1:3231
+@contentType = application/json
+
+######## jsonrpc ########
+
+### 查找
+POST {{baseUrl}}
+Content-Type: {{contentType}}
+
+{
+  "jsonrpc": "2.0",
+  "id": "id",
+  "method": "banned/Find",
+  "params": {
+      "word":"枪打出头鸟888",
+      "type":"findAll"
+   }
+}
+
+### 添加
+POST {{baseUrl}}
+Content-Type: {{contentType}}
+
+{
+  "jsonrpc": "2.0",
+  "id": "id",
+  "method": "banned/Add",
+  "params": {
+      "word":"888"
+   }
+}
+
+### 删除
+POST {{baseUrl}}
+Content-Type: {{contentType}}
+
+{
+  "jsonrpc": "2.0",
+  "id": "id",
+  "method": "banned/Del",
+  "params": {
+      "word":"888"
+   }
+}

@@ -1,0 +1,30 @@
+@baseUrl = {{baseUrl}}
+@contentType = application/json
+
+### read
+GET {{baseUrl}}/v1/dict/project?p_page1&p_limit10
+Accept: {{contentType}}
+
+### create
+POST {{baseUrl}}/v1/dict/project
+Content-Type: {{contentType}}
+
+{
+	"name": "test"
+}
+
+### update
+PUT {{baseUrl}}/v1/dict/project/4
+Content-Type: {{contentType}}
+
+{
+	"name": "test1"
+}
+
+### multiple delete
+DELETE {{baseUrl}}/v1/dict/project
+Content-Type: {{contentType}}
+
+{
+	"ids": [4]
+}

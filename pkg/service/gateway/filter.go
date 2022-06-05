@@ -1,0 +1,125 @@
+package gateway
+
+import (
+	"regexp"
+	"strings"
+
+	"goaway/pkg/library/util/config"
+	segmentService "goaway/pkg/service/segment"
+)
+
+type SEARCH_TYPE int
+
+const (
+	PROXY_SEARCH_TYPE SEARCH_TYPE = iota
+	PASS_SEARCH_TYPE
+	STANDARD_SEARCH_TYPE
+)
+
+type FilterService struct {
+	Segmenter *segmentService.SegmenterService
+}
+
+type PayLoadFilter struct {
+	Segmenter *segmentService.SegmenterService
+}
+
+type IFilter interface {
+	FilterRequest(er *EsRequest)
+}
+
+type EsRequest struct {
+	SearchType    SEARCH_TYPE
+	RequestUrl    string
+	RequestMethod string
+	IndexName     string
+	TypeName      string
+	BodyRaw       string
+	Banned        string
+	ProjectId     uint8
+}
+
+var (
+	payLoadFilterTypeCommon  *PayLoadFilter
+	payLoadFilterTypePayload *PayLoadFilter
+)
+
+// GetFilterInstance
+// 0 common
+// 1 payload
+func (fs *FilterService) GetFilterInstance(indexName string, typeName string) IFilter {
+	filterType := config.GetInstance().GetEsFilterType(indexName, typeName)
+	switch filterType {
+	case 0:
+		payLoadFilterTypeCommon = &PayLoadFilter{
+			Segmenter: fs.Segmenter,
+		}
+		return payLoadFilterTypeCommon
+	case 1:
+		payLoadFilterTypePayload = &PayLoadFilter{
+			Segmenter: fs.Segmenter,
+		}
+		return payLoadFilterTypePayload
+	default:
+		return nil
+	}
+}
+
+func (pf *PayLoadFilter) FilterRequest(er *EsRequest) {
+	er.Banned = ""
+	body := er.BodyRaw
+
+	reg := regexp.MustCompile(`"query"\s*:\s*"([^"]*)"`)
+	matches := reg.FindAllSubmatch([]byte(er.BodyRaw), -1)
+
+	hasHighFre := false
+	hanCount := 0
+	letCount := 0
+	numCount := 0
+
+	var termSlice []string
+	var bannedSlice []string
+	for i := 0; i < len(matches); i++ {
+		segWords := pf.Segmenter.SegmentSearchMode(string(matches[i][1])) // 搜索词分词
+		if len(segWords) == 0 {
+			continue
+		}
+		termSlice = make([]string, 0)
+		bannedSlice = make([]string, 0)
+		for _, word := range segWords {
+			// 停词
+			if pf.Segmenter.IsStop(word) {
+				continue
+			}
+			// 违禁词
+			if pf.Segmenter.IsBanned(word) {
+				bannedSlice = append(bannedSlice, word)
+				continue
+			}
+			termSlice = append(termSlice, word)
+			// 高频词
+			if pf.Segmenter.IsHighFrequency(word, er.ProjectId) {
+				hasHighFre = true
+			}
+		}
+		r := []rune(string(matches[i][1]))
+		for i := 0; i < len(r); i++ {
+			if r[i] <= 40869 && r[i] >= 19968 {
+				hanCount++
+			} else if (64 < r[i] && r[i] < 91) || (96 < r[i] && r[i] < 123) {
+				letCount++
+			} else if 47 < r[i] && r[i] < 58 {
+				numCount++
+			}
+		}
+		er.Banned = strings.Join(bannedSlice, " ")
+		body = strings.Replace(body, string(matches[i][1]), strings.Join(termSlice, " "), -1)
+	}
+	// 为啥会出现50%的选项 因为为了多显示搜索到的内容 但是由于是综合排序 评分不仅仅来自词的权重得分
+	// 高频词 含有数字或者字母 搜索长度汉字超过10  都采用100%搜索
+	if hasHighFre || (letCount > 0 || numCount > 0) || (hanCount >= 20) {
+		// if hasHighFre || (letCount > 20 || numCount > 20) || (hanCount >= 3){
+		body = strings.Replace(body, "50%", "100%", -1)
+	}
+	er.BodyRaw = body
+}

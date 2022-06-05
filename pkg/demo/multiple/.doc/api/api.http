@@ -1,0 +1,40 @@
+@baseUrl = http://127.0.0.1:8082
+@contentType = application/json
+
+######## jsonrpc ########
+
+### 查找
+GET {{baseUrl}}/v1/test?test=111
+Content-Type: {{contentType}}
+
+### 添加
+POST {{baseUrl}}
+Content-Type: {{contentType}}
+
+{
+  "word": "test",
+}
+
+### 添加
+PUT {{baseUrl}}/1
+Content-Type: {{contentType}}
+
+{
+  "word": "test2",
+}
+
+
+### 删除
+DELETE {{baseUrl}}/1
+Content-Type: {{contentType}}
+
+### Ping
+POST http://127.0.0.1:8081
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "id",
+  "method": "demo/Sub",
+  "params": [100,88]
+}

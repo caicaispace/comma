@@ -1,0 +1,32 @@
+@baseUrl = {{baseUrl}}
+@contentType = application/json
+
+### read
+GET {{baseUrl}}/v1/dict/banned?p_page1&p_limit=10
+Accept: {{contentType}}
+
+### create
+POST {{baseUrl}}/v1/dict/banned
+Content-Type: {{contentType}}
+
+{
+	"word_id": 352947,
+	"project_id": 1
+}
+
+### update
+PUT {{baseUrl}}/v1/dict/banned/4
+Content-Type: {{contentType}}
+
+{
+	"word_id": 5,
+	"project_id": 1
+}
+
+### multiple delete
+DELETE {{baseUrl}}/v1/dict/banned
+Content-Type: {{contentType}}
+
+{
+	"ids": [4]
+}

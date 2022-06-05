@@ -1,0 +1,41 @@
+@baseUrl = {{baseUrl}}
+@contentType = application/json
+
+### read
+GET {{baseUrl}}/v1/dict/festival?p_page1&p_limit=10
+Accept: {{contentType}}
+
+### create
+
+POST {{baseUrl}}/v1/dict/festival
+Content-Type: {{contentType}}
+
+{
+	"word_id": 352947,
+	"project_id": 1,
+	"name": "test",
+	"sun_date": "01-01",
+	"lunar_date": "01-01"
+}
+
+### update
+
+PUT {{baseUrl}}/v1/dict/festival/31
+Content-Type: {{contentType}}
+
+{
+	"word_id": 352947,
+	"project_id": 1,
+	"name": "test2",
+	"sun_date": "01-01",
+	"lunar_date": "01-01"
+}
+
+### multiple delete
+
+DELETE {{baseUrl}}/v1/dict/festival
+Content-Type: {{contentType}}
+
+{
+	"ids": [31]
+}

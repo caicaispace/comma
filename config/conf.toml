@@ -1,0 +1,20 @@
+title = "goaway"
+
+desc = ""
+
+env="dev"
+
+[server]
+host = "127.0.0.1"
+
+[db]
+addr = "root:123456@tcp(127.0.0.1:3306)/goaway?charset=utf8"
+
+[es]
+addr = "http://127.0.0.1:9200"
+username = ""
+password = ""
+routers = [
+	{ addr = "http://127.0.0.1:9200", index = "search_all_test", type = "all", filterType = 1, projectId = 0 },
+	{ addr = "http://127.0.0.1:9200", index = "search_all", type = "all", filterType = 1, projectId = 0 },
+]

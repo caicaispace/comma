@@ -1,0 +1,66 @@
+@baseUrl = http://127.0.0.1:9401
+
+######## http ########
+
+### 分词
+POST {{baseUrl}}/v1/api/segment
+Content-Type: application/json
+
+{
+  "title": "4k地球旋转很快",
+  "tags": "地球旋转,动画,环球,3d模型,3d,地球,地球村,全球,全世界"
+}
+
+### 返回实例 ###
+
+#{
+#  "code": 200,
+#  "msg": "ok",
+#  "data": null
+#}
+
+######## jsonrpc ########
+
+### Ping
+GET {{baseUrl}}/ping
+Content-Type: application/json
+
+### 分词
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "id",
+  "method": "segment/Segment",
+  "params": {
+      "title":"企业人名字幕条AE视频模板",
+      "tags": "企业,人名,字幕条,商务,视频元素,企业宣传,馄饨,老年人,人"
+   }
+}
+
+### 批量分词
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "id",
+  "method": "segment/BatchSegment",
+  "params": {
+      "list": {
+        "1":{
+            "title":"杭州西湖风景区天下第一财神庙4K风景视频",
+            "tags": "杭州,西湖,江南,江南水乡,4K风景,江南风光,江南建筑,风景,寺庙,禅院,财神庙,灵顺寺"
+        },
+        "2":{
+            "title":"装饰装修风格展示AE模板",
+            "tags": "装饰,装修,装修风格,房屋设计展示,AE模板,家装节,房屋设计,房屋装修构图"
+        },
+        "3":{
+            "title":"葡萄园里的翡翠香印葡萄",
+            "tags": "葡萄,葡萄园,翡翠香印,青提,绿葡萄,葡萄藤,夏天,阳光,种植园,丰收,农业"
+        }
+      }
+  }
+}

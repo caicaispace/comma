@@ -1,0 +1,36 @@
+@baseUrl = {{baseUrl}}
+@contentType = application/json
+
+### read
+GET http://127.0.0.1:9402/v1/dict/hyponym?p_page1&p_limit10
+Accept: {{contentType}}
+
+### create
+POST http://127.0.0.1:9402/v1/dict/hyponym
+Content-Type: {{contentType}}
+
+{
+	"word_id": 3,
+	"project_id": 1,
+	"hyponym_word_id": 1,
+	"rate": 1.2
+}
+
+### update
+PUT http://127.0.0.1:9402/v1/dict/hyponym/9
+Content-Type: {{contentType}}
+
+{
+	"word_id": 3,
+	"project_id": 1,
+	"hyponym_word_id": 1,
+	"rate": 1.3
+}
+
+### multiple delete
+DELETE http://127.0.0.1:9402/v1/dict/hyponym
+Content-Type: {{contentType}}
+
+{
+	"ids": [159]
+}

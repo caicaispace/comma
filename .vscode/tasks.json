@@ -1,0 +1,21 @@
+// {
+//     "version": "2.0.0",
+//     "tasks": [
+//         {
+//             "label": "go-fmt-cmd",
+//             "command": "go",
+//             "args": [
+//                 "fmt",
+//                 "./cmd/...",
+//             ],
+//         },
+//         {
+//             "label": "go-fmt-service",
+//             "command": "go",
+//             "args": [
+//                 "fmt",
+//                 "./src/...",
+//             ],
+//         }
+//     ]
+// }

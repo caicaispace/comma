@@ -1,0 +1,42 @@
+@baseUrl = {{baseUrl}}
+@contentType = application/json
+
+### read
+GET {{baseUrl}}/v1/dict/word?p_page1&p_limit10
+Accept: {{contentType}}
+
+### read
+GET {{baseUrl}}/v1/dict/words/349047,95763,95615
+Accept: {{contentType}}
+
+### info
+GET {{baseUrl}}/v1/dict/word/222
+Accept: {{contentType}}
+
+### create
+POST {{baseUrl}}/v1/dict/word
+Content-Type: {{contentType}}
+
+{
+	"word": "test",
+	"frequency": 1,
+	"classify": "n"
+}
+
+### update
+PUT {{baseUrl}}/v1/dict/word/352957
+Content-Type: {{contentType}}
+
+{
+	"word": "test1",
+	"frequency": 1,
+	"classify": "n"
+}
+
+### multiple delete
+DELETE {{baseUrl}}/v1/dict/word
+Content-Type: {{contentType}}
+
+{
+	"ids": [352957]
+}

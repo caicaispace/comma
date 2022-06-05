@@ -1,0 +1,30 @@
+######## http ########
+
+### ping
+GET http://127.0.0.1:3230/ping
+Content-Type: application/json
+
+### jieba
+GET http://127.0.0.1:8081/v1/api/test
+Content-Type: application/json
+
+### pager
+GET http://127.0.0.1:8081/v1/api/test_pager?p_page=1&p_limit=10
+Content-Type: application/json
+
+### json
+GET http://127.0.0.1:3230/json
+Content-Type: application/json
+
+######## jsonrpc ########
+
+### Ping
+POST http://127.0.0.1:8081
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "id",
+  "method": "demo/Sub",
+  "params": [100,88]
+}

@@ -1,0 +1,94 @@
+version: "3"
+services:
+  # nginx:
+  #   build:
+  #     context: ./docker/services/nginx
+  #     args:
+  #       NGINX_VERSION: nginx:${NGINX_VERSION}
+  #       CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+  #       NGINX_INSTALL_APPS: ${NGINX_INSTALL_APPS}
+  #   container_name: nginx
+  #   ports:
+  #     - "${NGINX_HTTP_HOST_PORT}:80"
+  #   volumes:
+  #     - ${SOURCE_DIR}:/home/www/:rw
+  #     - ${NGINX_CONFD_DIR}:/etc/nginx/conf.d/:rw
+  #     - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
+  #     - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
+  #   environment:
+  #     TZ: "$TZ"
+  #   restart: always
+  #   networks:
+  #     - default
+
+  golang:
+    build:
+      context: ./docker/services/golang
+      args:
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+    container_name: golang
+    environment:
+      - "TIMEZONE=Asia/Shanghai"
+      - "APP_SYSTEM_ENV=docker"
+    working_dir: "/home/www"
+    ports:
+      - "9400:9400"
+      - "9401:9401"
+      - "9402:9402"
+    volumes:
+      - ${SOURCE_DIR}:/home/www/:rw
+      - goaway:/home/www/goaway:rw
+      - config:/home/www/config:rw
+      - data:/home/www/data:rw
+      - static:/home/www/static:rw
+    command:
+      - /home/www/goaway
+      - -env=dev
+    # restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
+
+  elasticsearch:
+    build:
+      context: ./docker/services/elasticsearch
+      args:
+        ELASTICSEARCH_VERSION: ${ELASTICSEARCH_VERSION}
+        ELASTICSEARCH_PLUGINS: ${ELASTICSEARCH_PLUGINS}
+    container_name: elasticsearch
+    environment:
+      - TZ=$TZ
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ${DATA_DIR}/esdata:/usr/share/elasticsearch/data
+      - ${ELASTICSEARCH_CONF_FILE}:/usr/share/elasticsearch/config/elasticsearch.yml
+    hostname: elasticsearch
+    # restart: always
+    ports:
+      - "${ELASTICSEARCH_HOST_PORT_C}:9200"
+      - "${ELASTICSEARCH_HOST_PORT_S}:9300"
+
+  mysql:
+    image: mysql/mysql-server:${MYSQL_VERSION}
+    container_name: mysql
+    ports:
+      - "${MYSQL_HOST_PORT}:3306"
+    volumes:
+      - ${MYSQL_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
+      - ${DATA_DIR}/mysql:/var/lib/mysql/:rw
+      - ${MYSQL_LOG_DIR}:/var/log/mysql/:rw
+    # restart: always
+    networks:
+      - default
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_ROOT_HOST: "${MYSQL_ROOT_HOST}"
+      TZ: "$TZ"
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
