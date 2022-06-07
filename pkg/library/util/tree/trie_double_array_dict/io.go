@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	tda "goaway/pkg/library/util/tree/trie-double-array"
+	tda "goaway/pkg/library/util/tree/trie_double_array"
 )
 
 // Load gob serialized dict from dir

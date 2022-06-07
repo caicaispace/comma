@@ -1,7 +1,7 @@
 package trie_double_array_dict
 
 import (
-	tda "goaway/pkg/library/util/tree/trie-double-array"
+	tda "goaway/pkg/library/util/tree/trie_double_array"
 )
 
 // Dict contains the Trie and dict values

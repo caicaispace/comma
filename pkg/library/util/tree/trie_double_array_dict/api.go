@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	tda "goaway/pkg/library/util/tree/trie-double-array"
+	tda "goaway/pkg/library/util/tree/trie_double_array"
 )
 
 // BuildFromFile builds the da dict from fileName
