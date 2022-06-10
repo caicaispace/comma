@@ -25,11 +25,6 @@ func NewWithAddr(addr string) {
 		os.Exit(0)
 	}
 	_db = db
-	// err = db.AutoMigrate(&gorm.Model{}) // 自动生成表结构
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	os.Exit(0)
-	// }
 }
 
 func DB() *gorm.DB {
@@ -38,7 +33,7 @@ func DB() *gorm.DB {
 
 func getGormConfig() *gorm.Config {
 	// slowLogger := logger.New(
-	// 	// 将标准输出作为Writer
+	// 	// stdout
 	// 	log.New(os.Stdout, "\r\n", log.LstdFlags),
 	// 	logger.Config{
 	// 		SlowThreshold: time.Second,   // 慢 SQL 阈值
