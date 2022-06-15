@@ -1,4 +1,7 @@
-POST search_test/all/_search
+### 搜索
+POST http://127.0.0.1:9400/search_test/all/_search
+Content-Type: application/json
+
 {
   "query": {
     "function_score": {
@@ -8,7 +11,7 @@ POST search_test/all/_search
             "multi_match" : {
               "query" : "安阳",
               "fields" : [
-                  "name^33",
+                  "name^20",
                   "nickname",
                   "job"
               ],
@@ -25,10 +28,10 @@ POST search_test/all/_search
   "sort": []
 }
 
+### 创建索引
+PUT http://127.0.0.1:9200/search_test
+Content-Type: application/json
 
-
-// # 创建索引
-PUT search_test
 {
   "mappings": {
     "all": {

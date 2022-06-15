@@ -38,7 +38,7 @@ type searchResult struct {
 
 func (*Gateway) Search(params *searchParams, result *searchResult) error {
 	esBody, _ := json.Marshal(params.Body)
-	esData, err := gatewayService.GetInstance().DispatchWithRpc(params.Index, params.Type, string(esBody), "search")
+	esData, err := gatewayService.GetInstance().DispatchWithJsonRpc(params.Index, params.Type, string(esBody), "search")
 	if err != nil {
 		fmt.Println(err.Error())
 		return err

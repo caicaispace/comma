@@ -32,7 +32,16 @@ func DB() *gorm.DB {
 }
 
 func getGormConfig() *gorm.Config {
-	// slowLogger := logger.New(
+	c := &gorm.Config{}
+	if setting.Server.Env == "dev" {
+		c.Logger = logger.Default.LogMode(logger.Info)
+		// c.Logger slowLogger()
+	}
+	return c
+}
+
+func slowLogger() {
+	// return logger.New(
 	// 	// stdout
 	// 	log.New(os.Stdout, "\r\n", log.LstdFlags),
 	// 	logger.Config{
@@ -41,8 +50,4 @@ func getGormConfig() *gorm.Config {
 	// 		Colorful:      false,         // 禁用彩色打印
 	// 	},
 	// )
-	return &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
-		// Logger: slowLogger,
-	}
 }

@@ -83,12 +83,11 @@ func adminServerStart(serverAddr string) error {
 }
 
 func gatewayServerStart(serverAddr string) error {
-	// s := httpServer.NewServer()
-	// s.SetServerAddr(serverAddr)
-	// s.SetTrace(TRACE_URL, "gateway", serverAddr)
-	// gatewayServer.NewServer(s)
-	// s.Start()
-	gatewayServer.NewServer(serverAddr)
+	s := httpServer.NewServer()
+	s.SetServerAddr(serverAddr)
+	// s.UseTrace(TRACE_URL, "gateway", serverAddr)
+	gatewayServer.NewServer(s)
+	s.Start()
 	return nil
 }
 

@@ -87,17 +87,17 @@ func (pf *PayLoadFilter) FilterRequest(er *EsRequest) {
 		termSlice = make([]string, 0)
 		bannedSlice = make([]string, 0)
 		for _, word := range segWords {
-			// 停词
+			// stop
 			if pf.Segmenter.IsStop(word) {
 				continue
 			}
-			// 违禁词
+			// banned
 			if pf.Segmenter.IsBanned(word) {
 				bannedSlice = append(bannedSlice, word)
 				continue
 			}
 			termSlice = append(termSlice, word)
-			// 高频词
+			// High frequency
 			if pf.Segmenter.IsHighFrequency(word, er.ProjectId) {
 				hasHighFre = true
 			}
@@ -115,10 +115,7 @@ func (pf *PayLoadFilter) FilterRequest(er *EsRequest) {
 		er.Banned = strings.Join(bannedSlice, " ")
 		body = strings.Replace(body, string(matches[i][1]), strings.Join(termSlice, " "), -1)
 	}
-	// 为啥会出现50%的选项 因为为了多显示搜索到的内容 但是由于是综合排序 评分不仅仅来自词的权重得分
-	// 高频词 含有数字或者字母 搜索长度汉字超过10  都采用100%搜索
 	if hasHighFre || (letCount > 0 || numCount > 0) || (hanCount >= 20) {
-		// if hasHighFre || (letCount > 20 || numCount > 20) || (hanCount >= 3){
 		body = strings.Replace(body, "50%", "100%", -1)
 	}
 	er.BodyRaw = body

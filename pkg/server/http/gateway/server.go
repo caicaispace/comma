@@ -1,17 +1,21 @@
 package admin
 
 import (
-	"net/http"
-	// httpproxy "goaway/pkg/library/util/net/http/proxy"
+	httpServer "goaway/pkg/library/net/http"
+	"goaway/pkg/library/util/config"
 
+	// httpproxy "goaway/pkg/library/util/net/http/proxy"
 	gatewayService "goaway/pkg/service/gateway"
 )
 
-// ---------------------- http ----------------------
+// ---------------------- gin ----------------------
 
-func NewServer(addr string) {
-	http.HandleFunc("/", gatewayService.GetInstance().DispatchWithHttp)
-	http.ListenAndServe(addr, nil)
+func NewServer(s *httpServer.Service) {
+	routers := config.GetInstance().GetProxyRoutes()
+	for _, route := range routers {
+		s.Engine.Any(route, gatewayService.GetInstance().DispatchWithGin)
+		// s.Engine.POST(route, gatewayService.GetInstance().DispatchWithGin)
+	}
 }
 
 // ---------------------- proxy ----------------------
@@ -38,14 +42,4 @@ func NewServer(addr string) {
 // 	prx.OnAccept = OnAccept
 // 	// Listen...
 // 	http.ListenAndServe("127.0.0.1:8081", prx)
-// }
-
-// ---------------------- gin ----------------------
-
-// func NewServer(s *httpServer.Service) {
-// 	routers := config.GetXmlInstance().GetProxyRoutes()
-// 	for _, route := range routers {
-// 		// s.Engine.Any(route, gatewayService.GetInstance().DispatchWithGin)
-// 		s.Engine.POST(route, gatewayService.GetInstance().DispatchWithGin)
-// 	}
 // }

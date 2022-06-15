@@ -41,3 +41,8 @@ func (c *Context) Success(data interface{}, err error) {
 func (c *Context) Error(httpCode, errCode int, msg interface{}, err error) {
 	c.ResponseData(httpCode, errCode, nil, msg, err)
 }
+
+func (c *Context) JOSN(body []byte) {
+	c.C.Writer.Header().Set("Content-Type", "application/json")
+	c.C.Writer.Write(body)
+}

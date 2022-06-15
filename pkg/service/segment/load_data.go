@@ -13,7 +13,7 @@ const (
 	// dicWordTable = "dict_word_copy"
 )
 
-// GetLastCreateTime 字典最后修改时间
+// GetLastCreateTime
 func GetLastCreateTime() int {
 	sqlStr := "select max(create_time) as last_create_time from dict_version"
 	var lastCreateTime int
@@ -28,7 +28,7 @@ type wordModel struct {
 	Classify  string `gorm:"classify"`
 }
 
-// LoadDictFromDB 分词词典
+// LoadDictFromDB
 func LoadDictFromDB() ([]*wordModel, error) {
 	outData := make([]*wordModel, 0)
 	// models := make([]*wordModel, 0)
@@ -46,7 +46,7 @@ type synonymsModel struct {
 	Rate    string `gorm:"rate"`
 }
 
-// LoadSynonymsDictFromDB 同义词 v2
+// LoadSynonymsDictFromDB
 func LoadSynonymsDictFromDB(projectId int) (*map[string][]string, error) {
 	outData := make(map[string][]string)
 	models := make([]*synonymsModel, 0)
@@ -74,7 +74,7 @@ type highFrequencyModel struct {
 	Word string `gorm:"word"`
 }
 
-// LoadHighFrequencyDictFromDB 高频词
+// LoadHighFrequencyDictFromDB
 func LoadHighFrequencyDictFromDB(projectId int) (*map[string]bool, error) {
 	models := make([]*highFrequencyModel, 0)
 	table := dbGorm.DB().Table("dict_high_frequency")
@@ -100,7 +100,7 @@ type stopModel struct {
 	Word string `gorm:"word"`
 }
 
-// LoadStopDictFromDB 停词
+// LoadStopDictFromDB
 func LoadStopDictFromDB() (*map[string]bool, error) {
 	modes := make([]*stopModel, 0)
 	table := dbGorm.DB().Table("dict_stop")
@@ -125,7 +125,7 @@ type bannedModel struct {
 	Word string `gorm:"word"`
 }
 
-// LoadBannedDictFromDB 违禁词
+// LoadBannedDictFromDB
 func LoadBannedDictFromDB() (*map[string]bool, error) {
 	models := make([]*bannedModel, 0)
 	table := dbGorm.DB().Table("dict_banned")
@@ -144,7 +144,7 @@ dict_word.word AS word
 	return &outData, nil
 }
 
-// LoadBannedDictV3FromDB 违禁词
+// LoadBannedDictV3FromDB
 func LoadBannedDictV3FromDB() (*map[string]bool, error) {
 	outData := make(map[string]bool)
 	models := make([]*bannedModel, 0)
@@ -166,7 +166,7 @@ type hyponymModel struct {
 	Rate    string `gorm:"rate"`
 }
 
-// LoadHyponymDictFromDB 上位词，下位词
+// LoadHyponymDictFromDB
 // 返回参数第一参数是 下位词列表
 // 返回参数第二参数是 上位词列表 这个有没有必要进行上位词处理 暂不处理上位词 主要在无搜索结果情况下可以使用上位 暂时舍弃
 func LoadHyponymDictFromDB() (*map[string][]string, error) {
@@ -203,7 +203,7 @@ type ProjectOutData struct {
 	LastId int
 }
 
-// LoadProjectFromDB 项目
+// LoadProjectFromDB
 func LoadProjectFromDB() *ProjectOutData {
 	var total int64
 	dbGorm.DB().Table("dict_project").Select("count(*)").Count(&total)

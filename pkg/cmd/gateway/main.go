@@ -5,6 +5,7 @@ import (
 
 	"goaway/pkg/library/db"
 	serverSetting "goaway/pkg/library/net"
+	httpServer "goaway/pkg/library/net/http"
 	jsonrpcServer "goaway/pkg/library/net/jsonrpc"
 	"goaway/pkg/library/setting"
 	gatewayServer "goaway/pkg/server/http/gateway"
@@ -26,7 +27,11 @@ func init() {
 }
 
 func httpServerStart(serverAddr string) error {
-	gatewayServer.NewServer(serverAddr)
+	s := httpServer.NewServer()
+	s.SetServerAddr(serverAddr)
+	// s.UseTrace(TRACE_URL, "gateway", serverAddr)
+	gatewayServer.NewServer(s)
+	s.Start()
 	return nil
 }
 

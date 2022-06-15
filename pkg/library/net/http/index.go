@@ -3,10 +3,11 @@ package http
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"time"
 
-	middleware2 "goaway/pkg/library/net/http/middleware"
+	"goaway/pkg/library/net/http/middleware"
 	"goaway/pkg/library/setting"
 	"goaway/pkg/library/util"
 
@@ -41,6 +42,7 @@ func (s *Service) registerDefaultRouter() {
 
 func NewServer() *Service {
 	gin.SetMode(gin.ReleaseMode)
+	gin.DefaultWriter = ioutil.Discard // disable router map log
 	return &Service{
 		Engine: gin.New(),
 		// Engine: gin.Default(),
@@ -60,9 +62,9 @@ func (s *Service) SetServerAddr(addr string) *Service {
 	return s
 }
 
-// zipkin 链路追踪
+// zipkin
 func (s *Service) UseTrace(zipkinAddr, serviceName, serviceAddr string) *Service {
-	trace := middleware2.NewTraceV2(zipkinAddr, serviceName, serviceAddr)
+	trace := middleware.NewTraceV2(zipkinAddr, serviceName, serviceAddr)
 	s.Engine.Use(func(c *gin.Context) {
 		span := (trace.ZipkinTracer).StartSpan(c.FullPath())
 		defer span.Finish()
@@ -73,7 +75,7 @@ func (s *Service) UseTrace(zipkinAddr, serviceName, serviceAddr string) *Service
 }
 
 func (s *Service) UseGrafana() {
-	middleware2.NewGrafana(s.Engine)
+	middleware.NewGrafana(s.Engine)
 }
 
 func (s *Service) Start() {

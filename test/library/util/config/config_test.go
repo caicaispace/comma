@@ -15,8 +15,8 @@ func TestConf_New(t *testing.T) {
 	fmt.Printf("ElasticSearch Config: %+v\n\n", conf.ES)
 }
 
-func TestConf_GetServerAddr(t *testing.T) {
-	t.Log(conf.GetServerAddr())
+func TestConf_GetServerHost(t *testing.T) {
+	t.Log(conf.GetServerHost())
 }
 
 func TestConf_GetEs(t *testing.T) {
