@@ -10,6 +10,7 @@ require (
 	github.com/astaxie/beego v1.12.3
 	github.com/cheggaaa/pb v1.0.29
 	github.com/dustin/go-humanize v1.0.0 // indirect
+	github.com/elastic/go-elasticsearch/v5 v5.6.1
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-playground/validator/v10 v10.10.0 // indirect

@@ -27,3 +27,4 @@ main
 goaway
 
 # tools
+config/conf.toml

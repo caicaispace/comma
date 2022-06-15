@@ -42,17 +42,11 @@ func (s *service) GetSegmentData(title, tags string) (*map[string]float32, *map[
 			(*wordMap)[kw] = (*wordMap)[kw] + float32(titleWeight)
 		}
 	}
-	//{
-	//	arr := p.SegmenterService.SegmentSearchMode(words)
-	//	for _, val := range arr {
-	//		fmt.Print(val + "|")
-	//	}
-	//}
 	return wordMap, synMap, hypMap, orderArray
 }
 
 func (s *service) AddWordToDict(word, classify string, frequency int) {
-	// s.Segmenter.AddWordTokenToDict(word, classify, frequency)
+	s.Segmenter.AddWordTokenToDict(word, classify, frequency)
 }
 
 func (s service) DelWordToDict(word string) {
