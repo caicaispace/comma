@@ -6,7 +6,7 @@ import (
 )
 
 func TestBinary(t *testing.T) {
-	var v int64 = 989898956898958 //默认10进制
-	s2 := strconv.FormatInt(v, 2) //10 转2进制
+	var v int64 = 989898956898958 // 默认10进制
+	s2 := strconv.FormatInt(v, 2) // 10 to 2
 	t.Log(s2)
 }

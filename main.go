@@ -8,17 +8,17 @@ import (
 	"goaway/pkg/library/setting"
 	"goaway/pkg/library/util/config"
 	"goaway/pkg/model"
-	adminServer "goaway/pkg/server/http/admin"
-	gatewayServer "goaway/pkg/server/http/gateway"
-	bannedService "goaway/pkg/service/banned"
+	adminHttpServer "goaway/pkg/server/http/admin"
+	gatewayHttpServer "goaway/pkg/server/http/gateway"
 	"io/fs"
 	"net/http"
-
-	//bannedJsonRpc `goaway/pkg/service/banned/server/jsonrpc`
 
 	jsonrpcServer "goaway/pkg/library/net/jsonrpc"
 	gatewayJsonRpc "goaway/pkg/server/jsonrpc/gateway"
 	segmentJsonRpc "goaway/pkg/server/jsonrpc/segment"
+
+	//bannedJsonRpc `goaway/pkg/service/banned/server/jsonrpc`
+	bannedService "goaway/pkg/service/banned"
 	"log"
 
 	"golang.org/x/sync/errgroup"
@@ -29,17 +29,19 @@ const (
 )
 
 type Service struct {
-	IsOpen bool
+	AdminIsOpen   bool
+	JsonrpcIsOpen bool
+	GrpcIsOpen    bool
 }
 
 var (
 	//go:embed static/*
 	static   embed.FS
-	g        errgroup.Group
-	services = map[string]*Service{
-		"admin":   {IsOpen: true},
-		"jsonrpc": {IsOpen: true},
-		"grpc":    {IsOpen: true},
+	group    errgroup.Group
+	services = &Service{
+		AdminIsOpen:   true,
+		JsonrpcIsOpen: true,
+		GrpcIsOpen:    false,
 	}
 )
 
@@ -75,7 +77,7 @@ func adminServerStart(serverAddr string) error {
 	s.SetServerAddr(serverAddr)
 	// s.UseTrace(TRACE_URL, "goaway-admin", serverAddr)
 	// s.UseGrafana()
-	adminServer.NewServer(s.Engine)
+	adminHttpServer.NewServer(s.Engine)
 	fe, _ := fs.Sub(static, "static")
 	s.Engine.StaticFS("ui", http.FS(fe))
 	s.Start()
@@ -86,7 +88,7 @@ func gatewayServerStart(serverAddr string) error {
 	s := httpServer.NewServer()
 	s.SetServerAddr(serverAddr)
 	// s.UseTrace(TRACE_URL, "gateway", serverAddr)
-	gatewayServer.NewServer(s)
+	gatewayHttpServer.NewServer(s)
 	s.Start()
 	return nil
 }
@@ -104,26 +106,25 @@ func jsonRpcServerStart(serverAddr string) error {
 func main() {
 	serverSetting.New()
 	beforeStart()
-	g.Go(func() error {
+	group.Go(func() error {
 		// gateway server
 		return gatewayServerStart(config.GetInstance().GetServerHost() + ":9400")
-		return nil
 	})
-	g.Go(func() error {
+	group.Go(func() error {
 		// jsonrpc service
-		if services["jsonrpc"].IsOpen {
+		if services.JsonrpcIsOpen {
 			return jsonRpcServerStart(config.GetInstance().GetServerHost() + ":9401")
 		}
 		return nil
 	})
-	g.Go(func() error {
+	group.Go(func() error {
 		// admin server
-		if services["admin"].IsOpen {
+		if services.AdminIsOpen {
 			return adminServerStart(config.GetInstance().GetServerHost() + ":9402")
 		}
 		return nil
 	})
-	if err := g.Wait(); err != nil {
+	if err := group.Wait(); err != nil {
 		log.Fatal(err)
 	}
 }
