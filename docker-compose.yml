@@ -87,6 +87,38 @@ services:
       - default
     # restart: always
 
+  pushgateway:
+    image: prom/pushgateway
+    expose:
+      - 9091
+    ports:
+      - "9091:9091"
+
+  prometheus:
+    build:
+      context: ./docker/services/prometheus
+    environment:
+      - TZ=${TZ}
+    privileged: true
+    volumes:
+      - ./docker/services/prometheus/prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml  # 将 prometheus 配置文件挂载到容器里
+    ports:
+      - "${PROMETHEUS_PORT}:9090"                     # 设置容器9090端口映射指定宿主机端口，用于宿主机访问可视化web
+    networks:
+      - default
+    # restart: always
+
+  grafana:
+    build:
+      context: ./docker/services/grafana
+    environment:
+      - TZ=${TZ}
+    ports:
+      - "${GRAFANA_PORT}:3000"                        # 设置容器3000端口映射指定宿主机端口，用于宿主机访问可视化web
+    networks:
+      - default
+    # restart: always
+
 networks:
   default:
     driver: bridge
