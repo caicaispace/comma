@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"time"
 
 	"goaway/pkg/library/db"
@@ -41,6 +42,16 @@ func main() {
 		conf := metric.NewMetricCfg(*metricJob, *metricInstance, *metricAddress, time.Second*time.Duration(*metricIntervalSync))
 		runner := task.NewRunner()
 		metric.StartMetricsPush(runner, conf)
+		startAt := time.Time{}
+		m := Metric{}
+		ticker := time.NewTicker(1 * time.Second)
+		go func(t *time.Ticker) {
+			for {
+				<-t.C
+				m.PostRequest("test", startAt)
+				fmt.Println("get ticker1", time.Now().Format("2006-01-02 15:04:05"))
+			}
+		}(ticker)
 	})
 	s.Start()
 }

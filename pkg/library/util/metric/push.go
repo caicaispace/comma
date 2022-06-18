@@ -56,16 +56,15 @@ func StartMetricsPush(runner *task.Runner, cfg *MetricCfg) {
 
 	l.Info("metric: start prometheus push client")
 	runner.RunCancelableTask(func(ctx context.Context) {
-		t := time.NewTicker(cfg.DurationSync)
-		defer t.Stop()
-
+		ticker := time.NewTicker(cfg.DurationSync)
+		defer ticker.Stop()
 		for {
 			select {
 			case <-ctx.Done():
 				l.Info("stop: prometheus push client stopped")
-				t.Stop()
+				ticker.Stop()
 				return
-			case <-t.C:
+			case <-ticker.C:
 				err := doPush(cfg.Job, instanceGroupingKey(cfg.Instance), cfg.Address, prometheus.DefaultGatherer, "PUT")
 				if err != nil {
 					l.Errorf("metric: could not push metrics to prometheus pushgateway: errors:\n%+v", err)
