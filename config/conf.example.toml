@@ -18,3 +18,10 @@ routers = [
 	{ addr = "http://127.0.0.1:9200", index = "search_test", type = "doc", filterType = 1, projectId = 0 },
 	{ addr = "http://127.0.0.1:9200", index = "search", type = "doc", filterType = 1, projectId = 0 },
 ]
+
+[metric]
+enable = true
+job = "goaway"
+instance = ""
+address = "127.0.0.1:9091"
+intervalSync = 1

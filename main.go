@@ -2,17 +2,19 @@ package main
 
 import (
 	"embed"
-	"flag"
 	"goaway/pkg/library/db"
 	serverSetting "goaway/pkg/library/net"
 	httpServer "goaway/pkg/library/net/http"
 	"goaway/pkg/library/setting"
 	"goaway/pkg/library/util/config"
+	"goaway/pkg/library/util/metric"
+	"goaway/pkg/library/util/task"
 	"goaway/pkg/model"
 	adminHttpServer "goaway/pkg/server/http/admin"
 	gatewayHttpServer "goaway/pkg/server/http/gateway"
 	"io/fs"
 	"net/http"
+	"time"
 
 	jsonrpcServer "goaway/pkg/library/net/jsonrpc"
 	gatewayJsonRpc "goaway/pkg/server/jsonrpc/gateway"
@@ -23,14 +25,6 @@ import (
 	"log"
 
 	"golang.org/x/sync/errgroup"
-)
-
-var (
-	// metric
-	metricJob          = flag.String("metric-job", "", "prometheus job name")
-	metricInstance     = flag.String("metric-instance", "", "prometheus instance name")
-	metricAddress      = flag.String("metric-address", "", "prometheus proxy address")
-	metricIntervalSync = flag.Uint64("interval-metric-sync", 0, "Interval(sec): metric sync")
 )
 
 const (
@@ -58,7 +52,6 @@ func beforeStart() {
 	if config.GetInstance().GetEnv() == "dev" {
 		db.NewWithAddr(config.GetInstance().GetDB())
 	}
-	// metric.NewMetricCfg(*metricJob, *metricInstance, *metricAddress, time.Second*time.Duration(*metricIntervalSync))
 	if setting.Database.AutoMigrate == true {
 		db.DB().AutoMigrate(
 			&model.DictBanned{},
@@ -74,6 +67,15 @@ func beforeStart() {
 			&model.DictWeight{},
 			&model.DictWord{},
 		)
+	}
+	if setting.Metric.Enable == true {
+		conf := config.GetInstance().GetMetric()
+		metric.StartMetricsPush(task.NewRunner(), metric.NewMetricCfg(
+			conf.Job,
+			conf.Instance,
+			conf.Address,
+			time.Duration(conf.IntervalSync),
+		))
 	}
 	loadService()
 }

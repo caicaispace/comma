@@ -11,11 +11,13 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"goaway/pkg/library/core/l"
 	httpServer "goaway/pkg/library/net/http"
 	"goaway/pkg/library/util"
 	"goaway/pkg/library/util/config"
+	"goaway/pkg/library/util/metric"
 	"goaway/pkg/service/segment"
 
 	"github.com/gin-gonic/gin"
@@ -26,6 +28,7 @@ type Service struct {
 	Addr      string
 	AuthStr   string
 	Segmenter *segment.SegmenterService
+	Metric    *metric.Metric
 }
 
 var filterService *FilterService
@@ -43,6 +46,7 @@ func GetInstance() *Service {
 			Addr:      esConfig.Addr,
 			AuthStr:   base64.StdEncoding.EncodeToString([]byte(esConfig.Username + ":" + esConfig.Password)),
 			Segmenter: task.Segmenter,
+			Metric:    metric.NewMetric(),
 		}
 		filterService = &FilterService{
 			Segmenter: task.Segmenter,
@@ -57,6 +61,7 @@ func (ps *Service) DispatchWithGin(c *gin.Context) {
 			l.Infof("http request %v", err)
 		}
 	}()
+	startAt := time.Now()
 	ctx := httpServer.Context{C: c}
 	startTimeMS := util.NowTimestampMS()
 	esRequestObj := ps.getEsRequestObjWithHttpServer(c.Request)
@@ -87,6 +92,9 @@ func (ps *Service) DispatchWithGin(c *gin.Context) {
 		l.Infof("%s pass url:%s cost:%dms ", c.Request.Method, c.Request.URL.Path, util.NowTimestampMS()-startTimeMS)
 		ctx.JOSN(body)
 	}
+	go func() {
+		ps.Metric.PostRequest(c.Request.RequestURI, true, startAt)
+	}()
 }
 
 func (ps *Service) DispatchWithJsonRpc(esIndex, esType, esBody, handleType string) ([]byte, error) {

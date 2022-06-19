@@ -1,4 +1,4 @@
-package main
+package metric
 
 import (
 	"time"
@@ -19,7 +19,7 @@ var (
 		prometheus.CounterOpts{
 			Namespace: "goaway",
 			Subsystem: "goaway",
-			Name:      "api_request_total",
+			Name:      "req_total",
 			Help:      "Total number of request made.",
 		}, []string{"name", "type"})
 
@@ -27,8 +27,8 @@ var (
 		prometheus.HistogramOpts{
 			Namespace: "goaway",
 			Subsystem: "goaway",
-			Name:      "api_response_duration_seconds",
-			Help:      "Bucketed histogram of api response time duration",
+			Name:      "rsp_duration_seconds",
+			Help:      "Bucketed histogram of response time duration",
 			Buckets:   prometheus.ExponentialBuckets(0.0005, 2.0, 20),
 		}, []string{"name"})
 )
@@ -40,12 +40,20 @@ func init() {
 	prometheus.Register(apiResponseHistogramVec)
 }
 
-func (m *Metric) PostRequest(api string, startAt time.Time) {
+func NewMetric() *Metric {
+	return &Metric{}
+}
+
+func (m *Metric) PostRequest(name string, satus bool, startAt time.Time) {
 	doMetrics := true
-	incrRequestReject("test")
+	incrRequest(name)
+	incrRequestReject(name)
+	if satus == false {
+		incrRequestFailed(name)
+	}
 	if doMetrics {
-		incrRequestSucceed("test")
-		observeAPIResponse("test", startAt)
+		incrRequestSucceed(name)
+		observeAPIResponse(name, startAt)
 	}
 }
 

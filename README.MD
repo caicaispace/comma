@@ -2,7 +2,7 @@
 
 Chinese segment,dictionary manage, banned words filtering, Chinese to pinyin
 
-### functions
+### Features
 
 - chinese segment
 - traditional chinese to simplified chinese
@@ -10,11 +10,16 @@ Chinese segment,dictionary manage, banned words filtering, Chinese to pinyin
 - banned words filtering
 - chinese to pinyin
 - manage ui
+- monitor with grafana
 - jsonrpc
 
-### manage ui
+### UI
 
 ![base ui](.doc/img/base_ui.png)
+
+### Monitor
+
+![grafana](.doc/img/grafana.png)
 
 ### TODO
 

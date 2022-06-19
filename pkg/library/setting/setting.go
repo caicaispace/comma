@@ -40,3 +40,13 @@ type database struct {
 }
 
 var Database = &database{}
+
+type metric struct {
+	Enable       bool
+	Job          string
+	Instance     string
+	Address      string
+	IntervalSync uint64
+}
+
+var Metric = &metric{}

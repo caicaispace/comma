@@ -17,6 +17,7 @@ type Conf struct {
 	Env    string
 	Server server
 	DB     db
+	Metric metric
 	ES     es
 }
 
@@ -26,6 +27,14 @@ type server struct {
 
 type db struct {
 	Addr string
+}
+
+type metric struct {
+	Enable       bool
+	Job          string
+	Instance     string
+	Address      string
+	IntervalSync uint64
 }
 
 type es struct {
@@ -83,6 +92,10 @@ func (c *Conf) GetServerHost() string {
 
 func (c *Conf) GetEs() *es {
 	return &c.ES
+}
+
+func (c *Conf) GetMetric() *metric {
+	return &c.Metric
 }
 
 func (c *Conf) GetProxyRoutes() []string {

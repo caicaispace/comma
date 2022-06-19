@@ -16,7 +16,7 @@ import (
 
 var (
 	// metric
-	metricJob          = flag.String("metric-job", "prometheus", "prometheus job name")
+	metricJob          = flag.String("metric-job", "goaway", "prometheus job name")
 	metricInstance     = flag.String("metric-instance", "", "prometheus instance name")
 	metricAddress      = flag.String("metric-address", "127.0.0.1:9091", "prometheus proxy address")
 	metricIntervalSync = flag.Uint64("interval-metric-sync", 1, "Interval(sec): metric sync")
@@ -42,14 +42,13 @@ func main() {
 		conf := metric.NewMetricCfg(*metricJob, *metricInstance, *metricAddress, time.Second*time.Duration(*metricIntervalSync))
 		runner := task.NewRunner()
 		metric.StartMetricsPush(runner, conf)
-		startAt := time.Time{}
-		m := Metric{}
+		m := metric.NewMetric()
 		ticker := time.NewTicker(1 * time.Second)
 		go func(t *time.Ticker) {
 			for {
 				<-t.C
-				m.PostRequest("test", startAt)
-				fmt.Println("get ticker1", time.Now().Format("2006-01-02 15:04:05"))
+				m.PostRequest("test", true, time.Time{})
+				fmt.Println("get ticker", time.Now().Format("2006-01-02 15:04:05"))
 			}
 		}(ticker)
 	})

@@ -25,6 +25,12 @@ var (
 	logExtension = flag.String("log-ext", "log", "App: log file extension")
 	// database
 	autoMigrate = flag.Bool("at", false, "auto migrate run auto migration for given models")
+	// metric
+	metricEnable       = flag.Bool("metric-enable", true, "prometheus is enable")
+	metricJob          = flag.String("metric-job", "goaway", "prometheus job name")
+	metricInstance     = flag.String("metric-instance", "", "prometheus instance name")
+	metricAddress      = flag.String("metric-address", "127.0.0.1:9091", "prometheus proxy address")
+	metricIntervalSync = flag.Uint64("interval-metric-sync", 1, "Interval(sec): metric sync")
 )
 
 func init() {
@@ -32,6 +38,7 @@ func init() {
 	initServerSetting()
 	initAppSetting()
 	initDBSetting()
+	initMetricSetting()
 }
 
 func New() {
@@ -62,4 +69,12 @@ func initAppSetting() {
 
 func initDBSetting() {
 	setting.Database.AutoMigrate = *autoMigrate
+}
+
+func initMetricSetting() {
+	setting.Metric.Enable = *metricEnable
+	setting.Metric.Job = *metricJob
+	setting.Metric.Instance = *metricInstance
+	setting.Metric.Address = *metricAddress
+	setting.Metric.IntervalSync = *metricIntervalSync
 }
