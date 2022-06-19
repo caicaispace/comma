@@ -2,13 +2,10 @@ package gateway
 
 import (
 	"encoding/base64"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/url"
-	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -198,47 +195,4 @@ func (ps *Service) reqElasticSearch(esRequestObj *EsRequest) ([]byte, error) {
 
 func (ps *Service) getEsRequestUrl(reqUri string) string {
 	return ps.Addr + reqUri
-}
-
-// DictWithHttp
-func (ps *Service) DictWithHttp(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	var ok bool
-	var words []string
-	mode := 0
-	if modes, ok := r.URL.Query()["mode"]; ok {
-		mode, _ = strconv.Atoi(modes[0])
-	}
-	words, ok = r.URL.Query()["word"]
-	if !ok {
-		_, _ = w.Write([]byte(`{"status":1,"error":"word lost"}`))
-		return
-	}
-	word, err := url.QueryUnescape(words[0])
-	if err != nil {
-		_, _ = w.Write([]byte(`{"status":1,"error":"word lost"}`))
-		return
-	}
-	rspMap := make(map[string]interface{})
-	rspMap["status"] = 0
-	var body []byte
-	switch mode {
-	case 0:
-		rspMap["result"] = ps.Segmenter.SegmentSearchMode(word)
-		body, _ = json.Marshal(rspMap)
-	case 1:
-		wordMap, synMap, hypMap, _ := ps.Segmenter.SegmentIndexMode(word, false, 0, false)
-		rspMap["word"] = *wordMap
-		if len(*synMap) > 0 {
-			rspMap["syn"] = *synMap
-		}
-		if len(*hypMap) > 0 {
-			rspMap["hyp"] = *hypMap
-		}
-		rspMap["result"] = rspMap
-		body, _ = json.Marshal(rspMap)
-	default:
-		body = []byte(`{"status":2,"error":"no action"}`)
-	}
-	_, _ = w.Write(body)
 }

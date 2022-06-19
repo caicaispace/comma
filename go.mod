@@ -6,23 +6,19 @@ replace golang.org/x/sys => github.com/golang/sys v0.0.0-20190322080309-f49334f8
 
 require (
 	github.com/BurntSushi/toml v0.3.1
-	github.com/andybalholm/brotli v1.0.4
 	github.com/astaxie/beego v1.12.3
-	github.com/cheggaaa/pb v1.0.29
 	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/elastic/go-elasticsearch/v5 v5.6.1
-	github.com/fatih/color v1.13.0 // indirect
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9
-	github.com/jessevdk/go-flags v1.5.0
 	github.com/jinzhu/now v1.1.4 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kataras/tablewriter v0.0.0-20180708051242-e063d29b7c23
 	github.com/landoop/tableprinter v0.0.0-20201125135848-89e81fc956e7
 	github.com/lxmgo/config v0.0.0-20180313024057-8db99aca0f7e
-	github.com/mattn/go-colorable v0.1.12 // indirect
+	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mattn/go-runewidth v0.0.13 // indirect
 	github.com/mozillazg/go-pinyin v0.19.0
 	github.com/opentracing/opentracing-go v1.2.0

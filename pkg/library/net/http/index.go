@@ -1,12 +1,17 @@
 package http
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
+	"goaway/pkg/library/core/l"
 	"goaway/pkg/library/net/http/middleware"
 	"goaway/pkg/library/setting"
 	"goaway/pkg/library/util"
@@ -78,6 +83,21 @@ func (s *Service) UseGrafana() {
 	middleware.NewGrafana(s.Engine)
 }
 
+func listenSignal(ctx context.Context, httpSrv *http.Server) {
+	sc := make(chan os.Signal, 1)
+	signal.Notify(sc, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
+	sig := <-sc
+	l.Infof("exit: signal=<%d>.", sig)
+	switch sig {
+	case syscall.SIGTERM:
+		l.Infof("exit: bye :-).")
+		os.Exit(0)
+	default:
+		l.Infof("exit: bye :-(.")
+		os.Exit(1)
+	}
+}
+
 func (s *Service) Start() {
 	s.Engine.Use(gin.Logger())
 	s.Engine.Use(gin.Recovery())
@@ -99,5 +119,6 @@ func (s *Service) Start() {
 		WriteTimeout:   time.Duration(setting.Server.WriteTimeout) * time.Second,
 		MaxHeaderBytes: maxHeaderBytes,
 	}
-	_ = httpServer.ListenAndServe()
+	go httpServer.ListenAndServe()
+	listenSignal(context.Background(), httpServer)
 }
