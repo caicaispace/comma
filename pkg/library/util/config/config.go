@@ -94,6 +94,10 @@ func (c *Conf) GetEs() *es {
 	return &c.ES
 }
 
+func (c *Conf) GetMetricIsEnable() bool {
+	return c.Metric.Enable
+}
+
 func (c *Conf) GetMetric() *metric {
 	return &c.Metric
 }

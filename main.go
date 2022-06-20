@@ -52,7 +52,7 @@ func beforeStart() {
 	if config.GetInstance().GetEnv() == "dev" {
 		db.NewWithAddr(config.GetInstance().GetDB())
 	}
-	if setting.Database.AutoMigrate == true {
+	if setting.Database.AutoMigrate {
 		db.DB().AutoMigrate(
 			&model.DictBanned{},
 			&model.DictFestival{},
@@ -68,13 +68,13 @@ func beforeStart() {
 			&model.DictWord{},
 		)
 	}
-	if setting.Metric.Enable == true {
+	if config.GetInstance().GetMetricIsEnable() {
 		conf := config.GetInstance().GetMetric()
 		metric.StartMetricsPush(task.NewRunner(), metric.NewMetricCfg(
 			conf.Job,
 			conf.Instance,
 			conf.Address,
-			time.Duration(conf.IntervalSync),
+			time.Second*time.Duration(conf.IntervalSync),
 		))
 	}
 	loadService()

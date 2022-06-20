@@ -30,6 +30,20 @@ vm.max_map_count=262144
 /sbin/sysctl -p
 ```
 
+### 性能分析 
+
+#### pprof
+
+- [使用pprof分析cpu占用过高问题](https://blog.csdn.net/xmcy001122/article/details/103939923)
+
+```
+apt install graphviz
+go tool pprof main cpu.prof
+
+top # 查看 top
+png ### 输出详细报告
+```
+
 ### 扩展阅读
 
 - [jiagu自然语言处理工具](https://github.com/bububa/jiagu)

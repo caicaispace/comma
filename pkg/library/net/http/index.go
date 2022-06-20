@@ -83,6 +83,8 @@ func (s *Service) UseGrafana() {
 	middleware.NewGrafana(s.Engine)
 }
 
+// var f *os.File
+
 func listenSignal(ctx context.Context, httpSrv *http.Server) {
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
@@ -94,11 +96,24 @@ func listenSignal(ctx context.Context, httpSrv *http.Server) {
 		os.Exit(0)
 	default:
 		l.Infof("exit: bye :-(.")
+		// // CPU 性能分析
+		// f.Close()
+		// pprof.StopCPUProfile()
 		os.Exit(1)
 	}
 }
 
 func (s *Service) Start() {
+	// //CPU 性能分析
+	// runtime.GOMAXPROCS(1)              // 限制 CPU 使用数，避免过载
+	// runtime.SetMutexProfileFraction(1) // 开启对锁调用的跟踪
+	// runtime.SetBlockProfileRate(1)     // 开启对阻塞操作的跟踪
+	// f, err := os.OpenFile("cpu.prof", os.O_RDWR|os.O_CREATE, 0644)
+	// if err != nil {
+	// 	l.Error(err)
+	// 	return
+	// }
+	// pprof.StartCPUProfile(f)
 	s.Engine.Use(gin.Logger())
 	s.Engine.Use(gin.Recovery())
 	if s.beforeFunc != nil {

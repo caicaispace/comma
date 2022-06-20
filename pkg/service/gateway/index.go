@@ -174,12 +174,15 @@ func (ps *Service) getEsRequestObjWithHttpServer(r *http.Request) *EsRequest {
 	return esRequestObj
 }
 
+var client = resty.New()
+
 // send http request to es
 func (ps *Service) reqElasticSearch(esRequestObj *EsRequest) ([]byte, error) {
-	fmt.Println("---------------------------------- " + util.NowDateTime() + " ----------------------------------")
-	fmt.Println(esRequestObj.BodyRaw)
+	if config.GetInstance().GetEnv() == "dev" {
+		fmt.Println("---------------------------------- " + util.NowDateTime() + " ----------------------------------")
+		fmt.Println(esRequestObj.BodyRaw)
+	}
 	// Create a Resty Client
-	client := resty.New()
 	resp, err := client.R().
 		SetHeader("Content-Type", "application/json").
 		SetHeader("Authorization", "Basic "+ps.AuthStr).
