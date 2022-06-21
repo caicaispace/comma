@@ -36,6 +36,9 @@ git-push:
 git-clear:
 	./cmd.sh git clear
 
+install:
+	@docker plugin install  grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
+
 help:
 	@echo "make: compile packages and dependencies"
 	@echo "make vet: run specified go vet"

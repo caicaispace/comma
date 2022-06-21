@@ -17,9 +17,9 @@ services:
   #     - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
   #   environment:
   #     TZ: "$TZ"
-  #   restart: always
   #   networks:
   #     - default
+  #   restart: always
 
   # golang:
   #   build:
@@ -44,11 +44,11 @@ services:
   #   command:
   #     - /home/www/goaway
   #     - -env=dev
-  #   # restart: always
   #   cap_add:
   #     - SYS_PTRACE
   #   networks:
   #     - default
+  #   # restart: always
 
   # elasticsearch:
   #   build:
@@ -65,10 +65,10 @@ services:
   #     - ${DATA_DIR}/esdata:/usr/share/elasticsearch/data
   #     - ${ELASTICSEARCH_CONF_FILE}:/usr/share/elasticsearch/config/elasticsearch.yml
   #   hostname: elasticsearch
-  #   # restart: always
   #   ports:
   #     - "${ELASTICSEARCH_HOST_PORT_C}:9200"
   #     - "${ELASTICSEARCH_HOST_PORT_S}:9300"
+  #   # restart: always
 
   mysql:
     build:
@@ -94,6 +94,7 @@ services:
       - 9091
     ports:
       - "9091:9091"
+    # restart: always
 
   prometheus:
     build:
@@ -108,6 +109,32 @@ services:
     networks:
       - default
     # restart: always
+
+  # loki:
+  #   build:
+  #     context: ./docker/services/loki
+  #   ports:
+  #     - "3100:3100"
+  #   volumes:
+  #     - ./docker/services/loki:/etc/loki/config
+  #     - ./docker/data/loki/index:/opt/loki/index
+  #     - ./docker/data/loki/chunks:/opt/loki/chunks
+  #   command: -config.file=/etc/loki/config/loki.yaml
+  #   networks:
+  #     - default
+  #   # restart: always
+
+  # promtail:
+  #   build:
+  #     context: ./docker/services/promtail
+  #   volumes:
+  #     - /var/log:/var/log
+  #     - ./log:/var/log/goaway
+  #     - ./docker/services/promtail:/etc/promtail/config
+  #   command: -config.file=/etc/promtail/config/promtail.yaml
+  #   networks:
+  #     - default
+  #   # restart: always
 
   grafana:
     build:
