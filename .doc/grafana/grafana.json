@@ -258,7 +258,7 @@
             "uid": "DC7Y3XC7k"
           },
           "editorMode": "builder",
-          "expr": "goaway_goaway_req_total{job=\"goaway\", type=\"fail\"}",
+          "expr": "avg(goaway_goaway_req_total{job=\"goaway\", type=\"fail\"})",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -446,6 +446,40 @@
       ],
       "title": "gc",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "s3DSmVqnz"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 9,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "editorMode": "builder",
+          "expr": "{job=\"goaway\"}",
+          "key": "Q-9ae8e283-81df-48e9-9c50-c0879e11ce24-0",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "query log",
+      "type": "logs"
     }
   ],
   "refresh": "5s",
@@ -463,6 +497,6 @@
   "timezone": "",
   "title": "gateway",
   "uid": "3ULJT3jnz",
-  "version": 16,
+  "version": 20,
   "weekStart": ""
 }

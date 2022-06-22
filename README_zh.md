@@ -21,6 +21,10 @@
 
 ![grafana](.doc/img/grafana.png)
 
+### 日志
+
+![grafana](.doc/img/loki.png)
+
 ### TODO
 
 #### 2.0

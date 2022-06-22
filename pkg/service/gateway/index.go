@@ -52,7 +52,7 @@ func GetInstance() *Service {
 	return service
 }
 
-func (ps *Service) DispatchWithGin(c *gin.Context) {
+func (ps *Service) Dispatch(c *gin.Context) {
 	defer func() {
 		if err := recover(); err != nil {
 			l.Infof("http request %v", err)
@@ -69,7 +69,7 @@ func (ps *Service) DispatchWithGin(c *gin.Context) {
 	if esRequestObj.SearchType == PROXY_SEARCH_TYPE {
 		esRequestUrl := config.GetInstance().GetEsRoute(esRequestObj.IndexName, esRequestObj.TypeName)
 		if esRequestUrl == "" {
-			l.Errorf("%s not map url:%s cost %d ms param %s", c.Request.Method, c.Request.URL.Path, util.NowTimestampMS()-startTimeMS, esRequestObj.BodyRaw)
+			l.Errorf("%s not map url:%s time:%d ms body %s", c.Request.Method, c.Request.URL.Path, util.NowTimestampMS()-startTimeMS, esRequestObj.BodyRaw)
 			ctx.JOSN(nil)
 			return
 		}
@@ -79,14 +79,14 @@ func (ps *Service) DispatchWithGin(c *gin.Context) {
 			ctx.JOSN(body)
 			return
 		}
-		l.Infof("url:%s cost:%dms param:%s", c.Request.URL.Path, util.NowTimestampMS()-startTimeMS, esRequestObj.BodyRaw)
+		l.Infof("url:%s time:%dms body:%s", c.Request.URL.Path, util.NowTimestampMS()-startTimeMS, esRequestObj.BodyRaw)
 		ctx.JOSN(body)
 	} else {
 		body, err := ps.reqElasticSearch(esRequestObj)
 		if err != nil {
 			l.Errorf("http request %v", err)
 		}
-		l.Infof("%s pass url:%s cost:%dms ", c.Request.Method, c.Request.URL.Path, util.NowTimestampMS()-startTimeMS)
+		l.Infof("%s pass url:%s time:%dms ", c.Request.Method, c.Request.URL.Path, util.NowTimestampMS()-startTimeMS)
 		ctx.JOSN(body)
 	}
 	go func() {
@@ -135,9 +135,9 @@ func (ps *Service) DispatchWithJsonRpc(esIndex, esType, esBody, handleType strin
 	}
 	switch esRequestObj.SearchType {
 	case PROXY_SEARCH_TYPE:
-		l.Infof("url:%s cost:%dms param:%s", esRequestUrl, util.NowTimestampMS()-startTimeMS, esBody)
+		l.Infof("url:%s time:%dms body:%s", esRequestUrl, util.NowTimestampMS()-startTimeMS, esBody)
 	case PASS_SEARCH_TYPE:
-		l.Infof("%s transparent url:%s cost:%dms ", handleType, esRequestUrl, util.NowTimestampMS()-startTimeMS)
+		l.Infof("%s transparent url:%s time:%dms ", handleType, esRequestUrl, util.NowTimestampMS()-startTimeMS)
 	}
 	return body, nil
 }

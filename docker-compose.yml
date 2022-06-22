@@ -110,31 +110,35 @@ services:
       - default
     # restart: always
 
-  # loki:
-  #   build:
-  #     context: ./docker/services/loki
-  #   ports:
-  #     - "3100:3100"
-  #   volumes:
-  #     - ./docker/services/loki:/etc/loki/config
-  #     - ./docker/data/loki/index:/opt/loki/index
-  #     - ./docker/data/loki/chunks:/opt/loki/chunks
-  #   command: -config.file=/etc/loki/config/loki.yaml
-  #   networks:
-  #     - default
-  #   # restart: always
+  loki:
+    build:
+      context: ./docker/services/loki
+    environment:
+      - TZ=${TZ}
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./docker/services/loki:/etc/loki/config
+      - ./docker/data/loki/index:/opt/loki/index
+      - ./docker/data/loki/chunks:/opt/loki/chunks
+    command: -config.file=/etc/loki/config/loki.yaml
+    networks:
+      - default
+    # restart: always
 
-  # promtail:
-  #   build:
-  #     context: ./docker/services/promtail
-  #   volumes:
-  #     - /var/log:/var/log
-  #     - ./log:/var/log/goaway
-  #     - ./docker/services/promtail:/etc/promtail/config
-  #   command: -config.file=/etc/promtail/config/promtail.yaml
-  #   networks:
-  #     - default
-  #   # restart: always
+  promtail:
+    build:
+      context: ./docker/services/promtail
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - /var/log:/var/log
+      - ./logs:/var/log/goaway
+      - ./docker/services/promtail:/etc/promtail/config
+    command: -config.file=/etc/promtail/config/promtail.yaml
+    networks:
+      - default
+    # restart: always
 
   grafana:
     build:

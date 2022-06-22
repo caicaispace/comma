@@ -21,6 +21,10 @@ Chinese segment,dictionary manage, banned words filtering, Chinese to pinyin
 
 ![grafana](.doc/img/grafana.png)
 
+### Log
+
+![grafana](.doc/img/loki.png)
+
 ### TODO
 
 #### 2.0

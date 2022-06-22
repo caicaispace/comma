@@ -3,7 +3,7 @@ package banned
 import (
 	"goaway/pkg/library/core/e"
 	"goaway/pkg/library/core/t"
-	http2 "goaway/pkg/library/net/http"
+	"goaway/pkg/library/net/http"
 	service "goaway/pkg/service/banned"
 
 	"github.com/gin-gonic/gin"
@@ -11,7 +11,7 @@ import (
 
 func Find(c *gin.Context) {
 	var (
-		ctx        = http2.Context{C: c}
+		ctx        = http.Context{C: c}
 		word       = c.Query("word")
 		handleType = c.Query("type")
 	)
@@ -29,10 +29,10 @@ type FindAddForm struct {
 
 func Add(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = http.Context{C: c}
 		form FindAddForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := http.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -47,10 +47,10 @@ type FindDelForm struct {
 
 func Del(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = http.Context{C: c}
 		form FindDelForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := http.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
