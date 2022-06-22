@@ -9,9 +9,10 @@ Chinese segment,dictionary manage, banned words filtering, Chinese to pinyin
 - elasticSearch proxy middleware
 - banned words filtering
 - chinese to pinyin
+- jsonrpc
 - manage ui
 - monitor with grafana
-- jsonrpc
+- log collect with loki
 
 ### UI
 

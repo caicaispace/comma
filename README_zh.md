@@ -9,9 +9,10 @@
 - ElasticSearch 中间件
 - 违禁词
 - 汉字转拼音
+- jsonrpc
 - 管理ui
 - 监控（grafana）
-- jsonrpc
+- 日志收集（loki）
 
 ### UI
 
