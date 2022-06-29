@@ -52,6 +52,8 @@ png ### 输出详细报告
 - [美团搜索中查询改写技术的探索与实践](https://tech.meituan.com/2022/02/17/exploration-and-practice-of-query-rewriting-in-meituan-search.html)
 - [新词发现（一）：基于统计](https://www.cnblogs.com/en-heng/p/6699531.html)
 - [深入理解 NLP 的中文分词：从原理到实践](https://juejin.cn/book/6844733812102922247)
+- [重新写了之前的新词发现算法：更快更好的新词发现](https://spaces.ac.cn/archives/6920)
+- ["新词发现"算法探讨与优化-SmoothNLP](https://zhuanlan.zhihu.com/p/80385615)
 
 ### ide
 
