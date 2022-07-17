@@ -1,4 +1,4 @@
-title = "goaway"
+title = "comma"
 
 desc = ""
 
@@ -8,7 +8,7 @@ env="dev"
 host = "127.0.0.1"
 
 [db]
-addr = "root:123456@tcp(127.0.0.1:3306)/goaway?charset=utf8"
+addr = "root:123456@tcp(127.0.0.1:3306)/comma?charset=utf8"
 
 [es]
 addr = "http://127.0.0.1:9200"
@@ -21,7 +21,7 @@ routers = [
 
 [metric]
 enable = true
-job = "goaway"
+job = "comma"
 instance = ""
 address = "127.0.0.1:9091"
 intervalSync = 1

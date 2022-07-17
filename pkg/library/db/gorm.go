@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"goaway/pkg/library/setting"
+	"comma/pkg/library/setting"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

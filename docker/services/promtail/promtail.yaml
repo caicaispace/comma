@@ -26,5 +26,5 @@ scrape_configs:
       - localhost
      labels:
      #标签，用于后面的查询
-      job: goaway
-      __path__: /var/log/goaway/*.log
+      job: comma
+      __path__: /var/log/comma/*.log

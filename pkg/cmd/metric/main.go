@@ -5,18 +5,18 @@ import (
 	"fmt"
 	"time"
 
-	"goaway/pkg/library/db"
-	serverSetting "goaway/pkg/library/net"
-	jsonrpcServer "goaway/pkg/library/net/jsonrpc"
-	"goaway/pkg/library/setting"
-	"goaway/pkg/library/util/metric"
-	"goaway/pkg/library/util/task"
-	bannedJsonRpc "goaway/pkg/server/jsonrpc/banned"
+	"comma/pkg/library/db"
+	serverSetting "comma/pkg/library/net"
+	jsonrpcServer "comma/pkg/library/net/jsonrpc"
+	"comma/pkg/library/setting"
+	"comma/pkg/library/util/metric"
+	"comma/pkg/library/util/task"
+	bannedJsonRpc "comma/pkg/server/jsonrpc/banned"
 )
 
 var (
 	// metric
-	metricJob          = flag.String("metric-job", "goaway", "prometheus job name")
+	metricJob          = flag.String("metric-job", "comma", "prometheus job name")
 	metricInstance     = flag.String("metric-instance", "", "prometheus instance name")
 	metricAddress      = flag.String("metric-address", "127.0.0.1:9091", "prometheus proxy address")
 	metricIntervalSync = flag.Uint64("interval-metric-sync", 1, "Interval(sec): metric sync")
@@ -28,7 +28,7 @@ func init() {
 		Port:     "3306",
 		Username: "root",
 		Password: "123456",
-		DbName:   "goaway",
+		DbName:   "comma",
 	}
 	db.New(config)
 }

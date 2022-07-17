@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"goaway/pkg/library/net/jsonrpc/common"
-	"goaway/pkg/library/net/jsonrpc/server"
+	"comma/pkg/library/net/jsonrpc/common"
+	"comma/pkg/library/net/jsonrpc/server"
 )
 
 type Error common.Error

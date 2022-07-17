@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"strings"
 
-	"goaway/pkg/library/core/e"
-	http2 "goaway/pkg/library/net/http"
-	"goaway/pkg/service/admin"
+	"comma/pkg/library/core/e"
+	http2 "comma/pkg/library/net/http"
+	"comma/pkg/service/admin"
 
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"

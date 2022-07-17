@@ -3,7 +3,7 @@ package segment
 import (
 	"sync"
 
-	service "goaway/pkg/service/segment"
+	service "comma/pkg/service/segment"
 )
 
 type Segment struct{}

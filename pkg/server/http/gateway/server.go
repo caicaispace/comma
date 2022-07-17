@@ -1,9 +1,9 @@
 package admin
 
 import (
-	httpServer "goaway/pkg/library/net/http"
-	"goaway/pkg/library/util/config"
-	gatewayService "goaway/pkg/service/gateway"
+	httpServer "comma/pkg/library/net/http"
+	"comma/pkg/library/util/config"
+	gatewayService "comma/pkg/service/gateway"
 )
 
 func NewServer(s *httpServer.Service) {

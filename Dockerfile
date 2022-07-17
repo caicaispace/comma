@@ -7,7 +7,7 @@ ENV CGO_ENABLED 0
 ENV GOOS linux
 ENV GOPROXY https://goproxy.cn,direct
 
-WORKDIR /build/goaway
+WORKDIR /build/comma
 
 ADD go.mod .
 ADD go.sum .
@@ -15,7 +15,7 @@ RUN go mod download
 COPY . .
 COPY config /app/config
 COPY data /app/data
-RUN go build -ldflags="-s -w" -o /app/goaway main.go
+RUN go build -ldflags="-s -w" -o /app/comma main.go
 
 # step 2
 FROM alpine
@@ -26,8 +26,8 @@ RUN apk update --no-cache && apk add --no-cache ca-certificates tzdata
 ENV TZ Asia/Shanghai
 
 WORKDIR /app
-COPY --from=builder /app/goaway /app/goaway
+COPY --from=builder /app/comma /app/comma
 COPY --from=builder /app/config /app/config
 COPY --from=builder /app/data /app/data
 
-CMD ["./goaway", "-f", "config/config.toml"]
+CMD ["./comma", "-f", "config/config.toml"]

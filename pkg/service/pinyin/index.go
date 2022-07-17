@@ -5,7 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"goaway/pkg/service/admin"
+	"comma/pkg/service/admin"
 
 	"github.com/mozillazg/go-pinyin"
 )

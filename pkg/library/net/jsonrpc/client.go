@@ -3,7 +3,7 @@ package jsonrpc
 import (
 	"errors"
 
-	"goaway/pkg/library/net/jsonrpc/client"
+	"comma/pkg/library/net/jsonrpc/client"
 )
 
 type ClientInterface interface {

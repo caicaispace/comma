@@ -1,8 +1,8 @@
 package admin_test
 
 import (
-	"goaway/pkg/library/util/business"
-	service2 "goaway/pkg/service/admin"
+	"comma/pkg/library/util/business"
+	service2 "comma/pkg/service/admin"
 	"testing"
 )
 

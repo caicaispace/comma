@@ -1,10 +1,10 @@
 package banned
 
 import (
-	"goaway/pkg/library/core/e"
-	"goaway/pkg/library/core/t"
-	"goaway/pkg/library/net/http"
-	service "goaway/pkg/service/banned"
+	"comma/pkg/library/core/e"
+	"comma/pkg/library/core/t"
+	"comma/pkg/library/net/http"
+	service "comma/pkg/service/banned"
 
 	"github.com/gin-gonic/gin"
 )

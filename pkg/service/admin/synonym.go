@@ -3,9 +3,9 @@ package admin
 import (
 	"errors"
 
-	"goaway/pkg/library/db"
-	"goaway/pkg/library/util"
-	"goaway/pkg/library/util/business"
+	"comma/pkg/library/db"
+	"comma/pkg/library/util"
+	"comma/pkg/library/util/business"
 )
 
 type Synonym struct {

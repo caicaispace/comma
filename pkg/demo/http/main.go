@@ -1,8 +1,8 @@
 package main
 
 import (
-	"goaway/pkg/demo/http/controller"
-	httpServer "goaway/pkg/library/net/http"
+	"comma/pkg/demo/http/controller"
+	httpServer "comma/pkg/library/net/http"
 )
 
 func init() {

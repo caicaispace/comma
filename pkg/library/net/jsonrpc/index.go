@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"strings"
 
-	"goaway/pkg/library/setting"
-	"goaway/pkg/library/util"
-	util2 "goaway/pkg/library/util"
+	"comma/pkg/library/setting"
+	"comma/pkg/library/util"
+	util2 "comma/pkg/library/util"
 )
 
 type service struct {

@@ -37,12 +37,12 @@ services:
   #     - "9402:9402"
   #   volumes:
   #     - ${SOURCE_DIR}:/home/www/:rw
-  #     - goaway:/home/www/goaway:rw
+  #     - comma:/home/www/comma:rw
   #     - config:/home/www/config:rw
   #     - data:/home/www/data:rw
   #     - static:/home/www/static:rw
   #   command:
-  #     - /home/www/goaway
+  #     - /home/www/comma
   #     - -env=dev
   #   cap_add:
   #     - SYS_PTRACE
@@ -133,7 +133,7 @@ services:
       - TZ=${TZ}
     volumes:
       - /var/log:/var/log
-      - ./logs:/var/log/goaway
+      - ./logs:/var/log/comma
       - ./docker/services/promtail:/etc/promtail/config
     command: -config.file=/etc/promtail/config/promtail.yaml
     networks:

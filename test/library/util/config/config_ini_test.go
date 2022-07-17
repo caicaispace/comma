@@ -1,9 +1,9 @@
 package config
 
 import (
+	"comma/pkg/library/setting"
+	config2 "comma/pkg/library/util/config"
 	"fmt"
-	"goaway/pkg/library/setting"
-	config2 "goaway/pkg/library/util/config"
 	"testing"
 )
 

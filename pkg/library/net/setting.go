@@ -4,9 +4,9 @@ import (
 	"flag"
 	"time"
 
-	"goaway/pkg/library/core/l"
-	"goaway/pkg/library/setting"
-	util2 "goaway/pkg/library/util"
+	"comma/pkg/library/core/l"
+	"comma/pkg/library/setting"
+	util2 "comma/pkg/library/util"
 )
 
 var (
@@ -27,7 +27,7 @@ var (
 	autoMigrate = flag.Bool("at", false, "auto migrate run auto migration for given models")
 	// metric
 	// metricEnable       = flag.Bool("metric-enable", true, "prometheus is enable")
-	// metricJob          = flag.String("metric-job", "goaway", "prometheus job name")
+	// metricJob          = flag.String("metric-job", "comma", "prometheus job name")
 	// metricInstance     = flag.String("metric-instance", "", "prometheus instance name")
 	// metricAddress      = flag.String("metric-address", "127.0.0.1:9091", "prometheus proxy address")
 	// metricIntervalSync = flag.Uint64("metric-interval-sync", 1, "Interval(sec): metric sync")

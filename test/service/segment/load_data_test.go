@@ -1,10 +1,10 @@
 package segment
 
 import (
-	types "goaway/pkg/library/core/t"
-	"goaway/pkg/library/db"
-	"goaway/pkg/library/setting"
-	"goaway/pkg/service/segment"
+	types "comma/pkg/library/core/t"
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
+	"comma/pkg/service/segment"
 	"reflect"
 	"testing"
 
@@ -17,7 +17,7 @@ func init() {
 		Port:     "3306",
 		Username: "root",
 		Password: "123456",
-		DbName:   "goaway",
+		DbName:   "comma",
 	})
 }
 

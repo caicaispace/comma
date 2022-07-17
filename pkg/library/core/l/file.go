@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"goaway/pkg/library/setting"
+	"comma/pkg/library/setting"
 )
 
 // getLogFilePath get the log file save path

@@ -5,8 +5,8 @@ import (
 	"os"
 	"sync"
 
-	"goaway/pkg/library/setting"
-	"goaway/pkg/library/util"
+	"comma/pkg/library/setting"
+	"comma/pkg/library/util"
 
 	"github.com/BurntSushi/toml"
 )

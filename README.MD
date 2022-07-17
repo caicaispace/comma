@@ -1,4 +1,4 @@
-# goaway
+# comma
 
 Chinese segment,dictionary manage, banned words filtering, Chinese to pinyin
 

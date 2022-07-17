@@ -3,8 +3,8 @@ package controller
 import (
 	"fmt"
 
-	"goaway/pkg/library/db"
-	"goaway/pkg/library/net/http"
+	"comma/pkg/library/db"
+	"comma/pkg/library/net/http"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"

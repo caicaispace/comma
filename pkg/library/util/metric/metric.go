@@ -17,16 +17,16 @@ const (
 var (
 	apiRequestCounterVec = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Namespace: "goaway",
-			Subsystem: "goaway",
+			Namespace: "comma",
+			Subsystem: "comma",
 			Name:      "req_total",
 			Help:      "Total number of request made.",
 		}, []string{"name", "type"})
 
 	apiResponseHistogramVec = prometheus.NewHistogramVec(
 		prometheus.HistogramOpts{
-			Namespace: "goaway",
-			Subsystem: "goaway",
+			Namespace: "comma",
+			Subsystem: "comma",
 			Name:      "rsp_duration_seconds",
 			Help:      "Bucketed histogram of response time duration",
 			Buckets:   prometheus.ExponentialBuckets(0.0005, 2.0, 20),

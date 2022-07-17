@@ -1,7 +1,7 @@
 package segment
 
 import (
-	tda "goaway/pkg/library/util/tree/trie_double_array"
+	tda "comma/pkg/library/util/tree/trie_double_array"
 )
 
 // Dictionary 结构体实现了一个字串前缀树，一个分词可能出现在叶子节点也有可能出现在非叶节点

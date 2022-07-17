@@ -1,8 +1,8 @@
 package util
 
 import (
+	"comma/pkg/library/util"
 	"fmt"
-	"goaway/pkg/library/util"
 	"testing"
 )
 

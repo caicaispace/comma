@@ -4,8 +4,8 @@ import (
 	"regexp"
 	"strings"
 
-	"goaway/pkg/library/util/config"
-	segmentService "goaway/pkg/service/segment"
+	"comma/pkg/library/util/config"
+	segmentService "comma/pkg/service/segment"
 )
 
 type SEARCH_TYPE int

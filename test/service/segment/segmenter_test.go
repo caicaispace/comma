@@ -1,10 +1,10 @@
 package segment_test
 
 import (
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
+	"comma/pkg/service/segment"
 	"fmt"
-	"goaway/pkg/library/db"
-	"goaway/pkg/library/setting"
-	"goaway/pkg/service/segment"
 	"regexp"
 	"testing"
 )
@@ -15,7 +15,7 @@ func Test_Segmenter(t *testing.T) {
 		Port:     "3306",
 		Username: "root",
 		Password: "123456",
-		DbName:   "goaway",
+		DbName:   "comma",
 	})
 	// sego.LoadDb("s913_yanfa:Xuxinxin_s913@tcp(127.0.0.1:3312)/db_699pic_words?charset=utf8")
 

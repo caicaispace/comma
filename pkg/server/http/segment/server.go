@@ -1,10 +1,10 @@
 package segment
 
 import (
-	"goaway/pkg/library/core/e"
-	"goaway/pkg/library/core/t"
-	http2 "goaway/pkg/library/net/http"
-	service "goaway/pkg/service/segment"
+	"comma/pkg/library/core/e"
+	"comma/pkg/library/core/t"
+	http2 "comma/pkg/library/net/http"
+	service "comma/pkg/service/segment"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,8 +1,8 @@
 package test
 
 import (
-	"goaway/pkg/library/db"
-	"goaway/pkg/library/setting"
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
 )
 
 func init() {
@@ -11,6 +11,6 @@ func init() {
 		Port:     "3305",
 		Username: "root",
 		Password: "123456",
-		DbName:   "goaway",
+		DbName:   "comma",
 	})
 }

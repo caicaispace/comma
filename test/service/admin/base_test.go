@@ -1,8 +1,8 @@
 package admin_test
 
 import (
-	"goaway/pkg/library/db"
-	"goaway/pkg/library/setting"
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
 )
 
 func init() {
@@ -10,6 +10,6 @@ func init() {
 		Username: "root",
 		Password: "123456",
 		Host:     "127.0.0.1",
-		DbName:   "goaway",
+		DbName:   "comma",
 	})
 }

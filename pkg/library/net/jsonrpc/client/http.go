@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"goaway/pkg/library/net/jsonrpc/common"
+	"comma/pkg/library/net/jsonrpc/common"
 )
 
 type Http struct {

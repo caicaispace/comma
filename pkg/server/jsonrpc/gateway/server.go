@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	gatewayService "goaway/pkg/service/gateway"
+	gatewayService "comma/pkg/service/gateway"
 )
 
 type Gateway struct {

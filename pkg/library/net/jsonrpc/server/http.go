@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"sync"
 
-	"goaway/pkg/library/net/jsonrpc/common"
-	"goaway/pkg/library/net/jsonrpc/components/rate_limit"
+	"comma/pkg/library/net/jsonrpc/common"
+	"comma/pkg/library/net/jsonrpc/components/rate_limit"
 )
 
 type Http struct {

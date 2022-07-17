@@ -1,10 +1,10 @@
 package db_test
 
 import (
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
+	"comma/pkg/model"
 	"fmt"
-	"goaway/pkg/library/db"
-	"goaway/pkg/library/setting"
-	"goaway/pkg/model"
 	"testing"
 
 	"gorm.io/gorm"
@@ -20,7 +20,7 @@ func TestDB(t *testing.T) {
 		Username: "root",
 		Password: "123456",
 		Host:     "127.0.0.1",
-		DbName:   "goaway",
+		DbName:   "comma",
 	}
 	db.New(config)
 
@@ -49,7 +49,7 @@ func Test_banner(t *testing.T) {
 		Username: "root",
 		Password: "123456",
 		Host:     "127.0.0.1",
-		DbName:   "goaway",
+		DbName:   "comma",
 	}
 	db.New(config)
 	bannerMgr := model.DictBannedMgr(db.DB())

@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"sync"
 
-	"goaway/pkg/library/setting"
-	"goaway/pkg/library/util"
+	"comma/pkg/library/setting"
+	"comma/pkg/library/util"
 )
 
 type database struct {

@@ -3,13 +3,13 @@ package main
 import (
 	"log"
 
-	"goaway/pkg/library/db"
-	serverSetting "goaway/pkg/library/net"
-	httpServer "goaway/pkg/library/net/http"
-	jsonrpcServer "goaway/pkg/library/net/jsonrpc"
-	"goaway/pkg/library/setting"
-	gatewayServer "goaway/pkg/server/http/gateway"
-	gatewayJsonRpc "goaway/pkg/server/jsonrpc/gateway"
+	"comma/pkg/library/db"
+	serverSetting "comma/pkg/library/net"
+	httpServer "comma/pkg/library/net/http"
+	jsonrpcServer "comma/pkg/library/net/jsonrpc"
+	"comma/pkg/library/setting"
+	gatewayServer "comma/pkg/server/http/gateway"
+	gatewayJsonRpc "comma/pkg/server/jsonrpc/gateway"
 
 	"golang.org/x/sync/errgroup"
 )
@@ -22,7 +22,7 @@ func init() {
 		Port:     "3306",
 		Username: "root",
 		Password: "123456",
-		DbName:   "goaway",
+		DbName:   "comma",
 	})
 }
 

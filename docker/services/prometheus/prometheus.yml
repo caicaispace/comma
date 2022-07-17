@@ -38,7 +38,7 @@ scrape_configs:
         labels:
           instance: pushgateway
 
-  - job_name: 'goaway'
+  - job_name: 'comma'
     static_configs:
       - targets: ['golang:9400']
         labels:

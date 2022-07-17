@@ -10,12 +10,12 @@ import (
 	"sync"
 	"time"
 
-	"goaway/pkg/library/core/l"
-	httpServer "goaway/pkg/library/net/http"
-	"goaway/pkg/library/util"
-	"goaway/pkg/library/util/config"
-	"goaway/pkg/library/util/metric"
-	"goaway/pkg/service/segment"
+	"comma/pkg/library/core/l"
+	httpServer "comma/pkg/library/net/http"
+	"comma/pkg/library/util"
+	"comma/pkg/library/util/config"
+	"comma/pkg/library/util/metric"
+	"comma/pkg/service/segment"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-resty/resty/v2"

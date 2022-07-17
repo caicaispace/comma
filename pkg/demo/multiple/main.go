@@ -3,10 +3,10 @@ package main
 import (
 	"log"
 
-	"goaway/pkg/demo/jsonrpc/jsonrpc"
-	serverSetting "goaway/pkg/library/net"
-	"goaway/pkg/library/net/http"
-	jsonRpcServer "goaway/pkg/library/net/jsonrpc"
+	"comma/pkg/demo/jsonrpc/jsonrpc"
+	serverSetting "comma/pkg/library/net"
+	"comma/pkg/library/net/http"
+	jsonRpcServer "comma/pkg/library/net/jsonrpc"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/sync/errgroup"

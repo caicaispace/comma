@@ -1,4 +1,4 @@
-module goaway
+module comma
 
 go 1.16
 

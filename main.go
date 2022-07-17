@@ -1,27 +1,27 @@
 package main
 
 import (
+	"comma/pkg/library/db"
+	serverSetting "comma/pkg/library/net"
+	httpServer "comma/pkg/library/net/http"
+	"comma/pkg/library/setting"
+	"comma/pkg/library/util/config"
+	"comma/pkg/library/util/metric"
+	"comma/pkg/library/util/task"
+	"comma/pkg/model"
+	adminHttpServer "comma/pkg/server/http/admin"
+	gatewayHttpServer "comma/pkg/server/http/gateway"
 	"embed"
-	"goaway/pkg/library/db"
-	serverSetting "goaway/pkg/library/net"
-	httpServer "goaway/pkg/library/net/http"
-	"goaway/pkg/library/setting"
-	"goaway/pkg/library/util/config"
-	"goaway/pkg/library/util/metric"
-	"goaway/pkg/library/util/task"
-	"goaway/pkg/model"
-	adminHttpServer "goaway/pkg/server/http/admin"
-	gatewayHttpServer "goaway/pkg/server/http/gateway"
 	"io/fs"
 	"net/http"
 	"time"
 
-	jsonrpcServer "goaway/pkg/library/net/jsonrpc"
-	gatewayJsonRpc "goaway/pkg/server/jsonrpc/gateway"
-	segmentJsonRpc "goaway/pkg/server/jsonrpc/segment"
+	jsonrpcServer "comma/pkg/library/net/jsonrpc"
+	gatewayJsonRpc "comma/pkg/server/jsonrpc/gateway"
+	segmentJsonRpc "comma/pkg/server/jsonrpc/segment"
 
-	//bannedJsonRpc `goaway/pkg/service/banned/server/jsonrpc`
-	bannedService "goaway/pkg/service/banned"
+	//bannedJsonRpc `comma/pkg/service/banned/server/jsonrpc`
+	bannedService "comma/pkg/service/banned"
 	"log"
 
 	"golang.org/x/sync/errgroup"
@@ -87,7 +87,7 @@ func loadService() {
 func adminServerStart(serverAddr string) error {
 	s := httpServer.NewServer()
 	s.SetServerAddr(serverAddr)
-	// s.UseTrace(TRACE_URL, "goaway-admin", serverAddr)
+	// s.UseTrace(TRACE_URL, "comma-admin", serverAddr)
 	// s.UseGrafana()
 	adminHttpServer.NewServer(s.Engine)
 	fe, _ := fs.Sub(static, "static")

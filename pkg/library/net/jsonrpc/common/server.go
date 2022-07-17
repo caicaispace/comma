@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 
-	"goaway/pkg/library/net/jsonrpc/components/rate_limit"
+	"comma/pkg/library/net/jsonrpc/components/rate_limit"
 )
 
 type Method struct {

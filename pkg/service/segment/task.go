@@ -3,9 +3,9 @@ package segment
 import (
 	"sync"
 
-	"goaway/pkg/library/core/l"
-	"goaway/pkg/library/setting"
-	"goaway/pkg/library/util/crontab"
+	"comma/pkg/library/core/l"
+	"comma/pkg/library/setting"
+	"comma/pkg/library/util/crontab"
 )
 
 type TaskService struct {

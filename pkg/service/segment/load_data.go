@@ -3,7 +3,7 @@ package segment
 import (
 	"strings"
 
-	dbGorm "goaway/pkg/library/db"
+	dbGorm "comma/pkg/library/db"
 
 	"gorm.io/gorm"
 )

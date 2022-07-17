@@ -26,7 +26,7 @@ profile*.png
 
 # go build files
 main
-goaway
+comma
 
 # tools
 config/conf.toml

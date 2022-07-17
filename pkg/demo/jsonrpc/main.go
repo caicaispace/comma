@@ -1,9 +1,9 @@
 package main
 
 import (
-	"goaway/pkg/demo/jsonrpc/jsonrpc"
-	_ "goaway/pkg/library/net"
-	jsonrpcServer "goaway/pkg/library/net/jsonrpc"
+	"comma/pkg/demo/jsonrpc/jsonrpc"
+	_ "comma/pkg/library/net"
+	jsonrpcServer "comma/pkg/library/net/jsonrpc"
 )
 
 // https://www.jianshu.com/p/74ac2439afb2

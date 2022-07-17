@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"goaway/pkg/library/util"
+	"comma/pkg/library/util"
 )
 
 // SegmentsToSlice

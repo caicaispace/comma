@@ -3,7 +3,7 @@ package banned
 import (
 	"sync"
 
-	service "goaway/pkg/service/banned"
+	service "comma/pkg/service/banned"
 )
 
 type Banned struct{}

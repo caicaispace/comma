@@ -10,9 +10,9 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"goaway/pkg/library/core/l"
-	"goaway/pkg/library/util"
-	"goaway/pkg/library/util/text/t2c"
+	"comma/pkg/library/core/l"
+	"comma/pkg/library/util"
+	"comma/pkg/library/util/text/t2c"
 )
 
 const (

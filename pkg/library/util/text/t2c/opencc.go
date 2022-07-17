@@ -10,8 +10,8 @@ import (
 	"reflect"
 	"strings"
 
-	"goaway/pkg/library/util"
-	"goaway/pkg/library/util/tree/trie_double_array_dict"
+	"comma/pkg/library/util"
+	"comma/pkg/library/util/tree/trie_double_array_dict"
 )
 
 var (

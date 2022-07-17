@@ -3,10 +3,10 @@ package admin
 import (
 	"errors"
 
-	"goaway/pkg/library/db"
-	"goaway/pkg/library/util"
-	"goaway/pkg/library/util/business"
-	service "goaway/pkg/service/banned"
+	"comma/pkg/library/db"
+	"comma/pkg/library/util"
+	"comma/pkg/library/util/business"
+	service "comma/pkg/service/banned"
 
 	"gorm.io/gorm"
 )

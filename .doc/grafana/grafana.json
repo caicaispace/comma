@@ -89,7 +89,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "sum(rate(goaway_goaway_req_total{job=\"goaway\", type=\"all\"}[1m0s]))"
+                  "sum(rate(comma_comma_req_total{job=\"comma\", type=\"all\"}[1m0s]))"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -133,7 +133,7 @@
             "uid": "DC7Y3XC7k"
           },
           "editorMode": "builder",
-          "expr": "sum(rate(goaway_goaway_req_total{job=\"goaway\", type=\"all\"}[$__rate_interval]))",
+          "expr": "sum(rate(comma_comma_req_total{job=\"comma\", type=\"all\"}[$__rate_interval]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -203,7 +203,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "{__name__=\"goaway_goaway_req_total\", instance=\"DESKTOP-5EKG1D9\", job=\"goaway\", name=\"/search_test/all/_search\", type=\"succeed\"}"
+                  "{__name__=\"comma_comma_req_total\", instance=\"DESKTOP-5EKG1D9\", job=\"comma\", name=\"/search_test/all/_search\", type=\"succeed\"}"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -247,7 +247,7 @@
             "uid": "DC7Y3XC7k"
           },
           "editorMode": "builder",
-          "expr": "goaway_goaway_req_total{job=\"goaway\", type=\"succeed\"}",
+          "expr": "comma_comma_req_total{job=\"comma\", type=\"succeed\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -258,7 +258,7 @@
             "uid": "DC7Y3XC7k"
           },
           "editorMode": "builder",
-          "expr": "avg(goaway_goaway_req_total{job=\"goaway\", type=\"fail\"})",
+          "expr": "avg(comma_comma_req_total{job=\"comma\", type=\"fail\"})",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -349,7 +349,7 @@
             "uid": "DC7Y3XC7k"
           },
           "editorMode": "builder",
-          "expr": "goaway_goaway_rsp_duration_seconds_bucket{job=\"goaway\"}",
+          "expr": "comma_comma_rsp_duration_seconds_bucket{job=\"comma\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -438,7 +438,7 @@
             "uid": "DC7Y3XC7k"
           },
           "editorMode": "builder",
-          "expr": "go_gc_duration_seconds{job=\"goaway\"}",
+          "expr": "go_gc_duration_seconds{job=\"comma\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -472,7 +472,7 @@
       "targets": [
         {
           "editorMode": "builder",
-          "expr": "{job=\"goaway\"}",
+          "expr": "{job=\"comma\"}",
           "key": "Q-9ae8e283-81df-48e9-9c50-c0879e11ce24-0",
           "queryType": "range",
           "refId": "A"

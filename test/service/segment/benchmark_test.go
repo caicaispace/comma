@@ -26,11 +26,11 @@ package segment_test
 
 import (
 	"bufio"
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
+	"comma/pkg/service/segment"
 	"flag"
 	"fmt"
-	"goaway/pkg/library/db"
-	"goaway/pkg/library/setting"
-	"goaway/pkg/service/segment"
 	"log"
 	"os"
 	"runtime"
@@ -61,7 +61,7 @@ func Test_Benchmark(t *testing.T) {
 		Port:     "3306",
 		Username: "root",
 		Password: "123456",
-		DbName:   "goaway",
+		DbName:   "comma",
 	})
 	// sego.LoadDb("root:phpcj@tcp(localhost:3306)/es_help?charset=utf8")
 	segmenter.LoadDict()

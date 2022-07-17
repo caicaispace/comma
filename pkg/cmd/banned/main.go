@@ -1,10 +1,10 @@
 package main
 
 import (
-	"goaway/pkg/library/db"
-	jsonrpcServer "goaway/pkg/library/net/jsonrpc"
-	"goaway/pkg/library/setting"
-	bannedJsonRpc "goaway/pkg/server/jsonrpc/banned"
+	"comma/pkg/library/db"
+	jsonrpcServer "comma/pkg/library/net/jsonrpc"
+	"comma/pkg/library/setting"
+	bannedJsonRpc "comma/pkg/server/jsonrpc/banned"
 )
 
 func init() {
@@ -13,7 +13,7 @@ func init() {
 		Port:     "3306",
 		Username: "root",
 		Password: "123456",
-		DbName:   "goaway",
+		DbName:   "comma",
 	}
 	db.New(config)
 }
