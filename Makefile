@@ -11,6 +11,7 @@ build-upx:
 
 vet:
 	go vet ./pkg/...; true
+	go vet ./test/...; true
 
 lint:
 	golint ./pkg/...
@@ -23,6 +24,7 @@ clean:
 fmt:
 	# go install mvdan.cc/gofumpt@latest
 	gofumpt -l -w ./pkg/
+	gofumpt -l -w ./test/
 	# go fmt ./pkg/...
 	# find ./pkg -name "*.go" | xargs gofmt -w
 

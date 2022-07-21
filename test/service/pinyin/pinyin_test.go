@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"testing"
 
-	_ "comma/test"
-
 	"github.com/mozillazg/go-pinyin"
 )
 

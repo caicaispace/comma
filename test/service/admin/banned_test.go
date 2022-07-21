@@ -32,7 +32,7 @@ func TestBannedCreate(t *testing.T) {
 
 func TestBannedUpdate(t *testing.T) {
 	form := service2.BannedUpdateForm{
-		//WordId: 1,
+		// WordId: 1,
 	}
 	err := service2.NewBanned().BannedUpdateById(352957, form)
 	if err != nil {
