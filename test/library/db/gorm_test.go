@@ -37,7 +37,6 @@ func TestDB(t *testing.T) {
 		return nil
 	})
 	t.Log(ret)
-
 	// DB().Raw("select * from menu where id > ?", 0).Scan(&results)
 	// for _, result := range results {
 	// 	fmt.Println(result)

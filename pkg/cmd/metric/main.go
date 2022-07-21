@@ -1,16 +1,17 @@
 package main
 
 import (
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
+	"comma/pkg/library/util/metric"
+	"comma/pkg/library/util/task"
 	"flag"
 	"fmt"
 	"time"
 
-	"comma/pkg/library/db"
 	serverSetting "comma/pkg/library/net"
 	jsonrpcServer "comma/pkg/library/net/jsonrpc"
-	"comma/pkg/library/setting"
-	"comma/pkg/library/util/metric"
-	"comma/pkg/library/util/task"
+
 	bannedJsonRpc "comma/pkg/server/jsonrpc/banned"
 )
 

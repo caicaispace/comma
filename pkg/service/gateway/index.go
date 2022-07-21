@@ -1,6 +1,11 @@
 package gateway
 
 import (
+	"comma/pkg/library/core/l"
+	"comma/pkg/library/util"
+	"comma/pkg/library/util/config"
+	"comma/pkg/library/util/metric"
+	"comma/pkg/service/segment"
 	"encoding/base64"
 	"errors"
 	"fmt"
@@ -10,12 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"comma/pkg/library/core/l"
 	httpServer "comma/pkg/library/net/http"
-	"comma/pkg/library/util"
-	"comma/pkg/library/util/config"
-	"comma/pkg/library/util/metric"
-	"comma/pkg/service/segment"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-resty/resty/v2"

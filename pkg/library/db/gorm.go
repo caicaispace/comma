@@ -1,10 +1,9 @@
 package db
 
 import (
+	"comma/pkg/library/setting"
 	"fmt"
 	"os"
-
-	"comma/pkg/library/setting"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -13,7 +12,6 @@ import (
 
 var _db *gorm.DB
 
-// New https://github.com/moell-peng/gin-gorm-example
 func New(conf *setting.DBSetting) {
 	NewWithAddr(conf.ToAddrString())
 }

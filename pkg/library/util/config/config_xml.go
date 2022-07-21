@@ -1,12 +1,11 @@
 package config
 
 import (
+	"comma/pkg/library/setting"
+	"comma/pkg/library/util"
 	"encoding/xml"
 	"io/ioutil"
 	"sync"
-
-	"comma/pkg/library/setting"
-	"comma/pkg/library/util"
 )
 
 type database struct {

@@ -2,13 +2,12 @@ package client
 
 import (
 	"bytes"
+	"comma/pkg/library/net/jsonrpc/common"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
 	"time"
-
-	"comma/pkg/library/net/jsonrpc/common"
 )
 
 type Http struct {

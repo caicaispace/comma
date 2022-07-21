@@ -1,11 +1,10 @@
 package jsonrpc
 
 import (
-	"errors"
-	"net/http"
-
 	"comma/pkg/library/net/jsonrpc/common"
 	"comma/pkg/library/net/jsonrpc/server"
+	"errors"
+	"net/http"
 )
 
 type Error common.Error

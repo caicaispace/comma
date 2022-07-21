@@ -1,9 +1,8 @@
 package main
 
 import (
-	"log"
-
 	"comma/pkg/library/util/crontab"
+	"log"
 )
 
 var cron = crontab.New()

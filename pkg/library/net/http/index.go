@@ -1,6 +1,10 @@
 package http
 
 import (
+	"comma/pkg/library/core/l"
+	"comma/pkg/library/net/http/middleware"
+	"comma/pkg/library/setting"
+	"comma/pkg/library/util"
 	"context"
 	"flag"
 	"fmt"
@@ -10,11 +14,6 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-
-	"comma/pkg/library/core/l"
-	"comma/pkg/library/net/http/middleware"
-	"comma/pkg/library/setting"
-	"comma/pkg/library/util"
 
 	"github.com/gin-gonic/gin"
 )

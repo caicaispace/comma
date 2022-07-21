@@ -2,13 +2,12 @@ package banned
 
 import (
 	"bufio"
+	"comma/pkg/library/util/tree/trie"
 	"io"
 	"net/http"
 	"os"
 	"regexp"
 	"time"
-
-	"comma/pkg/library/util/tree/trie"
 )
 
 // Filter 敏感词过滤器

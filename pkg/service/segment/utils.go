@@ -2,9 +2,8 @@ package segment
 
 import (
 	"bytes"
-	"fmt"
-
 	"comma/pkg/library/util"
+	"fmt"
 )
 
 // SegmentsToSlice

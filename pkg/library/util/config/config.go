@@ -1,12 +1,11 @@
 package config
 
 import (
+	"comma/pkg/library/setting"
+	"comma/pkg/library/util"
 	"fmt"
 	"os"
 	"sync"
-
-	"comma/pkg/library/setting"
-	"comma/pkg/library/util"
 
 	"github.com/BurntSushi/toml"
 )

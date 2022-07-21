@@ -2,6 +2,8 @@
 package t2c
 
 import (
+	"comma/pkg/library/util"
+	"comma/pkg/library/util/tree/trie_double_array_dict"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -9,9 +11,6 @@ import (
 	"path/filepath"
 	"reflect"
 	"strings"
-
-	"comma/pkg/library/util"
-	"comma/pkg/library/util/tree/trie_double_array_dict"
 )
 
 var (

@@ -54,6 +54,7 @@ png ### 输出详细报告
 - [深入理解 NLP 的中文分词：从原理到实践](https://juejin.cn/book/6844733812102922247)
 - [重新写了之前的新词发现算法：更快更好的新词发现](https://spaces.ac.cn/archives/6920)
 - ["新词发现"算法探讨与优化-SmoothNLP](https://zhuanlan.zhihu.com/p/80385615)
+- [ElasticSearch性能调优](https://zhuanlan.zhihu.com/p/55092525)
 
 ### ide
 

@@ -1,11 +1,11 @@
 package net
 
 import (
+	"comma/pkg/library/core/l"
+	"comma/pkg/library/setting"
 	"flag"
 	"time"
 
-	"comma/pkg/library/core/l"
-	"comma/pkg/library/setting"
 	util2 "comma/pkg/library/util"
 )
 

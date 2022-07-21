@@ -1,13 +1,14 @@
 package main
 
 import (
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
 	"log"
 
-	"comma/pkg/library/db"
 	serverSetting "comma/pkg/library/net"
 	httpServer "comma/pkg/library/net/http"
 	jsonrpcServer "comma/pkg/library/net/jsonrpc"
-	"comma/pkg/library/setting"
+
 	gatewayServer "comma/pkg/server/http/gateway"
 	gatewayJsonRpc "comma/pkg/server/jsonrpc/gateway"
 

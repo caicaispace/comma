@@ -1,6 +1,9 @@
 package segment
 
 import (
+	"comma/pkg/library/core/l"
+	"comma/pkg/library/util"
+	"comma/pkg/library/util/text/t2c"
 	"fmt"
 	"log"
 	"math"
@@ -9,10 +12,6 @@ import (
 	"sync"
 	"unicode"
 	"unicode/utf8"
-
-	"comma/pkg/library/core/l"
-	"comma/pkg/library/util"
-	"comma/pkg/library/util/text/t2c"
 )
 
 const (

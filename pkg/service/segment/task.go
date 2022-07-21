@@ -1,11 +1,10 @@
 package segment
 
 import (
-	"sync"
-
 	"comma/pkg/library/core/l"
 	"comma/pkg/library/setting"
 	"comma/pkg/library/util/crontab"
+	"sync"
 )
 
 type TaskService struct {

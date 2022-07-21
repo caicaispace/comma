@@ -1,14 +1,13 @@
 package common
 
 import (
+	"comma/pkg/library/net/jsonrpc/components/rate_limit"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"reflect"
 	"strings"
 	"sync"
-
-	"comma/pkg/library/net/jsonrpc/components/rate_limit"
 )
 
 type Method struct {

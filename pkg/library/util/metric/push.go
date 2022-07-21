@@ -2,6 +2,8 @@ package metric
 
 import (
 	"bytes"
+	"comma/pkg/library/core/l"
+	"comma/pkg/library/util/task"
 	"context"
 	"fmt"
 	"io/ioutil"
@@ -10,9 +12,6 @@ import (
 	"os"
 	"strings"
 	"time"
-
-	"comma/pkg/library/core/l"
-	"comma/pkg/library/util/task"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/expfmt"
