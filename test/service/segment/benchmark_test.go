@@ -26,9 +26,6 @@ package segment_test
 
 import (
 	"bufio"
-	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
-	"comma/pkg/service/segment"
 	"flag"
 	"fmt"
 	"log"
@@ -37,6 +34,10 @@ import (
 	"runtime/pprof"
 	"testing"
 	"time"
+
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
+	"comma/pkg/service/segment"
 )
 
 var (

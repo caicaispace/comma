@@ -1,12 +1,13 @@
 package server
 
 import (
-	"comma/pkg/library/net/jsonrpc/common"
-	"comma/pkg/library/net/jsonrpc/components/rate_limit"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"sync"
+
+	"comma/pkg/library/net/jsonrpc/common"
+	"comma/pkg/library/net/jsonrpc/components/rate_limit"
 )
 
 type Http struct {

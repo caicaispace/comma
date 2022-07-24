@@ -42,8 +42,9 @@ install:
 	@docker plugin install  grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
 
 upgrade-go:
-	@wget https://go.dev/dl/go1.18.3.linux-amd64.tar.gz
-	@sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz
+	@wget https://go.dev/dl/go1.18.4.linux-amd64.tar.gz
+	@sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.18.4.linux-amd64.tar.gz
+	rm -rf go1.18.4.linux-amd64.tar.gz
 
 help:
 	@echo "make: compile packages and dependencies"

@@ -1,13 +1,14 @@
 package server
 
 import (
-	"comma/pkg/library/net/jsonrpc/common"
-	"comma/pkg/library/net/jsonrpc/components/rate_limit"
 	"context"
 	"fmt"
 	"net"
 	"net/http"
 	"sync"
+
+	"comma/pkg/library/net/jsonrpc/common"
+	"comma/pkg/library/net/jsonrpc/components/rate_limit"
 )
 
 type Tcp struct {

@@ -1,10 +1,11 @@
 package config
 
 import (
-	"comma/pkg/library/setting"
-	config2 "comma/pkg/library/util/config"
 	"fmt"
 	"testing"
+
+	"comma/pkg/library/setting"
+	config2 "comma/pkg/library/util/config"
 )
 
 func Test_ConfigIniLoadConfig(t *testing.T) {

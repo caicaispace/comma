@@ -1,13 +1,14 @@
 package main
 
 import (
+	"flag"
+	"fmt"
+	"time"
+
 	"comma/pkg/library/db"
 	"comma/pkg/library/setting"
 	"comma/pkg/library/util/metric"
 	"comma/pkg/library/util/task"
-	"flag"
-	"fmt"
-	"time"
 
 	serverSetting "comma/pkg/library/net"
 	jsonrpcServer "comma/pkg/library/net/jsonrpc"

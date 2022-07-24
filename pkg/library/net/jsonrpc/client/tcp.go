@@ -1,11 +1,12 @@
 package client
 
 import (
-	"comma/pkg/library/net/jsonrpc/common"
 	"fmt"
 	"net"
 	"strconv"
 	"time"
+
+	"comma/pkg/library/net/jsonrpc/common"
 )
 
 type Tcp struct {

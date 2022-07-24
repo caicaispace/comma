@@ -2,8 +2,6 @@
 package t2c
 
 import (
-	"comma/pkg/library/util"
-	"comma/pkg/library/util/tree/trie_double_array_dict"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -11,6 +9,10 @@ import (
 	"path/filepath"
 	"reflect"
 	"strings"
+
+	"comma/pkg/library/util"
+
+	"github.com/caicaispace/gohelper/tree/triedoublearraydict"
 )
 
 var (
@@ -31,7 +33,7 @@ func defaultDir() string {
 // Group holds a sequence of dicts
 type Group struct {
 	Files []string
-	Dicts []*trie_double_array_dict.Dict
+	Dicts []*triedoublearraydict.Dict
 }
 
 func (g *Group) String() string {
@@ -186,7 +188,7 @@ func (cc *OpenCC) addDictChain(d map[string]interface{}) (*Group, error) {
 			if !has {
 				return nil, fmt.Errorf("no file field found")
 			}
-			daDict, err := trie_double_array_dict.BuildFromFile(filepath.Join(*Dir, dictDir, file.(string)))
+			daDict, err := triedoublearraydict.BuildFromFile(filepath.Join(*Dir, dictDir, file.(string)))
 			if err != nil {
 				return nil, err
 			}

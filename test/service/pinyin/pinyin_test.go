@@ -1,9 +1,10 @@
 package pinyin_test
 
 import (
-	pinyinService "comma/pkg/service/pinyin"
 	"fmt"
 	"testing"
+
+	pinyinService "comma/pkg/service/pinyin"
 
 	"github.com/mozillazg/go-pinyin"
 )

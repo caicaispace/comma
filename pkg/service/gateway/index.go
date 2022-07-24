@@ -1,11 +1,6 @@
 package gateway
 
 import (
-	"comma/pkg/library/core/l"
-	"comma/pkg/library/util"
-	"comma/pkg/library/util/config"
-	"comma/pkg/library/util/metric"
-	"comma/pkg/service/segment"
 	"encoding/base64"
 	"errors"
 	"fmt"
@@ -14,6 +9,12 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"comma/pkg/library/core/l"
+	"comma/pkg/library/util"
+	"comma/pkg/library/util/config"
+	"comma/pkg/library/util/metric"
+	"comma/pkg/service/segment"
 
 	httpServer "comma/pkg/library/net/http"
 

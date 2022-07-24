@@ -1,9 +1,10 @@
 package l
 
 import (
-	"comma/pkg/library/setting"
 	"fmt"
 	"time"
+
+	"comma/pkg/library/setting"
 )
 
 // getLogFilePath get the log file save path

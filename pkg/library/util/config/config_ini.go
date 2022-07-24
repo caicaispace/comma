@@ -1,13 +1,14 @@
 package config
 
 import (
-	"comma/pkg/library/setting"
-	"comma/pkg/library/util"
 	"flag"
 	"fmt"
 	"os"
 	"runtime"
 	"sync"
+
+	"comma/pkg/library/setting"
+	"comma/pkg/library/util"
 
 	"github.com/lxmgo/config"
 )

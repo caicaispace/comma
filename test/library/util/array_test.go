@@ -1,8 +1,9 @@
 package util
 
 import (
-	"comma/pkg/library/util"
 	"testing"
+
+	"comma/pkg/library/util"
 )
 
 func TestGetLastItem(t *testing.T) {
