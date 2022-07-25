@@ -2,9 +2,9 @@ package segment
 
 import (
 	"comma/pkg/library/setting"
-	"comma/pkg/library/util/crontab"
 	"sync"
 
+	"github.com/caicaispace/gohelper/crontab"
 	"github.com/caicaispace/gohelper/logx"
 )
 

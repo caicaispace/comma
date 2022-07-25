@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"comma/pkg/library/util/business"
+	"github.com/caicaispace/gohelper/business"
 )
 
 func Pager() *business.Pager {
