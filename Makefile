@@ -26,7 +26,7 @@ fmt:
 	gofumpt -l -w ./pkg/
 	gofumpt -l -w ./test/
 	# go fmt ./pkg/...
-	# find ./pkg -name "*.go" | xargs gofmt -w
+	# find ./pkg -name "*.go" | xargs gofumpt -l -w
 
 gen-model:
 	# go install github.com/xxjwxc/gormt@master

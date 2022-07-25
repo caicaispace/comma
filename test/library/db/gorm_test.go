@@ -1,12 +1,11 @@
 package db_test
 
 import (
-	"fmt"
-	"testing"
-
 	"comma/pkg/library/db"
 	"comma/pkg/library/setting"
 	"comma/pkg/model"
+	"fmt"
+	"testing"
 
 	"gorm.io/gorm"
 )

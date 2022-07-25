@@ -1,9 +1,8 @@
 package util
 
 import (
-	"testing"
-
 	"comma/pkg/library/util"
+	"testing"
 )
 
 func Test_GetCurrentAbPath(t *testing.T) {

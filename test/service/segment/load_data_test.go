@@ -1,13 +1,13 @@
 package segment
 
 import (
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
+	"comma/pkg/service/segment"
 	"reflect"
 	"testing"
 
 	types "comma/pkg/library/core/t"
-	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
-	"comma/pkg/service/segment"
 
 	"github.com/stretchr/testify/assert"
 )

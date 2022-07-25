@@ -1,6 +1,8 @@
 package segment
 
 import (
+	"comma/pkg/library/util"
+	"comma/pkg/library/util/text/t2c"
 	"fmt"
 	"log"
 	"math"
@@ -10,9 +12,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"comma/pkg/library/core/l"
-	"comma/pkg/library/util"
-	"comma/pkg/library/util/text/t2c"
+	"github.com/caicaispace/gohelper/logx"
 )
 
 const (
@@ -69,7 +69,7 @@ func (seg *SegmenterService) LoadDict() {
 	seg.LoadDataToSynonymsDict()
 	seg.LoadDataToHighFrequencyDict()
 	seg.LoadDataToHyponymDict()
-	l.Debug("-------- dictionary load success --------")
+	logx.Debug("-------- dictionary load success --------")
 }
 
 // GetDict 返回分词器使用的词典

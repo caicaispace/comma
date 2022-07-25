@@ -1,19 +1,18 @@
 package admin
 
 import (
-	"net/http"
-
 	"comma/pkg/library/core/e"
 	"comma/pkg/service/admin"
+	"net/http"
 
-	http2 "comma/pkg/library/net/http"
+	httpServer "github.com/caicaispace/gohelper/server/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
 )
 
 func WeightList(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	pager := ctx.GetPager()
 	filter := &admin.Word{}
 	if ctx.C.Query("word") != "" {
@@ -28,10 +27,10 @@ func WeightList(c *gin.Context) {
 
 func WeightCreate(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.WordWeightCreateForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -48,10 +47,10 @@ func WeightCreate(c *gin.Context) {
 
 func WeightUpdate(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.WordWeightUpdateForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -66,7 +65,7 @@ func WeightUpdate(c *gin.Context) {
 }
 
 func WeightDelete(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	updateId := com.StrTo(ctx.C.Param("id")).MustInt()
 	ids := make([]int, 0)
 	ids = append(ids, updateId)
@@ -83,10 +82,10 @@ func WeightDelete(c *gin.Context) {
 
 func WeightMultipleDelete(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.WordWeightMultipleDeleteForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return

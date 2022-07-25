@@ -2,12 +2,11 @@ package main
 
 import (
 	"comma/pkg/library/db"
-	serverSetting "comma/pkg/library/net"
-	httpServer "comma/pkg/library/net/http"
 	"comma/pkg/library/setting"
 	"comma/pkg/library/util/config"
-	"comma/pkg/library/util/metric"
-	"comma/pkg/library/util/task"
+
+	httpServer "github.com/caicaispace/gohelper/server/http"
+
 	"comma/pkg/model"
 	adminHttpServer "comma/pkg/server/http/admin"
 	gatewayHttpServer "comma/pkg/server/http/gateway"
@@ -16,14 +15,19 @@ import (
 	"net/http"
 	"time"
 
-	jsonrpcServer "comma/pkg/library/net/jsonrpc"
+	"github.com/caicaispace/gohelper/metric"
+	"github.com/caicaispace/gohelper/task"
+
 	gatewayJsonRpc "comma/pkg/server/jsonrpc/gateway"
 	segmentJsonRpc "comma/pkg/server/jsonrpc/segment"
+
+	jsonrpcServer "github.com/caicaispace/gohelper/server/jsonrpc"
 
 	//bannedJsonRpc `comma/pkg/service/banned/server/jsonrpc`
 	bannedService "comma/pkg/service/banned"
 	"log"
 
+	"github.com/caicaispace/gohelper/server"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -116,7 +120,7 @@ func jsonRpcServerStart(serverAddr string) error {
 }
 
 func main() {
-	serverSetting.New()
+	server.New()
 	beforeStart()
 	group.Go(func() error {
 		// gateway server

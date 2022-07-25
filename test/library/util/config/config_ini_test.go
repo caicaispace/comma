@@ -1,10 +1,10 @@
 package config
 
 import (
+	"comma/pkg/library/setting"
 	"fmt"
 	"testing"
 
-	"comma/pkg/library/setting"
 	config2 "comma/pkg/library/util/config"
 )
 

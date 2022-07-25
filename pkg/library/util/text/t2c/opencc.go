@@ -2,6 +2,7 @@
 package t2c
 
 import (
+	"comma/pkg/library/util"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -9,8 +10,6 @@ import (
 	"path/filepath"
 	"reflect"
 	"strings"
-
-	"comma/pkg/library/util"
 
 	"github.com/caicaispace/gohelper/tree/triedoublearraydict"
 )

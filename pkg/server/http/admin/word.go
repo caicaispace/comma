@@ -1,22 +1,21 @@
 package admin
 
 import (
+	"comma/pkg/library/core/e"
+	"comma/pkg/service/admin"
 	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
 
-	"comma/pkg/library/core/e"
-	"comma/pkg/service/admin"
-
-	http2 "comma/pkg/library/net/http"
+	httpServer "github.com/caicaispace/gohelper/server/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
 )
 
 func WordList(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	pager := ctx.GetPager()
 	filter := &admin.Word{}
 	if ctx.C.Query("word") != "" {
@@ -30,7 +29,7 @@ func WordList(c *gin.Context) {
 }
 
 func WordListByIds(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	if ctx.C.Param("ids") == "" {
 		ctx.Error(http.StatusOK, e.Error, nil, nil)
 		return
@@ -50,7 +49,7 @@ func WordListByIds(c *gin.Context) {
 }
 
 func WordInfo(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	id := com.StrTo(ctx.C.Param("id")).MustInt()
 	info, _ := admin.NewWord().WordGetInfoById(id)
 	ctx.Success(gin.H{
@@ -60,10 +59,10 @@ func WordInfo(c *gin.Context) {
 
 func WordCreate(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.WordCreateForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -80,10 +79,10 @@ func WordCreate(c *gin.Context) {
 
 func WordUpdate(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.WordUpdateForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -98,7 +97,7 @@ func WordUpdate(c *gin.Context) {
 }
 
 func WordDelete(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	updateId := com.StrTo(ctx.C.Param("id")).MustInt()
 	ids := make([]int, 0)
 	ids = append(ids, updateId)
@@ -115,10 +114,10 @@ func WordDelete(c *gin.Context) {
 
 func WordMultipleDelete(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.WordMultipleDeleteForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return

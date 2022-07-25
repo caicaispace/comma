@@ -1,12 +1,11 @@
 package admin
 
 import (
-	"net/http"
-
 	"comma/pkg/library/core/e"
 	"comma/pkg/service/admin"
+	"net/http"
 
-	http2 "comma/pkg/library/net/http"
+	httpServer "github.com/caicaispace/gohelper/server/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
@@ -20,7 +19,7 @@ import (
 // 	JOIN dict_incr_id b ON b.id <= ( length( a.word_ids ) - length( REPLACE ( a.word_ids, ',', '' ))+ 1 )) d ON c.id = d.word_id LIMIT 100
 
 func SynonymList(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	pager := ctx.GetPager()
 	list, _ := admin.NewSynonym().SynonymGetList(pager)
 	ctx.Success(gin.H{
@@ -31,10 +30,10 @@ func SynonymList(c *gin.Context) {
 
 func SynonymCreate(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.SynonymCreateForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -51,10 +50,10 @@ func SynonymCreate(c *gin.Context) {
 
 func SynonymUpdate(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.SynonymUpdateForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -71,7 +70,7 @@ func SynonymUpdate(c *gin.Context) {
 }
 
 func SynonymDelete(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	updateId := com.StrTo(ctx.C.Param("id")).MustInt()
 	ids := make([]int, 0)
 	ids = append(ids, updateId)
@@ -88,10 +87,10 @@ func SynonymDelete(c *gin.Context) {
 
 func SynonymMultipleDelete(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.SynonymUMultipleDeleteForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return

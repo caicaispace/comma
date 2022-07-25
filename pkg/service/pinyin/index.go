@@ -1,11 +1,10 @@
 package pinyin
 
 import (
+	"comma/pkg/service/admin"
 	"fmt"
 	"strings"
 	"sync"
-
-	"comma/pkg/service/admin"
 
 	"github.com/mozillazg/go-pinyin"
 )

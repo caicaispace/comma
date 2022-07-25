@@ -1,19 +1,17 @@
 package admin
 
 import (
-	"net/http"
-
 	"comma/pkg/library/core/e"
 	"comma/pkg/service/admin"
+	"net/http"
 
-	http2 "comma/pkg/library/net/http"
-
+	httpServer "github.com/caicaispace/gohelper/server/http"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
 )
 
 func FestivalList(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	pager := ctx.GetPager()
 	list, _ := admin.NewFestival().FestivalGetList(pager)
 	ctx.Success(gin.H{
@@ -24,10 +22,10 @@ func FestivalList(c *gin.Context) {
 
 func FestivalCreate(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.FestivalCreateForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -44,10 +42,10 @@ func FestivalCreate(c *gin.Context) {
 
 func FestivalUpdate(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.FestivalUpdateForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -64,7 +62,7 @@ func FestivalUpdate(c *gin.Context) {
 }
 
 func FestivalDelete(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	updateId := com.StrTo(ctx.C.Param("id")).MustInt()
 	ids := make([]int, 0)
 	ids = append(ids, updateId)
@@ -81,10 +79,10 @@ func FestivalDelete(c *gin.Context) {
 
 func FestivalMultipleDelete(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.FestivalMultipleDeleteForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return

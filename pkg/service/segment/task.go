@@ -1,11 +1,11 @@
 package segment
 
 import (
-	"sync"
-
-	"comma/pkg/library/core/l"
 	"comma/pkg/library/setting"
 	"comma/pkg/library/util/crontab"
+	"sync"
+
+	"github.com/caicaispace/gohelper/logx"
 )
 
 type TaskService struct {
@@ -47,7 +47,7 @@ func (ts *TaskService) loadDictOnTime() {
 		minTime = minTime + 1
 		time := GetLastCreateTime()
 		if GetLastCreateTime() > lastTime {
-			l.Infof("change so load dic")
+			logx.Infof("change so load dic")
 			ts.Segmenter.LoadDict()
 			lastTime = time
 			minTime = 0
@@ -64,7 +64,7 @@ func (ts *TaskService) loadDictOnTime() {
 	// 全量更新（每天）
 	job2, err = crontab.NewJobModel("00 00 03 * * *", func() {
 		minTime = 0
-		l.Infof("24 time load dic")
+		logx.Infof("24 time load dic")
 		ts.Segmenter.LoadDict()
 	})
 	if err != nil {

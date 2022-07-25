@@ -3,7 +3,8 @@ package admin
 import (
 	"comma/pkg/library/db"
 	"comma/pkg/library/util"
-	"comma/pkg/library/util/business"
+
+	"github.com/caicaispace/gohelper/business"
 )
 
 type Word struct {

@@ -3,7 +3,9 @@ package banned
 import (
 	"comma/pkg/library/core/e"
 	"comma/pkg/library/core/t"
-	"comma/pkg/library/net/http"
+
+	httpServer "github.com/caicaispace/gohelper/server/http"
+
 	service "comma/pkg/service/banned"
 
 	"github.com/gin-gonic/gin"
@@ -11,7 +13,7 @@ import (
 
 func Find(c *gin.Context) {
 	var (
-		ctx        = http.Context{C: c}
+		ctx        = httpServer.Context{C: c}
 		word       = c.Query("word")
 		handleType = c.Query("type")
 	)
@@ -29,10 +31,10 @@ type FindAddForm struct {
 
 func Add(c *gin.Context) {
 	var (
-		ctx  = http.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form FindAddForm
 	)
-	httpCode, errCode := http.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -47,10 +49,10 @@ type FindDelForm struct {
 
 func Del(c *gin.Context) {
 	var (
-		ctx  = http.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form FindDelForm
 	)
-	httpCode, errCode := http.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return

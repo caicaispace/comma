@@ -3,7 +3,9 @@ package segment
 import (
 	"comma/pkg/library/core/e"
 	"comma/pkg/library/core/t"
-	http2 "comma/pkg/library/net/http"
+
+	httpServer "github.com/caicaispace/gohelper/server/http"
+
 	service "comma/pkg/service/segment"
 
 	"github.com/gin-gonic/gin"
@@ -23,11 +25,11 @@ type ParticipleForm struct {
 // @Router /v1/api/es-participle [post]
 func Segment(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form ParticipleForm
 	)
 
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return

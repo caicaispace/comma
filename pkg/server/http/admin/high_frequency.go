@@ -1,19 +1,18 @@
 package admin
 
 import (
-	"net/http"
-
 	"comma/pkg/library/core/e"
 	"comma/pkg/service/admin"
+	"net/http"
 
-	http2 "comma/pkg/library/net/http"
+	httpServer "github.com/caicaispace/gohelper/server/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
 )
 
 func HighFrequencyList(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	pager := ctx.GetPager()
 	list, _ := admin.NewHighFrequency().HighFrequencyGetList(pager)
 	ctx.Success(gin.H{
@@ -24,10 +23,10 @@ func HighFrequencyList(c *gin.Context) {
 
 func HighFrequencyCreate(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.HighFrequencyCreateForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -44,10 +43,10 @@ func HighFrequencyCreate(c *gin.Context) {
 
 func HighFrequencyUpdate(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.HighFrequencyUpdateForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
@@ -62,7 +61,7 @@ func HighFrequencyUpdate(c *gin.Context) {
 }
 
 func HighFrequencyDelete(c *gin.Context) {
-	ctx := http2.Context{C: c}
+	ctx := httpServer.Context{C: c}
 	updateId := com.StrTo(ctx.C.Param("id")).MustInt()
 	ids := make([]int, 0)
 	ids = append(ids, updateId)
@@ -79,10 +78,10 @@ func HighFrequencyDelete(c *gin.Context) {
 
 func HighFrequencyMultipleDelete(c *gin.Context) {
 	var (
-		ctx  = http2.Context{C: c}
+		ctx  = httpServer.Context{C: c}
 		form admin.HighFrequencyMultipleDeleteForm
 	)
-	httpCode, errCode := http2.BindAndValid(c, &form)
+	httpCode, errCode := httpServer.BindAndValid(c, &form)
 	if errCode != e.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return

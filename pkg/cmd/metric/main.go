@@ -1,19 +1,21 @@
 package main
 
 import (
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
 	"flag"
 	"fmt"
 	"time"
 
-	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
-	"comma/pkg/library/util/metric"
-	"comma/pkg/library/util/task"
+	"github.com/caicaispace/gohelper/task"
 
-	serverSetting "comma/pkg/library/net"
-	jsonrpcServer "comma/pkg/library/net/jsonrpc"
+	"github.com/caicaispace/gohelper/metric"
 
 	bannedJsonRpc "comma/pkg/server/jsonrpc/banned"
+
+	jsonrpcServer "github.com/caicaispace/gohelper/server/jsonrpc"
+
+	"github.com/caicaispace/gohelper/server"
 )
 
 var (
@@ -36,7 +38,7 @@ func init() {
 }
 
 func main() {
-	serverSetting.New()
+	server.New()
 	s := jsonrpcServer.NewServer()
 	s.SetServerAddr("127.0.0.1:3231")
 	s.RegisterService(bannedJsonRpc.GetInstance())

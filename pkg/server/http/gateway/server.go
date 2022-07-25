@@ -1,9 +1,10 @@
 package admin
 
 import (
-	httpServer "comma/pkg/library/net/http"
 	"comma/pkg/library/util/config"
 	gatewayService "comma/pkg/service/gateway"
+
+	httpServer "github.com/caicaispace/gohelper/server/http"
 )
 
 func NewServer(s *httpServer.Service) {

@@ -1,10 +1,9 @@
 package config
 
 import (
+	"comma/pkg/library/util/config"
 	"fmt"
 	"testing"
-
-	"comma/pkg/library/util/config"
 )
 
 var conf = config.GetInstance()

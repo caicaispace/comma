@@ -1,10 +1,9 @@
 package gateway
 
 import (
+	"comma/pkg/library/util/config"
 	"regexp"
 	"strings"
-
-	"comma/pkg/library/util/config"
 
 	segmentService "comma/pkg/service/segment"
 )

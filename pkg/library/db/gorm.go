@@ -1,10 +1,9 @@
 package db
 
 import (
+	"comma/pkg/library/setting"
 	"fmt"
 	"os"
-
-	"comma/pkg/library/setting"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

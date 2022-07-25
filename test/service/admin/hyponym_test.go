@@ -1,10 +1,10 @@
 package admin_test
 
 import (
+	service2 "comma/pkg/service/admin"
 	"testing"
 
-	"comma/pkg/library/util/business"
-	service2 "comma/pkg/service/admin"
+	"github.com/caicaispace/gohelper/business"
 )
 
 func TestHyponymGetList(t *testing.T) {

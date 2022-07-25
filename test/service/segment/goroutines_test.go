@@ -4,6 +4,8 @@ package segment_test
 
 import (
 	"bufio"
+	"comma/pkg/library/db"
+	"comma/pkg/library/setting"
 	"fmt"
 	"log"
 	"os"
@@ -11,8 +13,6 @@ import (
 	"testing"
 	"time"
 
-	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
 	participleService "comma/pkg/service/segment"
 )
 

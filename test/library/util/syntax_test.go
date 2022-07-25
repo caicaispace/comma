@@ -1,10 +1,9 @@
 package util
 
 import (
+	"comma/pkg/library/util"
 	"fmt"
 	"testing"
-
-	"comma/pkg/library/util"
 )
 
 func TestIf(t *testing.T) {

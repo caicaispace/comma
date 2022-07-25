@@ -2,9 +2,10 @@ package main
 
 import (
 	"comma/pkg/library/db"
-	jsonrpcServer "comma/pkg/library/net/jsonrpc"
 	"comma/pkg/library/setting"
 	bannedJsonRpc "comma/pkg/server/jsonrpc/banned"
+
+	jsonrpcServer "github.com/caicaispace/gohelper/server/jsonrpc"
 )
 
 func init() {

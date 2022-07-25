@@ -2,8 +2,9 @@ package main
 
 import (
 	"comma/pkg/demo/jsonrpc/jsonrpc"
-	_ "comma/pkg/library/net"
-	jsonrpcServer "comma/pkg/library/net/jsonrpc"
+
+	_ "github.com/caicaispace/gohelper/server"
+	jsonrpcServer "github.com/caicaispace/gohelper/server/jsonrpc"
 )
 
 // https://www.jianshu.com/p/74ac2439afb2

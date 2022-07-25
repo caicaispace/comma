@@ -1,18 +1,17 @@
 package main
 
 import (
-	"log"
-
 	"comma/pkg/library/db"
 	"comma/pkg/library/setting"
-
-	serverSetting "comma/pkg/library/net"
-	httpServer "comma/pkg/library/net/http"
-	jsonrpcServer "comma/pkg/library/net/jsonrpc"
+	"log"
 
 	gatewayServer "comma/pkg/server/http/gateway"
 	gatewayJsonRpc "comma/pkg/server/jsonrpc/gateway"
 
+	httpServer "github.com/caicaispace/gohelper/server/http"
+	jsonrpcServer "github.com/caicaispace/gohelper/server/jsonrpc"
+
+	"github.com/caicaispace/gohelper/server"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -46,7 +45,7 @@ func jsonRpcServerStart(serverAddr string) error {
 }
 
 func main() {
-	serverSetting.New()
+	server.New()
 	g.Go(func() error {
 		return jsonRpcServerStart("127.0.0.1:3231")
 	})
