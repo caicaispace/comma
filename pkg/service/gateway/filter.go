@@ -1,11 +1,12 @@
 package gateway
 
 import (
-	"comma/pkg/library/util/config"
 	"regexp"
 	"strings"
 
 	segmentService "comma/pkg/service/segment"
+
+	"github.com/caicaispace/gohelper/config"
 )
 
 type SEARCH_TYPE int

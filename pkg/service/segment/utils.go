@@ -2,8 +2,9 @@ package segment
 
 import (
 	"bytes"
-	"comma/pkg/library/util"
 	"fmt"
+
+	"github.com/caicaispace/gohelper/stringx"
 )
 
 // SegmentsToSlice
@@ -35,7 +36,7 @@ func SegmentsToSlice(segSlice []Segment, searchType bool, threeParticiple bool) 
 	}
 	// 剔除重复的词 剔除非法字符 剔除stop
 	for _, s := range sliceStr {
-		if util.IsInvaildSymbol(s) {
+		if stringx.IsInvaildSymbol(s) {
 			continue
 		}
 		output = append(output, s)

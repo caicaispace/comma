@@ -59,8 +59,8 @@ github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6r
 github.com/bits-and-blooms/bitset v1.2.0 h1:Kn4yilvwNtMACtf1eYDlG8H77R07mZSPbMjLyS07ChA=
 github.com/bits-and-blooms/bitset v1.2.0/go.mod h1:gIdJ4wp64HaoK2YrL1Q5/N7Y16edYb8uY+O0FJTyyDA=
 github.com/bradfitz/gomemcache v0.0.0-20180710155616-bc664df96737/go.mod h1:PmM6Mmwb0LSuEubjR8N7PtNe1KxZLtOUHtbeikc5h60=
-github.com/caicaispace/gohelper v0.0.3 h1:hBm1BydW1TMyke157C+BLjtlQl73axe8w0aFPFECbZE=
-github.com/caicaispace/gohelper v0.0.3/go.mod h1:tcHZdgXlY90BPjvGsPxbT2SIqKcHj4z6Sqyc1TdcJX4=
+github.com/caicaispace/gohelper v0.0.5 h1:raQdcfS/U6VwLFNqWtbi6eNtpv8B/H7+XtD6vmx+RaQ=
+github.com/caicaispace/gohelper v0.0.5/go.mod h1:EGvfyxB7pjHZW4HesiuBkiGSbAqQME0j8Xs9VKElyZE=
 github.com/casbin/casbin v1.7.0/go.mod h1:c67qKN6Oum3UF5Q1+BByfFxkwKvhwW57ITjqwtzR1KE=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/cespare/xxhash/v2 v2.1.1/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=

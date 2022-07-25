@@ -1,9 +1,9 @@
 package admin
 
 import (
-	"comma/pkg/library/util/config"
 	gatewayService "comma/pkg/service/gateway"
 
+	"github.com/caicaispace/gohelper/config"
 	httpServer "github.com/caicaispace/gohelper/server/http"
 )
 

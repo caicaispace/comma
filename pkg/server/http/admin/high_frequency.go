@@ -1,9 +1,11 @@
 package admin
 
 import (
-	"comma/pkg/library/core/e"
-	"comma/pkg/service/admin"
 	"net/http"
+
+	"comma/pkg/service/admin"
+
+	"github.com/caicaispace/gohelper/errx"
 
 	httpServer "github.com/caicaispace/gohelper/server/http"
 
@@ -27,13 +29,13 @@ func HighFrequencyCreate(c *gin.Context) {
 		form admin.HighFrequencyCreateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	outData, err := admin.NewHighFrequency().HighFrequencyCreate(form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), nil)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), nil)
 		return
 	}
 	ctx.Success(gin.H{
@@ -47,14 +49,14 @@ func HighFrequencyUpdate(c *gin.Context) {
 		form admin.HighFrequencyUpdateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	updateId := com.StrTo(ctx.C.Param("id")).MustInt()
 	success := admin.NewHighFrequency().HighFrequencyUpdateById(updateId, form)
 	if !success {
-		ctx.Error(http.StatusOK, e.Error, nil, nil)
+		ctx.Error(http.StatusOK, errx.Error, nil, nil)
 		return
 	}
 	ctx.Success(nil, nil)
@@ -70,7 +72,7 @@ func HighFrequencyDelete(c *gin.Context) {
 	}
 	success := admin.NewHighFrequency().HighFrequencyDeleteByIds(form)
 	if !success {
-		ctx.Error(http.StatusOK, e.Error, nil, nil)
+		ctx.Error(http.StatusOK, errx.Error, nil, nil)
 		return
 	}
 	ctx.Success(nil, nil)
@@ -82,13 +84,13 @@ func HighFrequencyMultipleDelete(c *gin.Context) {
 		form admin.HighFrequencyMultipleDeleteForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	success := admin.NewHighFrequency().HighFrequencyDeleteByIds(form)
 	if !success {
-		ctx.Error(http.StatusOK, e.Error, nil, nil)
+		ctx.Error(http.StatusOK, errx.Error, nil, nil)
 		return
 	}
 	ctx.Success(nil, nil)

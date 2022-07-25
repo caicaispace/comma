@@ -1,9 +1,10 @@
 package db
 
 import (
-	"comma/pkg/library/setting"
 	"fmt"
 	"os"
+
+	"github.com/caicaispace/gohelper/setting"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

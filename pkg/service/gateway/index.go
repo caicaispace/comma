@@ -1,9 +1,6 @@
 package gateway
 
 import (
-	"comma/pkg/library/util"
-	"comma/pkg/library/util/config"
-	"comma/pkg/service/segment"
 	"encoding/base64"
 	"errors"
 	"fmt"
@@ -13,11 +10,13 @@ import (
 	"sync"
 	"time"
 
+	"comma/pkg/service/segment"
+
+	"github.com/caicaispace/gohelper/config"
+	"github.com/caicaispace/gohelper/datetime"
 	"github.com/caicaispace/gohelper/logx"
 	"github.com/caicaispace/gohelper/metric"
-
 	httpServer "github.com/caicaispace/gohelper/server/http"
-
 	"github.com/gin-gonic/gin"
 	"github.com/go-resty/resty/v2"
 )
@@ -61,7 +60,7 @@ func (ps *Service) Dispatch(c *gin.Context) {
 	}()
 	startAt := time.Now()
 	ctx := httpServer.Context{C: c}
-	startTimeMS := util.NowTimestampMS()
+	startTimeMS := datetime.NowTimestampMS()
 	esRequestObj := ps.getEsRequestObjWithHttpServer(c.Request)
 	if esRequestObj.Banned != "" {
 		ctx.C.Writer.Write(nil)
@@ -70,7 +69,7 @@ func (ps *Service) Dispatch(c *gin.Context) {
 	if esRequestObj.SearchType == PROXY_SEARCH_TYPE {
 		esRequestUrl := config.GetInstance().GetEsRoute(esRequestObj.IndexName, esRequestObj.TypeName)
 		if esRequestUrl == "" {
-			logx.Errorf("%s not map url:%s time:%d ms body %s", c.Request.Method, c.Request.URL.Path, util.NowTimestampMS()-startTimeMS, esRequestObj.BodyRaw)
+			logx.Errorf("%s not map url:%s time:%d ms body %s", c.Request.Method, c.Request.URL.Path, datetime.NowTimestampMS()-startTimeMS, esRequestObj.BodyRaw)
 			ctx.JOSN(nil)
 			return
 		}
@@ -80,14 +79,14 @@ func (ps *Service) Dispatch(c *gin.Context) {
 			ctx.JOSN(body)
 			return
 		}
-		logx.Infof("url:%s time:%dms body:%s", c.Request.URL.Path, util.NowTimestampMS()-startTimeMS, esRequestObj.BodyRaw)
+		logx.Infof("url:%s time:%dms body:%s", c.Request.URL.Path, datetime.NowTimestampMS()-startTimeMS, esRequestObj.BodyRaw)
 		ctx.JOSN(body)
 	} else {
 		body, err := ps.reqElasticSearch(esRequestObj)
 		if err != nil {
 			logx.Errorf("http request %v", err)
 		}
-		logx.Infof("%s pass url:%s time:%dms ", c.Request.Method, c.Request.URL.Path, util.NowTimestampMS()-startTimeMS)
+		logx.Infof("%s pass url:%s time:%dms ", c.Request.Method, c.Request.URL.Path, datetime.NowTimestampMS()-startTimeMS)
 		ctx.JOSN(body)
 	}
 	go func() {
@@ -96,7 +95,7 @@ func (ps *Service) Dispatch(c *gin.Context) {
 }
 
 func (ps *Service) DispatchWithJsonRpc(esIndex, esType, esBody, handleType string) ([]byte, error) {
-	startTimeMS := util.NowTimestampMS()
+	startTimeMS := datetime.NowTimestampMS()
 	esRequestUrl := ps.getEsRequestUrl("")
 	esRequestObj := &EsRequest{
 		SearchType: PASS_SEARCH_TYPE,
@@ -136,9 +135,9 @@ func (ps *Service) DispatchWithJsonRpc(esIndex, esType, esBody, handleType strin
 	}
 	switch esRequestObj.SearchType {
 	case PROXY_SEARCH_TYPE:
-		logx.Infof("url:%s time:%dms body:%s", esRequestUrl, util.NowTimestampMS()-startTimeMS, esBody)
+		logx.Infof("url:%s time:%dms body:%s", esRequestUrl, datetime.NowTimestampMS()-startTimeMS, esBody)
 	case PASS_SEARCH_TYPE:
-		logx.Infof("%s transparent url:%s time:%dms ", handleType, esRequestUrl, util.NowTimestampMS()-startTimeMS)
+		logx.Infof("%s transparent url:%s time:%dms ", handleType, esRequestUrl, datetime.NowTimestampMS()-startTimeMS)
 	}
 	return body, nil
 }
@@ -180,7 +179,7 @@ var client = resty.New()
 // send http request to es
 func (ps *Service) reqElasticSearch(esRequestObj *EsRequest) ([]byte, error) {
 	if config.GetInstance().GetEnv() == "dev" {
-		fmt.Println("---------------------------------- " + util.NowDateTime() + " ----------------------------------")
+		fmt.Println("---------------------------------- " + datetime.NowDateTime() + " ----------------------------------")
 		fmt.Println(esRequestObj.BodyRaw)
 	}
 	// Create a Resty Client

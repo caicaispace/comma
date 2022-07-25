@@ -1,8 +1,6 @@
 package segment
 
 import (
-	"comma/pkg/library/util"
-	"comma/pkg/library/util/text/t2c"
 	"fmt"
 	"log"
 	"math"
@@ -12,7 +10,11 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	"comma/pkg/library/util/text/t2c"
+
 	"github.com/caicaispace/gohelper/logx"
+	"github.com/caicaispace/gohelper/mathx"
+	"github.com/caicaispace/gohelper/stringx"
 )
 
 const (
@@ -370,7 +372,7 @@ func (seg *SegmenterService) segmentBatchWord(textSlice []Text, searchMode bool)
 			baseDistance = jumperArr[current-1].minDistance
 		}
 		// 寻找所有以当前字元开头的分词
-		tokenCount := seg.dict.getTokenCount(textSlice[current:util.MinInt(current+seg.dict.maxTokenLength, len(textSlice))], tokenArr)
+		tokenCount := seg.dict.getTokenCount(textSlice[current:mathx.MinInt(current+seg.dict.maxTokenLength, len(textSlice))], tokenArr)
 		// 对所有可能的分词，更新分词结束字元处的跳转信息
 		for iToken := 0; iToken < tokenCount; iToken++ {
 			location := current + len(tokenArr[iToken].textSlice) - 1
@@ -447,7 +449,7 @@ func splitTextToWords(text Text) []Text {
 			if inAlphanumeric {
 				inAlphanumeric = false
 				if current != 0 {
-					outData = append(outData, util.ToLower(text[alphanumericStart:current]))
+					outData = append(outData, stringx.ToLower(text[alphanumericStart:current]))
 				}
 			}
 			outData = append(outData, text[current:current+size])
@@ -457,7 +459,7 @@ func splitTextToWords(text Text) []Text {
 	// 处理最后一个字元是英文的情况
 	if inAlphanumeric {
 		if current != 0 {
-			outData = append(outData, util.ToLower(text[alphanumericStart:current]))
+			outData = append(outData, stringx.ToLower(text[alphanumericStart:current]))
 		}
 	}
 	return outData
@@ -483,10 +485,10 @@ func (seg *SegmenterService) preDelString(in string) string {
 	var preAplNum string
 	for i := 0; i < len(r); i++ {
 		t := r[i]
-		if util.IsAlphabet(t) || unicode.IsNumber(t) {
+		if stringx.IsAlphabet(t) || unicode.IsNumber(t) {
 			// 这里功能就是为了让数字和字母分开 但是如果这是一个词 那就不能分开
 			if preBool && i != 0 {
-				if (util.IsAlphabet(t) && unicode.IsNumber(r[i-1])) || (util.IsAlphabet(r[i-1]) && unicode.IsNumber(t)) {
+				if (stringx.IsAlphabet(t) && unicode.IsNumber(r[i-1])) || (stringx.IsAlphabet(r[i-1]) && unicode.IsNumber(t)) {
 					ids := seg.dict.trie.PrefixPredict([]byte(strings.ToLower(preAplNum+string(t))), 0)
 					if len(ids) > 0 {
 						maxFindStr := ""

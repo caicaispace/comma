@@ -1,11 +1,13 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
-	"comma/pkg/library/util"
 	"errors"
 
+	"comma/pkg/library/db"
+
 	"github.com/caicaispace/gohelper/business"
+	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/syntax"
 
 	service "comma/pkg/service/banned"
 
@@ -78,7 +80,7 @@ func (bs *bannedService) BannedCreate(inData BannedCreateForm) (*Banned, error) 
 		WordId:     inData.WordId,
 		ProjectId:  inData.ProjectId,
 		IsDel:      1,
-		CreateTime: int(util.NowTimestamp()),
+		CreateTime: int(datetime.NowTimestamp()),
 	}
 	err := db.DB().Transaction(func(tx *gorm.DB) error {
 		ret := tx.Table(bannedTableName).Create(&outData)
@@ -107,8 +109,8 @@ type BannedUpdateForm struct {
 }
 
 func (bs *bannedService) BannedUpdateById(id int, inData BannedUpdateForm) error {
-	updateData, _ := util.StructToMap(inData, "json")
-	updateData["update_time"] = int(util.NowTimestamp())
+	updateData, _ := syntax.StructToMap(inData, "json")
+	updateData["update_time"] = int(datetime.NowTimestamp())
 	ret := db.DB().Table(bannedTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return ret.Error

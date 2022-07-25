@@ -4,14 +4,16 @@ package segment_test
 
 import (
 	"bufio"
-	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
 	"fmt"
 	"log"
 	"os"
 	"runtime"
 	"testing"
 	"time"
+
+	"comma/pkg/library/db"
+
+	"github.com/caicaispace/gohelper/setting"
 
 	participleService "comma/pkg/service/segment"
 )

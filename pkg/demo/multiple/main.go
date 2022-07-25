@@ -1,8 +1,9 @@
 package main
 
 import (
-	"comma/pkg/demo/jsonrpc/jsonrpc"
 	"log"
+
+	"comma/pkg/demo/jsonrpc/jsonrpc"
 
 	"github.com/caicaispace/gohelper/server/http"
 

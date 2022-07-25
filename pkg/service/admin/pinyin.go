@@ -2,9 +2,10 @@ package admin
 
 import (
 	"comma/pkg/library/db"
-	"comma/pkg/library/util"
 
 	"github.com/caicaispace/gohelper/business"
+	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/syntax"
 )
 
 type Pinyin struct {
@@ -97,7 +98,7 @@ func (ws *pinyinService) PinyinCreate(inData PinyinCreateForm) (*Pinyin, error) 
 		Pinyins:        inData.Pinyins,
 		PinyinInitials: inData.PinyinInitials,
 		IsDel:          inData.IsDel,
-		CreateTime:     int(util.NowTimestamp()),
+		CreateTime:     int(datetime.NowTimestamp()),
 	}
 	ret := db.DB().Table(pinyinTableName).Create(&outData)
 	if ret.Error != nil {
@@ -117,8 +118,8 @@ type PinyinUpdateForm struct {
 }
 
 func (ws *pinyinService) PinyinUpdateById(id int, inData PinyinUpdateForm) bool {
-	updateData, _ := util.StructToMap(inData, "form")
-	updateData["update_time"] = int(util.NowTimestamp())
+	updateData, _ := syntax.StructToMap(inData, "form")
+	updateData["update_time"] = int(datetime.NowTimestamp())
 	ret := db.DB().Table(pinyinTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return false

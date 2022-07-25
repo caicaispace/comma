@@ -1,12 +1,14 @@
 package admin
 
 import (
-	"comma/pkg/library/core/e"
-	"comma/pkg/service/admin"
 	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"comma/pkg/service/admin"
+
+	"github.com/caicaispace/gohelper/errx"
 
 	httpServer "github.com/caicaispace/gohelper/server/http"
 
@@ -31,7 +33,7 @@ func WordList(c *gin.Context) {
 func WordListByIds(c *gin.Context) {
 	ctx := httpServer.Context{C: c}
 	if ctx.C.Param("ids") == "" {
-		ctx.Error(http.StatusOK, e.Error, nil, nil)
+		ctx.Error(http.StatusOK, errx.Error, nil, nil)
 		return
 	}
 	idsStr := ctx.C.Param("ids")
@@ -63,13 +65,13 @@ func WordCreate(c *gin.Context) {
 		form admin.WordCreateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	outData, err := admin.NewWord().WordCreate(form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), nil)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), nil)
 		return
 	}
 	ctx.Success(gin.H{
@@ -83,14 +85,14 @@ func WordUpdate(c *gin.Context) {
 		form admin.WordUpdateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	updateId := com.StrTo(ctx.C.Param("id")).MustInt()
 	success := admin.NewWord().WordUpdateById(updateId, form)
 	if !success {
-		ctx.Error(http.StatusOK, e.Error, nil, nil)
+		ctx.Error(http.StatusOK, errx.Error, nil, nil)
 		return
 	}
 	ctx.Success(nil, nil)
@@ -106,7 +108,7 @@ func WordDelete(c *gin.Context) {
 	}
 	success := admin.NewWord().WordDeleteByIds(form)
 	if !success {
-		ctx.Error(http.StatusOK, e.Error, nil, nil)
+		ctx.Error(http.StatusOK, errx.Error, nil, nil)
 		return
 	}
 	ctx.Success(nil, nil)
@@ -118,13 +120,13 @@ func WordMultipleDelete(c *gin.Context) {
 		form admin.WordMultipleDeleteForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	success := admin.NewWord().WordDeleteByIds(form)
 	if !success {
-		ctx.Error(http.StatusOK, e.Error, nil, nil)
+		ctx.Error(http.StatusOK, errx.Error, nil, nil)
 		return
 	}
 	ctx.Success(nil, nil)

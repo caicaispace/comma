@@ -1,11 +1,13 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
-	"comma/pkg/library/util"
 	"errors"
 
+	"comma/pkg/library/db"
+
 	"github.com/caicaispace/gohelper/business"
+	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/syntax"
 )
 
 type Synonym struct {
@@ -67,7 +69,7 @@ func (ss *synonymService) SynonymCreate(inData SynonymCreateForm) (*Synonym, err
 		Rate:       inData.Rate,
 		ProjectId:  inData.ProjectId,
 		IsDel:      inData.IsDel,
-		CreateTime: int(util.NowTimestamp()),
+		CreateTime: int(datetime.NowTimestamp()),
 	}
 	ret := db.DB().Table(synonymTableName).Create(&outData)
 	if ret.Error != nil {
@@ -85,13 +87,13 @@ type SynonymUpdateForm struct {
 }
 
 func (ss *synonymService) SynonymUpdateById(id int, inData SynonymUpdateForm) (*SynonymUpdateForm, error) {
-	updateData, _ := util.StructToMap(inData, "json")
-	updateData["update_time"] = int(util.NowTimestamp())
+	updateData, _ := syntax.StructToMap(inData, "json")
+	updateData["update_time"] = int(datetime.NowTimestamp())
 	ret := db.DB().Table(synonymTableName).Where("id = ?", id).Updates(updateData)
 	if ret.RowsAffected <= 0 {
 		return nil, errors.New("update err")
 	}
-	err := util.MapToStruct(updateData, &inData)
+	err := syntax.MapToStruct(updateData, &inData)
 	if err != nil {
 		return nil, err
 	}

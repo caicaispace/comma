@@ -1,12 +1,14 @@
 package segment_test
 
 import (
-	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
-	"comma/pkg/service/segment"
 	"fmt"
 	"regexp"
 	"testing"
+
+	"comma/pkg/library/db"
+	"comma/pkg/service/segment"
+
+	"github.com/caicaispace/gohelper/setting"
 )
 
 func Test_Segmenter(t *testing.T) {

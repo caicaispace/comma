@@ -1,13 +1,14 @@
 package segment
 
 import (
-	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
-	"comma/pkg/service/segment"
 	"reflect"
 	"testing"
 
-	types "comma/pkg/library/core/t"
+	"comma/pkg/library/db"
+	"comma/pkg/service/segment"
+
+	"github.com/caicaispace/gohelper/setting"
+	"github.com/caicaispace/gohelper/syntax"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -40,7 +41,7 @@ func TestLoadDictFromDB(t *testing.T) {
 		t.Error(err)
 	}
 	tAssert := assert.New(t)
-	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&types.SliceMapStrAny{}))
+	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&syntax.SliceMapStrAny{}))
 }
 
 func TestLoadSynonymsDictV2FromDB(t *testing.T) {
@@ -49,7 +50,7 @@ func TestLoadSynonymsDictV2FromDB(t *testing.T) {
 		t.Error(err)
 	}
 	tAssert := assert.New(t)
-	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&types.MapStrSliceStr{}))
+	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&syntax.MapStrSliceStr{}))
 }
 
 func TestLoadHighFrequencyDictFromDB(t *testing.T) {
@@ -58,7 +59,7 @@ func TestLoadHighFrequencyDictFromDB(t *testing.T) {
 		t.Error(err)
 	}
 	tAssert := assert.New(t)
-	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&types.MapStrBool{}))
+	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&syntax.MapStrBool{}))
 }
 
 func TestLoadStopDictFromDB(t *testing.T) {
@@ -67,7 +68,7 @@ func TestLoadStopDictFromDB(t *testing.T) {
 		t.Error(err)
 	}
 	tAssert := assert.New(t)
-	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&types.MapStrBool{}))
+	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&syntax.MapStrBool{}))
 }
 
 func TestLoadBannedDictFromDB(t *testing.T) {
@@ -76,7 +77,7 @@ func TestLoadBannedDictFromDB(t *testing.T) {
 		t.Error(err)
 	}
 	tAssert := assert.New(t)
-	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&types.MapStrBool{}))
+	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&syntax.MapStrBool{}))
 }
 
 func TestLoadBannedDictV3FromDB(t *testing.T) {
@@ -85,7 +86,7 @@ func TestLoadBannedDictV3FromDB(t *testing.T) {
 		t.Error(err)
 	}
 	tAssert := assert.New(t)
-	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&types.MapStrBool{}))
+	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&syntax.MapStrBool{}))
 }
 
 func TestLoadHyponymDictFromDB(t *testing.T) {
@@ -94,5 +95,5 @@ func TestLoadHyponymDictFromDB(t *testing.T) {
 		t.Error(err)
 	}
 	tAssert := assert.New(t)
-	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&types.MapStrSliceStr{}))
+	tAssert.Equal(reflect.TypeOf(dict), reflect.TypeOf(&syntax.MapStrSliceStr{}))
 }

@@ -1,8 +1,9 @@
 package admin_test
 
 import (
-	service2 "comma/pkg/service/admin"
 	"testing"
+
+	service2 "comma/pkg/service/admin"
 
 	"github.com/caicaispace/gohelper/business"
 )

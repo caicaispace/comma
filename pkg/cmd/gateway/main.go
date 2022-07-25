@@ -1,9 +1,11 @@
 package main
 
 import (
-	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
 	"log"
+
+	"comma/pkg/library/db"
+
+	"github.com/caicaispace/gohelper/setting"
 
 	gatewayServer "comma/pkg/server/http/gateway"
 	gatewayJsonRpc "comma/pkg/server/jsonrpc/gateway"

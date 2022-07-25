@@ -1,9 +1,11 @@
 package admin
 
 import (
-	"comma/pkg/library/core/e"
-	"comma/pkg/service/admin"
 	"net/http"
+
+	"comma/pkg/service/admin"
+
+	"github.com/caicaispace/gohelper/errx"
 
 	httpServer "github.com/caicaispace/gohelper/server/http"
 	"github.com/gin-gonic/gin"
@@ -26,13 +28,13 @@ func FestivalCreate(c *gin.Context) {
 		form admin.FestivalCreateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	outData, err := admin.NewFestival().FestivalCreate(form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), nil)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), nil)
 		return
 	}
 	ctx.Success(gin.H{
@@ -46,14 +48,14 @@ func FestivalUpdate(c *gin.Context) {
 		form admin.FestivalUpdateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	updateId := com.StrTo(ctx.C.Param("id")).MustInt()
 	outData, err := admin.NewFestival().FestivalUpdateById(updateId, form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), err)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), err)
 		return
 	}
 	ctx.Success(gin.H{
@@ -71,7 +73,7 @@ func FestivalDelete(c *gin.Context) {
 	}
 	err := admin.NewFestival().FestivalDeleteByIds(form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), err)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), err)
 		return
 	}
 	ctx.Success(nil, nil)
@@ -83,13 +85,13 @@ func FestivalMultipleDelete(c *gin.Context) {
 		form admin.FestivalMultipleDeleteForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	err := admin.NewFestival().FestivalDeleteByIds(form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), err)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), err)
 		return
 	}
 	ctx.Success(nil, nil)

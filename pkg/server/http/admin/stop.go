@@ -1,9 +1,11 @@
 package admin
 
 import (
-	"comma/pkg/library/core/e"
-	"comma/pkg/service/admin"
 	"net/http"
+
+	"comma/pkg/service/admin"
+
+	"github.com/caicaispace/gohelper/errx"
 
 	httpServer "github.com/caicaispace/gohelper/server/http"
 
@@ -31,13 +33,13 @@ func StopCreate(c *gin.Context) {
 		form admin.StopCreateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	outData, err := admin.NewStop().StopCreate(form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), nil)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), nil)
 		return
 	}
 	ctx.Success(gin.H{
@@ -51,14 +53,14 @@ func StopUpdate(c *gin.Context) {
 		form admin.StopUpdateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	updateId := com.StrTo(ctx.C.Param("id")).MustInt()
 	outData, err := admin.NewStop().StopUpdateById(updateId, form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), err)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), err)
 		return
 	}
 	ctx.Success(gin.H{
@@ -76,7 +78,7 @@ func StopDelete(c *gin.Context) {
 	}
 	success := admin.NewStop().StopDeleteByIds(form)
 	if !success {
-		ctx.Error(http.StatusOK, e.Error, nil, nil)
+		ctx.Error(http.StatusOK, errx.Error, nil, nil)
 		return
 	}
 	ctx.Success(nil, nil)
@@ -88,13 +90,13 @@ func StopMultipleDelete(c *gin.Context) {
 		form admin.StopMultipleDeleteForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	success := admin.NewStop().StopDeleteByIds(form)
 	if !success {
-		ctx.Error(http.StatusOK, e.Error, nil, nil)
+		ctx.Error(http.StatusOK, errx.Error, nil, nil)
 		return
 	}
 	ctx.Success(nil, nil)

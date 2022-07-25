@@ -1,11 +1,11 @@
 package segment
 
 import (
-	"comma/pkg/library/setting"
 	"sync"
 
 	"github.com/caicaispace/gohelper/crontab"
 	"github.com/caicaispace/gohelper/logx"
+	"github.com/caicaispace/gohelper/setting"
 )
 
 type TaskService struct {

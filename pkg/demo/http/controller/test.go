@@ -1,8 +1,9 @@
 package controller
 
 import (
-	"comma/pkg/library/db"
 	"fmt"
+
+	"comma/pkg/library/db"
 
 	"github.com/caicaispace/gohelper/server/http"
 

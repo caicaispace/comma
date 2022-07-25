@@ -1,12 +1,13 @@
 package banned
 
 import (
-	"comma/pkg/library/db"
 	"fmt"
 	"os"
 	"strconv"
 	"sync"
 	"time"
+
+	"comma/pkg/library/db"
 
 	"gorm.io/gorm"
 )

@@ -1,15 +1,15 @@
 package main
 
 import (
-	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
 	"flag"
 	"fmt"
 	"time"
 
-	"github.com/caicaispace/gohelper/task"
+	"comma/pkg/library/db"
 
 	"github.com/caicaispace/gohelper/metric"
+	"github.com/caicaispace/gohelper/setting"
+	"github.com/caicaispace/gohelper/task"
 
 	bannedJsonRpc "comma/pkg/server/jsonrpc/banned"
 

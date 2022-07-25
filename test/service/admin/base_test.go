@@ -2,7 +2,8 @@ package admin_test
 
 import (
 	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
+
+	"github.com/caicaispace/gohelper/setting"
 )
 
 func init() {

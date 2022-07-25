@@ -1,5 +1,9 @@
 package util
 
+import (
+	"github.com/caicaispace/gohelper/print"
+)
+
 type CommandPrintStruct struct {
 	Command string `header:"option"`
 	Value   string `header:"value"`
@@ -14,12 +18,12 @@ func CommandSetPrintData(protocol, addr, mode string) []CommandPrintStruct {
 }
 
 func CommandPrint(data interface{}) {
-	PrintTable(data)
+	print.PrintTable(data)
 }
 
 func CommandPrintWithHeader(data [][]string, header []string) {
 	if len(header) == 0 {
 		header = []string{"option", "value"}
 	}
-	PrintTableWithHeader(data, header)
+	print.PrintTableWithHeader(data, header)
 }

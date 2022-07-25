@@ -5,25 +5,22 @@ go 1.18
 replace golang.org/x/sys => github.com/golang/sys v0.0.0-20190322080309-f49334f85ddc
 
 require (
-	github.com/BurntSushi/toml v1.2.0
-	github.com/caicaispace/gohelper v0.0.3
+	github.com/caicaispace/gohelper v0.0.5
 	github.com/elastic/go-elasticsearch/v5 v5.6.1
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-resty/resty/v2 v2.7.0
-	github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9
 	github.com/kataras/tablewriter v0.0.0-20180708051242-e063d29b7c23
 	github.com/landoop/tableprinter v0.0.0-20201125135848-89e81fc956e7
-	github.com/lxmgo/config v0.0.0-20180313024057-8db99aca0f7e
 	github.com/mozillazg/go-pinyin v0.19.0
 	github.com/stretchr/testify v1.8.0
 	github.com/unknwon/com v1.0.1
 	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4
-	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/mysql v1.3.5
 	gorm.io/gorm v1.23.8
 )
 
 require (
+	github.com/BurntSushi/toml v1.2.0 // indirect
 	github.com/astaxie/beego v1.12.3 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.2.0 // indirect
@@ -36,12 +33,14 @@ require (
 	github.com/go-playground/validator/v10 v10.11.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/goccy/go-json v0.9.10 // indirect
+	github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.6 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
+	github.com/lxmgo/config v0.0.0-20180313024057-8db99aca0f7e // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mattn/go-runewidth v0.0.13 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
@@ -68,5 +67,6 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/grpc v1.41.0 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

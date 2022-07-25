@@ -2,9 +2,10 @@ package admin
 
 import (
 	"comma/pkg/library/db"
-	"comma/pkg/library/util"
 
 	"github.com/caicaispace/gohelper/business"
+	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/syntax"
 )
 
 type HighFrequency struct {
@@ -61,7 +62,7 @@ func (hfs *highFrequencyService) HighFrequencyCreate(inData HighFrequencyCreateF
 	outData := HighFrequency{
 		WordId:     inData.WordId,
 		ProjectId:  inData.ProjectId,
-		CreateTime: int(util.NowTimestamp()),
+		CreateTime: int(datetime.NowTimestamp()),
 	}
 	ret := db.DB().Table(highFrequencyTableName).Create(&outData)
 	if ret.Error != nil {
@@ -78,8 +79,8 @@ type HighFrequencyUpdateForm struct {
 }
 
 func (hfs *highFrequencyService) HighFrequencyUpdateById(id int, inData HighFrequencyUpdateForm) bool {
-	updateData, _ := util.StructToMap(inData, "json")
-	updateData["update_time"] = int(util.NowTimestamp())
+	updateData, _ := syntax.StructToMap(inData, "json")
+	updateData["update_time"] = int(datetime.NowTimestamp())
 	ret := db.DB().Table(highFrequencyTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return false

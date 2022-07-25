@@ -2,9 +2,10 @@ package admin
 
 import (
 	"comma/pkg/library/db"
-	"comma/pkg/library/util"
 
 	"github.com/caicaispace/gohelper/business"
+	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/syntax"
 )
 
 type Word struct {
@@ -123,7 +124,7 @@ func (ws *wordService) WordCreate(inData WordCreateForm) (*Word, error) {
 		Frequency:  inData.Frequency,
 		Classify:   inData.Classify,
 		IsDel:      inData.IsDel,
-		CreateTime: int(util.NowTimestamp()),
+		CreateTime: int(datetime.NowTimestamp()),
 	}
 	ret := db.DB().Table(wordTableName).Create(&outData)
 	if ret.Error != nil {
@@ -142,8 +143,8 @@ type WordUpdateForm struct {
 }
 
 func (ws *wordService) WordUpdateById(id int, inData WordUpdateForm) bool {
-	updateData, _ := util.StructToMap(inData, "form")
-	updateData["update_time"] = int(util.NowTimestamp())
+	updateData, _ := syntax.StructToMap(inData, "form")
+	updateData["update_time"] = int(datetime.NowTimestamp())
 	ret := db.DB().Table(wordTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return false

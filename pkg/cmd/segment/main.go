@@ -2,10 +2,10 @@ package main
 
 import (
 	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
 	segmentJsonRpc "comma/pkg/server/jsonrpc/segment"
 
 	jsonrpcServer "github.com/caicaispace/gohelper/server/jsonrpc"
+	"github.com/caicaispace/gohelper/setting"
 )
 
 func init() {

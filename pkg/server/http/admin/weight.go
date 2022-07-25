@@ -1,9 +1,11 @@
 package admin
 
 import (
-	"comma/pkg/library/core/e"
-	"comma/pkg/service/admin"
 	"net/http"
+
+	"comma/pkg/service/admin"
+
+	"github.com/caicaispace/gohelper/errx"
 
 	httpServer "github.com/caicaispace/gohelper/server/http"
 
@@ -31,13 +33,13 @@ func WeightCreate(c *gin.Context) {
 		form admin.WordWeightCreateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	outData, err := admin.NewWordWeight().WordWeightCreate(form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), nil)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), nil)
 		return
 	}
 	ctx.Success(gin.H{
@@ -51,14 +53,14 @@ func WeightUpdate(c *gin.Context) {
 		form admin.WordWeightUpdateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	updateId := com.StrTo(ctx.C.Param("id")).MustInt()
 	err := admin.NewWordWeight().WordWeightUpdateById(updateId, form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), err)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), err)
 		return
 	}
 	ctx.Success(nil, nil)
@@ -74,7 +76,7 @@ func WeightDelete(c *gin.Context) {
 	}
 	err := admin.NewWordWeight().WordWeightDeleteByIds(form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), err)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), err)
 		return
 	}
 	ctx.Success(nil, nil)
@@ -86,13 +88,13 @@ func WeightMultipleDelete(c *gin.Context) {
 		form admin.WordWeightMultipleDeleteForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	err := admin.NewWordWeight().WordWeightDeleteByIds(form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), err)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), err)
 		return
 	}
 	ctx.Success(nil, nil)

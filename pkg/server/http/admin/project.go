@@ -1,9 +1,11 @@
 package admin
 
 import (
-	"comma/pkg/library/core/e"
-	"comma/pkg/service/admin"
 	"net/http"
+
+	"comma/pkg/service/admin"
+
+	"github.com/caicaispace/gohelper/errx"
 
 	httpServer "github.com/caicaispace/gohelper/server/http"
 
@@ -27,13 +29,13 @@ func ProjectCreate(c *gin.Context) {
 		form admin.ProjectCreateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	outData, err := admin.NewProject().ProjectCreate(form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), nil)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), nil)
 		return
 	}
 	ctx.Success(gin.H{
@@ -47,14 +49,14 @@ func ProjectUpdate(c *gin.Context) {
 		form admin.ProjectUpdateForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	updateId := com.StrTo(ctx.C.Param("id")).MustInt()
 	outData, err := admin.NewProject().ProjectUpdateById(updateId, form)
 	if err != nil {
-		ctx.Error(http.StatusOK, e.Error, err.Error(), err)
+		ctx.Error(http.StatusOK, errx.Error, err.Error(), err)
 		return
 	}
 	ctx.Success(gin.H{
@@ -72,7 +74,7 @@ func ProjectDelete(c *gin.Context) {
 	}
 	success := admin.NewProject().ProjectDeleteByIds(form)
 	if !success {
-		ctx.Error(http.StatusOK, e.Error, nil, nil)
+		ctx.Error(http.StatusOK, errx.Error, nil, nil)
 		return
 	}
 	ctx.Success(nil, nil)
@@ -84,13 +86,13 @@ func ProjectMultipleDelete(c *gin.Context) {
 		form admin.ProjectMultipleDeleteForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
 	success := admin.NewProject().ProjectDeleteByIds(form)
 	if !success {
-		ctx.Error(http.StatusOK, e.Error, nil, nil)
+		ctx.Error(http.StatusOK, errx.Error, nil, nil)
 		return
 	}
 	ctx.Success(nil, nil)

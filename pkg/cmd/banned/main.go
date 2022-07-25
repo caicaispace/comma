@@ -2,7 +2,9 @@ package main
 
 import (
 	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
+
+	"github.com/caicaispace/gohelper/setting"
+
 	bannedJsonRpc "comma/pkg/server/jsonrpc/banned"
 
 	jsonrpcServer "github.com/caicaispace/gohelper/server/jsonrpc"

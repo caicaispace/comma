@@ -1,11 +1,13 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
-	"comma/pkg/library/util"
 	"errors"
 
+	"comma/pkg/library/db"
+
 	"github.com/caicaispace/gohelper/business"
+	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/syntax"
 )
 
 type Stop struct {
@@ -72,7 +74,7 @@ func (ss *stopService) StopCreate(inData StopCreateForm) (*Stop, error) {
 	outData := Stop{
 		WordId:     inData.WordId,
 		ProjectId:  inData.ProjectId,
-		CreateTime: int(util.NowTimestamp()),
+		CreateTime: int(datetime.NowTimestamp()),
 	}
 	//if inData.ProjectId > 0 {
 	//	projectService := NewProject()
@@ -97,8 +99,8 @@ type StopUpdateForm struct {
 }
 
 func (ss *stopService) StopUpdateById(id int, inData StopUpdateForm) (*StopUpdateForm, error) {
-	updateData, _ := util.StructToMap(inData, "json")
-	updateData["update_time"] = int(util.NowTimestamp())
+	updateData, _ := syntax.StructToMap(inData, "json")
+	updateData["update_time"] = int(datetime.NowTimestamp())
 	ret := db.DB().Table(stopTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return nil, ret.Error
@@ -106,7 +108,7 @@ func (ss *stopService) StopUpdateById(id int, inData StopUpdateForm) (*StopUpdat
 	if ret.RowsAffected <= 0 {
 		return nil, errors.New("update err")
 	}
-	err := util.MapToStruct(updateData, &inData)
+	err := syntax.MapToStruct(updateData, &inData)
 	if err != nil {
 		return nil, err
 	}

@@ -1,8 +1,8 @@
 package banned
 
 import (
-	"comma/pkg/library/core/e"
-	"comma/pkg/library/core/t"
+	"github.com/caicaispace/gohelper/errx"
+	"github.com/caicaispace/gohelper/syntax"
 
 	httpServer "github.com/caicaispace/gohelper/server/http"
 
@@ -18,7 +18,7 @@ func Find(c *gin.Context) {
 		handleType = c.Query("type")
 	)
 	hasFind, textFindSlice := service.GetInstance().Find(word, handleType)
-	rspData := t.Map{
+	rspData := syntax.Map{
 		"has_find": hasFind,
 		"text":     textFindSlice,
 	}
@@ -35,7 +35,7 @@ func Add(c *gin.Context) {
 		form FindAddForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}
@@ -53,7 +53,7 @@ func Del(c *gin.Context) {
 		form FindDelForm
 	)
 	httpCode, errCode := httpServer.BindAndValid(c, &form)
-	if errCode != e.Success {
+	if errCode != errx.Success {
 		ctx.Error(httpCode, errCode, nil, nil)
 		return
 	}

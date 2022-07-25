@@ -1,11 +1,13 @@
 package db_test
 
 import (
-	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
-	"comma/pkg/model"
 	"fmt"
 	"testing"
+
+	"comma/pkg/library/db"
+	"comma/pkg/model"
+
+	"github.com/caicaispace/gohelper/setting"
 
 	"gorm.io/gorm"
 )

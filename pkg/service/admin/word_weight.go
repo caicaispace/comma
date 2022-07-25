@@ -2,9 +2,10 @@ package admin
 
 import (
 	"comma/pkg/library/db"
-	"comma/pkg/library/util"
 
 	"github.com/caicaispace/gohelper/business"
+	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/syntax"
 )
 
 type WordWeight struct {
@@ -75,7 +76,7 @@ func (wws *wordWeightService) WordWeightCreate(inData WordWeightCreateForm) (*Wo
 		Weight:     inData.Weight,
 		ProjectId:  inData.ProjectId,
 		IsDel:      1,
-		CreateTime: int(util.NowTimestamp()),
+		CreateTime: int(datetime.NowTimestamp()),
 	}
 	ret := db.DB().Table(weightTableName).Create(&outData)
 	if ret.Error != nil {
@@ -93,8 +94,8 @@ type WordWeightUpdateForm struct {
 }
 
 func (wws *wordWeightService) WordWeightUpdateById(id int, inData WordWeightUpdateForm) error {
-	updateData, _ := util.StructToMap(inData, "json")
-	updateData["update_time"] = int(util.NowTimestamp())
+	updateData, _ := syntax.StructToMap(inData, "json")
+	updateData["update_time"] = int(datetime.NowTimestamp())
 	ret := db.DB().Table(weightTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return ret.Error

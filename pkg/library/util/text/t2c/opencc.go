@@ -2,7 +2,6 @@
 package t2c
 
 import (
-	"comma/pkg/library/util"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -11,6 +10,7 @@ import (
 	"reflect"
 	"strings"
 
+	"github.com/caicaispace/gohelper/runtimex"
 	"github.com/caicaispace/gohelper/tree/triedoublearraydict"
 )
 
@@ -22,7 +22,7 @@ var (
 )
 
 func defaultDir() string {
-	return util.GetRootPath()
+	return runtimex.GetRootPath()
 	//if runtime.GOOS == "windows" {
 	//	return rootPath + "\\cmd\\participle\\"
 	//}

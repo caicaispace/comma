@@ -2,8 +2,6 @@ package main
 
 import (
 	"comma/pkg/library/db"
-	"comma/pkg/library/setting"
-	"comma/pkg/library/util/config"
 
 	httpServer "github.com/caicaispace/gohelper/server/http"
 
@@ -15,9 +13,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/caicaispace/gohelper/metric"
-	"github.com/caicaispace/gohelper/task"
-
 	gatewayJsonRpc "comma/pkg/server/jsonrpc/gateway"
 	segmentJsonRpc "comma/pkg/server/jsonrpc/segment"
 
@@ -27,7 +22,11 @@ import (
 	bannedService "comma/pkg/service/banned"
 	"log"
 
+	"github.com/caicaispace/gohelper/config"
+	"github.com/caicaispace/gohelper/metric"
 	"github.com/caicaispace/gohelper/server"
+	"github.com/caicaispace/gohelper/setting"
+	"github.com/caicaispace/gohelper/task"
 	"golang.org/x/sync/errgroup"
 )
 
