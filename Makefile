@@ -32,6 +32,9 @@ gen-model:
 	# go install github.com/xxjwxc/gormt@master
 	@gormt
 
+gen-proto:
+	@cd pkg/server/grpc/gateway && protoc --go_out=plugins=grpc:. server.proto
+
 git-push:
 	./cmd.sh git push
 
