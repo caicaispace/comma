@@ -24,108 +24,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ListReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Page  int64 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
-	Limit int64 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
-}
-
-func (x *ListReq) Reset() {
-	*x = ListReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_server_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ListReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListReq) ProtoMessage() {}
-
-func (x *ListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_server_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListReq.ProtoReflect.Descriptor instead.
-func (*ListReq) Descriptor() ([]byte, []int) {
-	return file_server_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *ListReq) GetPage() int64 {
-	if x != nil {
-		return x.Page
-	}
-	return 0
-}
-
-func (x *ListReq) GetLimit() int64 {
-	if x != nil {
-		return x.Limit
-	}
-	return 0
-}
-
-type ListRsp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	List string `protobuf:"bytes,1,opt,name=list,proto3" json:"list,omitempty"`
-}
-
-func (x *ListRsp) Reset() {
-	*x = ListRsp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_server_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ListRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListRsp) ProtoMessage() {}
-
-func (x *ListRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_server_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListRsp.ProtoReflect.Descriptor instead.
-func (*ListRsp) Descriptor() ([]byte, []int) {
-	return file_server_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ListRsp) GetList() string {
-	if x != nil {
-		return x.List
-	}
-	return ""
-}
-
 type SearchReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -139,7 +37,7 @@ type SearchReq struct {
 func (x *SearchReq) Reset() {
 	*x = SearchReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_server_proto_msgTypes[2]
+		mi := &file_server_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -152,7 +50,7 @@ func (x *SearchReq) String() string {
 func (*SearchReq) ProtoMessage() {}
 
 func (x *SearchReq) ProtoReflect() protoreflect.Message {
-	mi := &file_server_proto_msgTypes[2]
+	mi := &file_server_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -165,7 +63,7 @@ func (x *SearchReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchReq.ProtoReflect.Descriptor instead.
 func (*SearchReq) Descriptor() ([]byte, []int) {
-	return file_server_proto_rawDescGZIP(), []int{2}
+	return file_server_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *SearchReq) GetIndex() string {
@@ -200,7 +98,7 @@ type SearchRsp struct {
 func (x *SearchRsp) Reset() {
 	*x = SearchRsp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_server_proto_msgTypes[3]
+		mi := &file_server_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -213,7 +111,7 @@ func (x *SearchRsp) String() string {
 func (*SearchRsp) ProtoMessage() {}
 
 func (x *SearchRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_server_proto_msgTypes[3]
+	mi := &file_server_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -226,7 +124,7 @@ func (x *SearchRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchRsp.ProtoReflect.Descriptor instead.
 func (*SearchRsp) Descriptor() ([]byte, []int) {
-	return file_server_proto_rawDescGZIP(), []int{3}
+	return file_server_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *SearchRsp) GetData() string {
@@ -240,24 +138,19 @@ var File_server_proto protoreflect.FileDescriptor
 
 var file_server_proto_rawDesc = []byte{
 	0x0a, 0x0c, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07,
-	0x67, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x22, 0x33, 0x0a, 0x07, 0x4c, 0x69, 0x73, 0x74, 0x52,
-	0x65, 0x71, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03,
-	0x52, 0x04, 0x70, 0x61, 0x67, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x22, 0x1d, 0x0a, 0x07,
-	0x4c, 0x69, 0x73, 0x74, 0x52, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x22, 0x49, 0x0a, 0x09, 0x53,
-	0x65, 0x61, 0x72, 0x63, 0x68, 0x52, 0x65, 0x71, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6e, 0x64, 0x65,
-	0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x12, 0x12,
-	0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79,
-	0x70, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x62, 0x6f, 0x64, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x04, 0x62, 0x6f, 0x64, 0x79, 0x22, 0x1f, 0x0a, 0x09, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68,
-	0x52, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x32, 0x37, 0x0a, 0x07, 0x47, 0x61, 0x74, 0x65, 0x77,
-	0x61, 0x79, 0x12, 0x2c, 0x0a, 0x04, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x10, 0x2e, 0x67, 0x61, 0x74,
-	0x65, 0x77, 0x61, 0x79, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x10, 0x2e, 0x67,
-	0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x73, 0x70, 0x22, 0x00,
-	0x42, 0x0c, 0x5a, 0x0a, 0x2e, 0x2f, 0x3b, 0x67, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x67, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x22, 0x49, 0x0a, 0x09, 0x53, 0x65, 0x61, 0x72, 0x63,
+	0x68, 0x52, 0x65, 0x71, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79,
+	0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x12,
+	0x0a, 0x04, 0x62, 0x6f, 0x64, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x62, 0x6f,
+	0x64, 0x79, 0x22, 0x1f, 0x0a, 0x09, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x52, 0x73, 0x70, 0x12,
+	0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64,
+	0x61, 0x74, 0x61, 0x32, 0x3d, 0x0a, 0x07, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x12, 0x32,
+	0x0a, 0x06, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x12, 0x12, 0x2e, 0x67, 0x61, 0x74, 0x65, 0x77,
+	0x61, 0x79, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x52, 0x65, 0x71, 0x1a, 0x12, 0x2e, 0x67,
+	0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x52, 0x73, 0x70,
+	0x22, 0x00, 0x42, 0x0c, 0x5a, 0x0a, 0x2e, 0x2f, 0x3b, 0x67, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -272,16 +165,14 @@ func file_server_proto_rawDescGZIP() []byte {
 	return file_server_proto_rawDescData
 }
 
-var file_server_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_server_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_server_proto_goTypes = []interface{}{
-	(*ListReq)(nil),   // 0: gateway.ListReq
-	(*ListRsp)(nil),   // 1: gateway.ListRsp
-	(*SearchReq)(nil), // 2: gateway.SearchReq
-	(*SearchRsp)(nil), // 3: gateway.SearchRsp
+	(*SearchReq)(nil), // 0: gateway.SearchReq
+	(*SearchRsp)(nil), // 1: gateway.SearchRsp
 }
 var file_server_proto_depIdxs = []int32{
-	0, // 0: gateway.Gateway.List:input_type -> gateway.ListReq
-	1, // 1: gateway.Gateway.List:output_type -> gateway.ListRsp
+	0, // 0: gateway.Gateway.Search:input_type -> gateway.SearchReq
+	1, // 1: gateway.Gateway.Search:output_type -> gateway.SearchRsp
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -296,30 +187,6 @@ func file_server_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_server_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_server_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListRsp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_server_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchReq); i {
 			case 0:
 				return &v.state
@@ -331,7 +198,7 @@ func file_server_proto_init() {
 				return nil
 			}
 		}
-		file_server_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_server_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchRsp); i {
 			case 0:
 				return &v.state
@@ -350,7 +217,7 @@ func file_server_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_server_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -376,7 +243,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type GatewayClient interface {
-	List(ctx context.Context, in *ListReq, opts ...grpc.CallOption) (*ListRsp, error)
+	Search(ctx context.Context, in *SearchReq, opts ...grpc.CallOption) (*SearchRsp, error)
 }
 
 type gatewayClient struct {
@@ -387,9 +254,9 @@ func NewGatewayClient(cc grpc.ClientConnInterface) GatewayClient {
 	return &gatewayClient{cc}
 }
 
-func (c *gatewayClient) List(ctx context.Context, in *ListReq, opts ...grpc.CallOption) (*ListRsp, error) {
-	out := new(ListRsp)
-	err := c.cc.Invoke(ctx, "/gateway.Gateway/List", in, out, opts...)
+func (c *gatewayClient) Search(ctx context.Context, in *SearchReq, opts ...grpc.CallOption) (*SearchRsp, error) {
+	out := new(SearchRsp)
+	err := c.cc.Invoke(ctx, "/gateway.Gateway/Search", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -398,35 +265,35 @@ func (c *gatewayClient) List(ctx context.Context, in *ListReq, opts ...grpc.Call
 
 // GatewayServer is the server API for Gateway service.
 type GatewayServer interface {
-	List(context.Context, *ListReq) (*ListRsp, error)
+	Search(context.Context, *SearchReq) (*SearchRsp, error)
 }
 
 // UnimplementedGatewayServer can be embedded to have forward compatible implementations.
 type UnimplementedGatewayServer struct {
 }
 
-func (*UnimplementedGatewayServer) List(context.Context, *ListReq) (*ListRsp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+func (*UnimplementedGatewayServer) Search(context.Context, *SearchReq) (*SearchRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
 
 func RegisterGatewayServer(s *grpc.Server, srv GatewayServer) {
 	s.RegisterService(&_Gateway_serviceDesc, srv)
 }
 
-func _Gateway_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListReq)
+func _Gateway_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GatewayServer).List(ctx, in)
+		return srv.(GatewayServer).Search(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/gateway.Gateway/List",
+		FullMethod: "/gateway.Gateway/Search",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GatewayServer).List(ctx, req.(*ListReq))
+		return srv.(GatewayServer).Search(ctx, req.(*SearchReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -436,8 +303,8 @@ var _Gateway_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*GatewayServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "List",
-			Handler:    _Gateway_List_Handler,
+			MethodName: "Search",
+			Handler:    _Gateway_Search_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

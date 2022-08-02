@@ -31,7 +31,7 @@ func (that *Gateway) Start() {
 	register, _ := etcd.NewRegister(&etcd.NodeInfo{
 		Addr:     that.serverAddr,
 		Name:     "gateway",
-		UniqueId: fmt.Sprintf("discovery/all/instance_id/%s", "gateway"),
+		UniqueId: fmt.Sprintf("discovery/gateway/instance_id/%s", "888"),
 	}, clientV3.Config{
 		Endpoints:            []string{"127.0.0.1:2379"},
 		DialTimeout:          2 * time.Second,
@@ -44,11 +44,9 @@ func (that *Gateway) Start() {
 	s.Start()
 }
 
-func (s *Gateway) List(c context.Context, in *ListReq) (*ListRsp, error) {
-	return &ListRsp{List: "user list"}, nil
-}
-
 func (*Gateway) Search(c context.Context, in *SearchReq) (*SearchRsp, error) {
+	fmt.Println(in)
+	return &SearchRsp{Data: "888"}, nil
 	esData, err := gatewayService.GetInstance().DispatchWithJsonRpc(in.Index, in.Type, in.Body, "search")
 	if err != nil {
 		fmt.Println(err.Error())
