@@ -39,12 +39,14 @@ func (that *Gateway) Start() {
 		DialKeepAliveTimeout: time.Second,
 	})
 	go register.Run()
-	s := server.New(that.serverAddr)
-	RegisterGatewayServer(s.GrpcServer, that)
+	s := server.NewServer(that.serverAddr)
+	RegisterGatewayServer(s.GrpcServer, &Service{})
 	s.Start()
 }
 
-func (*Gateway) Search(c context.Context, in *SearchReq) (*SearchRsp, error) {
+type Service struct{}
+
+func (*Service) Search(c context.Context, in *SearchReq) (*SearchRsp, error) {
 	fmt.Println(in)
 	return &SearchRsp{Data: "888"}, nil
 	esData, err := gatewayService.GetInstance().DispatchWithJsonRpc(in.Index, in.Type, in.Body, "search")

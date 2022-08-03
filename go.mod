@@ -5,7 +5,7 @@ go 1.18
 replace golang.org/x/sys => github.com/golang/sys v0.0.0-20190322080309-f49334f85ddc
 
 require (
-	github.com/caicaispace/gohelper v0.0.6
+	github.com/caicaispace/gohelper v0.0.7
 	github.com/elastic/go-elasticsearch/v5 v5.6.1
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-resty/resty/v2 v2.7.0
