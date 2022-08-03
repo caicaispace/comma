@@ -1,6 +1,7 @@
 package gateway
 
 import (
+	"comma/pkg/service/segment"
 	"encoding/base64"
 	"errors"
 	"fmt"
@@ -9,8 +10,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"comma/pkg/service/segment"
 
 	"github.com/caicaispace/gohelper/config"
 	"github.com/caicaispace/gohelper/datetime"

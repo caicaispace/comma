@@ -1,6 +1,7 @@
 package segment
 
 import (
+	"comma/pkg/library/util/text/t2c"
 	"fmt"
 	"log"
 	"math"
@@ -9,8 +10,6 @@ import (
 	"sync"
 	"unicode"
 	"unicode/utf8"
-
-	"comma/pkg/library/util/text/t2c"
 
 	"github.com/caicaispace/gohelper/logx"
 	"github.com/caicaispace/gohelper/mathx"

@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	gatewayGrpc "comma/pkg/server/grpc/gateway"
+	gatewayGrpc "comma/pkg/server/grpc"
 
 	"github.com/caicaispace/gohelper/server"
 	"golang.org/x/sync/errgroup"

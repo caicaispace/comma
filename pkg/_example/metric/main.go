@@ -1,11 +1,10 @@
 package main
 
 import (
+	"comma/pkg/library/db"
 	"flag"
 	"fmt"
 	"time"
-
-	"comma/pkg/library/db"
 
 	"github.com/caicaispace/gohelper/metric"
 	"github.com/caicaispace/gohelper/setting"

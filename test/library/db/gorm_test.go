@@ -1,11 +1,10 @@
 package db_test
 
 import (
-	"fmt"
-	"testing"
-
 	"comma/pkg/library/db"
 	"comma/pkg/model"
+	"fmt"
+	"testing"
 
 	"github.com/caicaispace/gohelper/setting"
 

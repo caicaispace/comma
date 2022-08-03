@@ -1,11 +1,10 @@
 package segment
 
 import (
-	"reflect"
-	"testing"
-
 	"comma/pkg/library/db"
 	"comma/pkg/service/segment"
+	"reflect"
+	"testing"
 
 	"github.com/caicaispace/gohelper/setting"
 	"github.com/caicaispace/gohelper/syntax"
