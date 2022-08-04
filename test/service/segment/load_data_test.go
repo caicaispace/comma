@@ -1,25 +1,25 @@
 package segment
 
 import (
-	"comma/pkg/library/db"
 	"comma/pkg/service/segment"
 	"reflect"
 	"testing"
 
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/setting"
 	"github.com/caicaispace/gohelper/syntax"
-
 	"github.com/stretchr/testify/assert"
 )
 
 func init() {
-	db.New(&setting.DBSetting{
+	config := &setting.DBSetting{
 		Host:     "127.0.0.1",
 		Port:     "3306",
 		Username: "root",
 		Password: "123456",
 		DbName:   "comma",
-	})
+	}
+	gorm.GetInstance().AddConnWithConfig(config, "")
 }
 
 func TestLoadProjectFromDB(t *testing.T) {

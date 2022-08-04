@@ -1,11 +1,11 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
 	"errors"
 
 	"github.com/caicaispace/gohelper/business"
 	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/syntax"
 )
 
@@ -34,7 +34,7 @@ func NewSynonym() *synonymService {
 
 func (ss *synonymService) SynonymGetList(pager *business.Pager) ([]SynonymList, int64) {
 	list := make([]SynonymList, 0)
-	table := db.DB().Table(synonymTableName)
+	table := gorm.GetInstance().GetDB("").Table(synonymTableName)
 	total := int64(0)
 	table.Select("count(*)").Count(&total)
 	pager.SetTotal(int(total))
@@ -70,7 +70,7 @@ func (ss *synonymService) SynonymCreate(inData SynonymCreateForm) (*Synonym, err
 		IsDel:      inData.IsDel,
 		CreateTime: int(datetime.NowTimestamp()),
 	}
-	ret := db.DB().Table(synonymTableName).Create(&outData)
+	ret := gorm.GetInstance().GetDB("").Table(synonymTableName).Create(&outData)
 	if ret.Error != nil {
 		return nil, ret.Error
 	}
@@ -88,7 +88,7 @@ type SynonymUpdateForm struct {
 func (ss *synonymService) SynonymUpdateById(id int, inData SynonymUpdateForm) (*SynonymUpdateForm, error) {
 	updateData, _ := syntax.StructToMap(inData, "json")
 	updateData["update_time"] = int(datetime.NowTimestamp())
-	ret := db.DB().Table(synonymTableName).Where("id = ?", id).Updates(updateData)
+	ret := gorm.GetInstance().GetDB("").Table(synonymTableName).Where("id = ?", id).Updates(updateData)
 	if ret.RowsAffected <= 0 {
 		return nil, errors.New("update err")
 	}
@@ -104,7 +104,7 @@ type SynonymUMultipleDeleteForm struct {
 }
 
 func (ss *synonymService) SynonymDeleteByIds(inData SynonymUMultipleDeleteForm) bool {
-	ret := db.DB().Table(synonymTableName).Where("id", inData.Ids).Update("is_del", 1)
+	ret := gorm.GetInstance().GetDB("").Table(synonymTableName).Where("id", inData.Ids).Update("is_del", 1)
 	if ret.Error != nil {
 		return false
 	}

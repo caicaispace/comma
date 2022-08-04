@@ -1,10 +1,9 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
-
 	"github.com/caicaispace/gohelper/business"
 	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/syntax"
 )
 
@@ -33,7 +32,7 @@ func NewHighFrequency() *highFrequencyService {
 
 func (hfs *highFrequencyService) HighFrequencyGetList(pager *business.Pager) ([]HighFrequencyList, int64) {
 	results := make([]HighFrequencyList, 0)
-	table := db.DB().Table(highFrequencyTableName)
+	table := gorm.GetInstance().GetDB("").Table(highFrequencyTableName)
 	total := int64(0)
 	table.Select("count(*)").Count(&total)
 	table.Select(`
@@ -64,7 +63,7 @@ func (hfs *highFrequencyService) HighFrequencyCreate(inData HighFrequencyCreateF
 		ProjectId:  inData.ProjectId,
 		CreateTime: int(datetime.NowTimestamp()),
 	}
-	ret := db.DB().Table(highFrequencyTableName).Create(&outData)
+	ret := gorm.GetInstance().GetDB("").Table(highFrequencyTableName).Create(&outData)
 	if ret.Error != nil {
 		return nil, ret.Error
 	}
@@ -81,7 +80,7 @@ type HighFrequencyUpdateForm struct {
 func (hfs *highFrequencyService) HighFrequencyUpdateById(id int, inData HighFrequencyUpdateForm) bool {
 	updateData, _ := syntax.StructToMap(inData, "json")
 	updateData["update_time"] = int(datetime.NowTimestamp())
-	ret := db.DB().Table(highFrequencyTableName).Where("id = ?", id).Updates(updateData)
+	ret := gorm.GetInstance().GetDB("").Table(highFrequencyTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return false
 	}
@@ -93,7 +92,7 @@ type HighFrequencyMultipleDeleteForm struct {
 }
 
 func (hfs *highFrequencyService) HighFrequencyDeleteByIds(inData HighFrequencyMultipleDeleteForm) bool {
-	ret := db.DB().Table(highFrequencyTableName).Where("id", inData.Ids).Update("is_del", 1)
+	ret := gorm.GetInstance().GetDB("").Table(highFrequencyTableName).Where("id", inData.Ids).Update("is_del", 1)
 	if ret.Error != nil {
 		return false
 	}

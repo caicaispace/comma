@@ -1,14 +1,14 @@
 package banned
 
 import (
-	"comma/pkg/library/db"
 	"fmt"
 	"os"
 	"strconv"
 	"sync"
 	"time"
 
-	"gorm.io/gorm"
+	"github.com/caicaispace/gohelper/orm/gorm"
+	orm "gorm.io/gorm"
 )
 
 var f = NewFilter()
@@ -79,12 +79,12 @@ func _loadDataFromDb(limit int) ([]string, error) {
 		Must uint   `gorm:"must"`
 	}
 	outData := make([]string, 0)
-	model := db.DB().Table("banned")
+	model := gorm.GetInstance().GetDB("").Table("banned")
 	model.Select("*")
 	model.Limit(limit)
 	model.Order("id DESC")
 	rows := make([]*Model, 0)
-	model.FindInBatches(&rows, 5000, func(tx *gorm.DB, batch int) error {
+	model.FindInBatches(&rows, 5000, func(tx *orm.DB, batch int) error {
 		for _, row := range rows {
 			outData = append(outData, row.Word)
 		}

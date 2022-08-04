@@ -1,14 +1,13 @@
 package db_test
 
 import (
-	"comma/pkg/library/db"
 	"comma/pkg/model"
 	"fmt"
 	"testing"
 
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/setting"
-
-	"gorm.io/gorm"
+	orm "gorm.io/gorm"
 )
 
 type Menu struct {
@@ -23,10 +22,10 @@ func TestDB(t *testing.T) {
 		Host:     "127.0.0.1",
 		DbName:   "comma",
 	}
-	db.New(config)
+	gorm.GetInstance().AddConnWithConfig(config, "")
 
 	results := make([]*Menu, 0)
-	ret := db.DB().Table("menu").Where("id > ?", 0).FindInBatches(&results, 5, func(tx *gorm.DB, batch int) error {
+	ret := gorm.GetInstance().GetDB("").Table("menu").Where("id > ?", 0).FindInBatches(&results, 5, func(tx *orm.DB, batch int) error {
 		for _, result := range results {
 			fmt.Println(result)
 			// batch processing found records
@@ -51,8 +50,8 @@ func Test_banner(t *testing.T) {
 		Host:     "127.0.0.1",
 		DbName:   "comma",
 	}
-	db.New(config)
-	bannerMgr := model.DictBannedMgr(db.DB())
+	gorm.GetInstance().AddConnWithConfig(config, "")
+	bannerMgr := model.DictBannedMgr(gorm.GetInstance().GetDB(""))
 	list, _ := bannerMgr.Gets()
 	for _, item := range list {
 		fmt.Println(item)

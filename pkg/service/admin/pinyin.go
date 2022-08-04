@@ -1,10 +1,9 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
-
 	"github.com/caicaispace/gohelper/business"
 	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/syntax"
 )
 
@@ -34,7 +33,7 @@ func NewPinyin() *pinyinService {
 func (ws *pinyinService) PinyinGetList(pager *business.Pager, filter *Pinyin) ([]*PinyinList, int64) {
 	outData := make([]*PinyinList, 0)
 	total := int64(0)
-	table := db.DB().Table(pinyinTableName)
+	table := gorm.GetInstance().GetDB("").Table(pinyinTableName)
 	if (Pinyin{} != *filter) {
 		if filter.Keyword != "" {
 			table.Where("keyword LIKE ?", filter.Keyword+"%")
@@ -54,7 +53,7 @@ func (ws *pinyinService) PinyinGetList(pager *business.Pager, filter *Pinyin) ([
 
 func (ws *pinyinService) PinyinGetListByIds(ids []int) ([]*PinyinList, error) {
 	outData := make([]*PinyinList, 0)
-	model := db.DB().Table(pinyinTableName)
+	model := gorm.GetInstance().GetDB("").Table(pinyinTableName)
 	ret := model.Where("id", ids).Find(&outData)
 	if ret.Error != nil {
 		return outData, ret.Error
@@ -64,7 +63,7 @@ func (ws *pinyinService) PinyinGetListByIds(ids []int) ([]*PinyinList, error) {
 
 func (ws *pinyinService) PinyinGetInfoById(id int) (Pinyin, error) {
 	outData := Pinyin{}
-	model := db.DB().Table(pinyinTableName)
+	model := gorm.GetInstance().GetDB("").Table(pinyinTableName)
 	ret := model.Where("id", id).First(&outData)
 	if ret.Error != nil {
 		return outData, ret.Error
@@ -74,7 +73,7 @@ func (ws *pinyinService) PinyinGetInfoById(id int) (Pinyin, error) {
 
 func (ws *pinyinService) PinyinGetInfoByIds(ids []int) (Pinyin, error) {
 	outData := Pinyin{}
-	model := db.DB().Table(pinyinTableName)
+	model := gorm.GetInstance().GetDB("").Table(pinyinTableName)
 	ret := model.Find(&outData, ids)
 	if ret.Error != nil {
 		return outData, ret.Error
@@ -100,7 +99,7 @@ func (ws *pinyinService) PinyinCreate(inData PinyinCreateForm) (*Pinyin, error) 
 		IsDel:          inData.IsDel,
 		CreateTime:     int(datetime.NowTimestamp()),
 	}
-	ret := db.DB().Table(pinyinTableName).Create(&outData)
+	ret := gorm.GetInstance().GetDB("").Table(pinyinTableName).Create(&outData)
 	if ret.Error != nil {
 		return &outData, ret.Error
 	}
@@ -120,7 +119,7 @@ type PinyinUpdateForm struct {
 func (ws *pinyinService) PinyinUpdateById(id int, inData PinyinUpdateForm) bool {
 	updateData, _ := syntax.StructToMap(inData, "form")
 	updateData["update_time"] = int(datetime.NowTimestamp())
-	ret := db.DB().Table(pinyinTableName).Where("id = ?", id).Updates(updateData)
+	ret := gorm.GetInstance().GetDB("").Table(pinyinTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return false
 	}
@@ -132,7 +131,7 @@ type PinyinMultipleDeleteForm struct {
 }
 
 func (ws *pinyinService) PinyinDeleteByIds(inData PinyinMultipleDeleteForm) bool {
-	ret := db.DB().Table(pinyinTableName).Where("id", inData.Ids).Update("is_del", 1)
+	ret := gorm.GetInstance().GetDB("").Table(pinyinTableName).Where("id", inData.Ids).Update("is_del", 1)
 	if ret.Error != nil {
 		return false
 	}

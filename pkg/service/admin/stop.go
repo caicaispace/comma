@@ -1,11 +1,11 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
 	"errors"
 
 	"github.com/caicaispace/gohelper/business"
 	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/syntax"
 )
 
@@ -34,7 +34,7 @@ func NewStop() *stopService {
 
 func (ss *stopService) StopGetList(pager *business.Pager, filter *Word) ([]StopList, int64) {
 	list := make([]StopList, 0)
-	table := db.DB().Table(stopTableName)
+	table := gorm.GetInstance().GetDB("").Table(stopTableName)
 	total := int64(0)
 	table.Select("count(*)").Count(&total)
 	pager.SetTotal(int(total))
@@ -83,7 +83,7 @@ func (ss *stopService) StopCreate(inData StopCreateForm) (*Stop, error) {
 	//	}
 	//	outData.Name = projectModel.Name
 	//}
-	ret := db.DB().Table(stopTableName).Create(&outData)
+	ret := gorm.GetInstance().GetDB("").Table(stopTableName).Create(&outData)
 	if ret.Error != nil {
 		return nil, ret.Error
 	}
@@ -100,7 +100,7 @@ type StopUpdateForm struct {
 func (ss *stopService) StopUpdateById(id int, inData StopUpdateForm) (*StopUpdateForm, error) {
 	updateData, _ := syntax.StructToMap(inData, "json")
 	updateData["update_time"] = int(datetime.NowTimestamp())
-	ret := db.DB().Table(stopTableName).Where("id = ?", id).Updates(updateData)
+	ret := gorm.GetInstance().GetDB("").Table(stopTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return nil, ret.Error
 	}
@@ -119,7 +119,7 @@ type StopMultipleDeleteForm struct {
 }
 
 func (ss *stopService) StopDeleteByIds(inData StopMultipleDeleteForm) bool {
-	ret := db.DB().Table(stopTableName).Where("id", inData.Ids).Update("is_del", 1)
+	ret := gorm.GetInstance().GetDB("").Table(stopTableName).Where("id", inData.Ids).Update("is_del", 1)
 	if ret.Error != nil {
 		return false
 	}

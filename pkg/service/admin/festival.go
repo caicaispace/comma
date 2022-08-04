@@ -1,11 +1,11 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
 	"errors"
 
 	"github.com/caicaispace/gohelper/business"
 	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/syntax"
 )
 
@@ -37,7 +37,7 @@ func NewFestival() *festivalService {
 
 func (fs *festivalService) FestivalGetList(pager *business.Pager) ([]FestivalList, int64) {
 	list := make([]FestivalList, 0)
-	table := db.DB().Table(festivalTableName)
+	table := gorm.GetInstance().GetDB("").Table(festivalTableName)
 	total := int64(0)
 	table.Select("count(*)").Count(&total)
 	pager.SetTotal(int(total))
@@ -78,7 +78,7 @@ func (fs *festivalService) FestivalCreate(inData FestivalCreateForm) (*Festival,
 		IsDel:      inData.IsDel,
 		CreateTime: int(datetime.NowTimestamp()),
 	}
-	ret := db.DB().Table(festivalTableName).Create(&outData)
+	ret := gorm.GetInstance().GetDB("").Table(festivalTableName).Create(&outData)
 	if ret.Error != nil {
 		return nil, ret.Error
 	}
@@ -97,7 +97,7 @@ type FestivalUpdateForm struct {
 func (fs *festivalService) FestivalUpdateById(id int, inData FestivalUpdateForm) (*FestivalUpdateForm, error) {
 	updateData, _ := syntax.StructToMap(inData, "json")
 	updateData["update_time"] = int(datetime.NowTimestamp())
-	ret := db.DB().Table(festivalTableName).Where("id = ?", id).Updates(updateData)
+	ret := gorm.GetInstance().GetDB("").Table(festivalTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return nil, ret.Error
 	}
@@ -116,7 +116,7 @@ type FestivalMultipleDeleteForm struct {
 }
 
 func (fs *festivalService) FestivalDeleteByIds(inData FestivalMultipleDeleteForm) error {
-	ret := db.DB().Table(festivalTableName).Where("id", inData.Ids).Update("is_del", 1)
+	ret := gorm.GetInstance().GetDB("").Table(festivalTableName).Where("id", inData.Ids).Update("is_del", 1)
 	if ret.Error != nil {
 		return ret.Error
 	}
