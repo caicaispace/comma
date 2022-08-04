@@ -6,7 +6,6 @@ replace golang.org/x/sys => github.com/golang/sys v0.0.0-20190322080309-f49334f8
 
 require (
 	github.com/caicaispace/gohelper v0.0.7
-	github.com/elastic/go-elasticsearch/v5 v5.6.1
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/kataras/tablewriter v0.0.0-20180708051242-e063d29b7c23
