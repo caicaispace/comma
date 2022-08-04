@@ -1,10 +1,9 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
-
 	"github.com/caicaispace/gohelper/business"
 	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/syntax"
 )
 
@@ -36,7 +35,7 @@ func NewHyponym() *hyponymService {
 
 func (hs *hyponymService) HyponymGetList(pager *business.Pager) ([]HyponymList, int64) {
 	list := make([]HyponymList, 0)
-	table := db.DB().Table(hyponymTableName)
+	table := gorm.GetInstance().GetDB("").Table(hyponymTableName)
 	total := int64(0)
 	table.Select("count(*)").Count(&total)
 	pager.SetTotal(int(total))
@@ -77,7 +76,7 @@ func (hs *hyponymService) HyponymCreate(inData HyponymCreateForm) (*Hyponym, err
 		HyponymWordId:  inData.HyponymWordId,
 		CreateTime:     int(datetime.NowTimestamp()),
 	}
-	ret := db.DB().Table(hyponymTableName).Create(&outData)
+	ret := gorm.GetInstance().GetDB("").Table(hyponymTableName).Create(&outData)
 	if ret.Error != nil {
 		return nil, ret.Error
 	}
@@ -96,7 +95,7 @@ type HyponymUpdateForm struct {
 func (hs *hyponymService) HyponymUpdateById(id int, inData HyponymUpdateForm) bool {
 	updateData, _ := syntax.StructToMap(inData, "json")
 	updateData["update_time"] = int(datetime.NowTimestamp())
-	ret := db.DB().Table(hyponymTableName).Where("id = ?", id).Updates(updateData)
+	ret := gorm.GetInstance().GetDB("").Table(hyponymTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return false
 	}
@@ -108,7 +107,7 @@ type HyponymMultipleDeleteForm struct {
 }
 
 func (hs *hyponymService) HyponymDeleteByIds(inData HyponymMultipleDeleteForm) bool {
-	ret := db.DB().Table(hyponymTableName).Where("id", inData.Ids).Update("is_del", 1)
+	ret := gorm.GetInstance().GetDB("").Table(hyponymTableName).Where("id", inData.Ids).Update("is_del", 1)
 	if ret.Error != nil {
 		return false
 	}

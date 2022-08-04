@@ -1,10 +1,9 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
-
 	"github.com/caicaispace/gohelper/business"
 	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/syntax"
 )
 
@@ -56,7 +55,7 @@ func NewWord() *wordService {
 func (ws *wordService) WordGetList(pager *business.Pager, filter *Word) ([]*WordList, int64) {
 	outData := make([]*WordList, 0)
 	total := int64(0)
-	table := db.DB().Table(wordTableName)
+	table := gorm.GetInstance().GetDB("").Table(wordTableName)
 	if (Word{} != *filter) {
 		if filter.Word != "" {
 			table.Where("word LIKE ?", filter.Word+"%")
@@ -82,7 +81,7 @@ func (ws *wordService) WordGetList(pager *business.Pager, filter *Word) ([]*Word
 
 func (ws *wordService) WordGetListByIds(ids []int) ([]*WordList, error) {
 	outData := make([]*WordList, 0)
-	model := db.DB().Table(wordTableName)
+	model := gorm.GetInstance().GetDB("").Table(wordTableName)
 	ret := model.Where("id", ids).Find(&outData)
 	if ret.Error != nil {
 		return outData, ret.Error
@@ -92,7 +91,7 @@ func (ws *wordService) WordGetListByIds(ids []int) ([]*WordList, error) {
 
 func (ws *wordService) WordGetInfoById(id int) (Word, error) {
 	outData := Word{}
-	model := db.DB().Table(wordTableName)
+	model := gorm.GetInstance().GetDB("").Table(wordTableName)
 	ret := model.Where("id", id).First(&outData)
 	if ret.Error != nil {
 		return outData, ret.Error
@@ -102,7 +101,7 @@ func (ws *wordService) WordGetInfoById(id int) (Word, error) {
 
 func (ws *wordService) WordGetInfoByIds(ids []int) (Word, error) {
 	outData := Word{}
-	model := db.DB().Table(wordTableName)
+	model := gorm.GetInstance().GetDB("").Table(wordTableName)
 	ret := model.Find(&outData, ids)
 	if ret.Error != nil {
 		return outData, ret.Error
@@ -126,7 +125,7 @@ func (ws *wordService) WordCreate(inData WordCreateForm) (*Word, error) {
 		IsDel:      inData.IsDel,
 		CreateTime: int(datetime.NowTimestamp()),
 	}
-	ret := db.DB().Table(wordTableName).Create(&outData)
+	ret := gorm.GetInstance().GetDB("").Table(wordTableName).Create(&outData)
 	if ret.Error != nil {
 		return &outData, ret.Error
 	}
@@ -145,7 +144,7 @@ type WordUpdateForm struct {
 func (ws *wordService) WordUpdateById(id int, inData WordUpdateForm) bool {
 	updateData, _ := syntax.StructToMap(inData, "form")
 	updateData["update_time"] = int(datetime.NowTimestamp())
-	ret := db.DB().Table(wordTableName).Where("id = ?", id).Updates(updateData)
+	ret := gorm.GetInstance().GetDB("").Table(wordTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return false
 	}
@@ -157,7 +156,7 @@ type WordMultipleDeleteForm struct {
 }
 
 func (ws *wordService) WordDeleteByIds(inData WordMultipleDeleteForm) bool {
-	ret := db.DB().Table(wordTableName).Where("id", inData.Ids).Update("is_del", 1)
+	ret := gorm.GetInstance().GetDB("").Table(wordTableName).Where("id", inData.Ids).Update("is_del", 1)
 	if ret.Error != nil {
 		return false
 	}

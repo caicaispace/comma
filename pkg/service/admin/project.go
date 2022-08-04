@@ -1,11 +1,11 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
 	"errors"
 
 	"github.com/caicaispace/gohelper/business"
 	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/syntax"
 )
 
@@ -32,7 +32,7 @@ func NewProject() *projectService {
 func (ps *projectService) ProjectGetList(pager *business.Pager) ([]ProjectList, int64) {
 	list := make([]ProjectList, 0)
 	total := int64(0)
-	table := db.DB().Table(projectTableName)
+	table := gorm.GetInstance().GetDB("").Table(projectTableName)
 	table.Select("count(*)").Count(&total)
 	pager.SetTotal(int(total))
 	table.Select("*")
@@ -45,7 +45,7 @@ func (ps *projectService) ProjectGetList(pager *business.Pager) ([]ProjectList, 
 
 func (ps *projectService) ProjectGetInfoById(id int) (*Project, error) {
 	modelOut := &Project{}
-	model := db.DB().Table(projectTableName)
+	model := gorm.GetInstance().GetDB("").Table(projectTableName)
 	ret := model.Where("id", id).First(modelOut)
 	if ret.Error != nil {
 		return modelOut, ret.Error
@@ -64,7 +64,7 @@ func (ps *projectService) ProjectCreate(inData ProjectCreateForm) (*Project, err
 		IsDel:      inData.IsDel,
 		CreateTime: int(datetime.NowTimestamp()),
 	}
-	ret := db.DB().Table(projectTableName).Create(&outData)
+	ret := gorm.GetInstance().GetDB("").Table(projectTableName).Create(&outData)
 	if ret.Error != nil {
 		return nil, ret.Error
 	}
@@ -80,7 +80,7 @@ type ProjectUpdateForm struct {
 func (ps *projectService) ProjectUpdateById(id int, inData ProjectUpdateForm) (*ProjectUpdateForm, error) {
 	updateData, _ := syntax.StructToMap(inData, "json")
 	updateData["update_time"] = int(datetime.NowTimestamp())
-	ret := db.DB().Table(projectTableName).Where("id = ?", id).Updates(updateData)
+	ret := gorm.GetInstance().GetDB("").Table(projectTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return nil, ret.Error
 	}
@@ -99,7 +99,7 @@ type ProjectMultipleDeleteForm struct {
 }
 
 func (ps *projectService) ProjectDeleteByIds(inData ProjectMultipleDeleteForm) bool {
-	ret := db.DB().Table(projectTableName).Where("id", inData.Ids).Update("is_del", 1)
+	ret := gorm.GetInstance().GetDB("").Table(projectTableName).Where("id", inData.Ids).Update("is_del", 1)
 	if ret.Error != nil {
 		return false
 	}

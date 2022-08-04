@@ -1,10 +1,9 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
-
 	"github.com/caicaispace/gohelper/business"
 	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/syntax"
 )
 
@@ -34,7 +33,7 @@ func NewWordWeight() *wordWeightService {
 func (wws *wordWeightService) WordWeightGetList(pager *business.Pager, filter *Word) ([]WordWeightList, int64) {
 	list := make([]WordWeightList, 0)
 	total := int64(0)
-	table := db.DB().Table(weightTableName)
+	table := gorm.GetInstance().GetDB("").Table(weightTableName)
 	table.Select("count(*)").Count(&total)
 	pager.SetTotal(int(total))
 	table.Select(`
@@ -78,7 +77,7 @@ func (wws *wordWeightService) WordWeightCreate(inData WordWeightCreateForm) (*Wo
 		IsDel:      1,
 		CreateTime: int(datetime.NowTimestamp()),
 	}
-	ret := db.DB().Table(weightTableName).Create(&outData)
+	ret := gorm.GetInstance().GetDB("").Table(weightTableName).Create(&outData)
 	if ret.Error != nil {
 		return nil, ret.Error
 	}
@@ -96,7 +95,7 @@ type WordWeightUpdateForm struct {
 func (wws *wordWeightService) WordWeightUpdateById(id int, inData WordWeightUpdateForm) error {
 	updateData, _ := syntax.StructToMap(inData, "json")
 	updateData["update_time"] = int(datetime.NowTimestamp())
-	ret := db.DB().Table(weightTableName).Where("id = ?", id).Updates(updateData)
+	ret := gorm.GetInstance().GetDB("").Table(weightTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return ret.Error
 	}
@@ -108,7 +107,7 @@ type WordWeightMultipleDeleteForm struct {
 }
 
 func (wws *wordWeightService) WordWeightDeleteByIds(inData WordWeightMultipleDeleteForm) error {
-	ret := db.DB().Table(weightTableName).Where("id", inData.Ids).Update("is_del", 1)
+	ret := gorm.GetInstance().GetDB("").Table(weightTableName).Where("id", inData.Ids).Update("is_del", 1)
 	if ret.Error != nil {
 		return ret.Error
 	}

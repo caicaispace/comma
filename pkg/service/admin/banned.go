@@ -1,16 +1,15 @@
 package admin
 
 import (
-	"comma/pkg/library/db"
 	"errors"
-
-	"github.com/caicaispace/gohelper/business"
-	"github.com/caicaispace/gohelper/datetime"
-	"github.com/caicaispace/gohelper/syntax"
 
 	service "comma/pkg/service/banned"
 
-	"gorm.io/gorm"
+	"github.com/caicaispace/gohelper/business"
+	"github.com/caicaispace/gohelper/datetime"
+	"github.com/caicaispace/gohelper/orm/gorm"
+	"github.com/caicaispace/gohelper/syntax"
+	orm "gorm.io/gorm"
 )
 
 type Banned struct {
@@ -38,7 +37,7 @@ func NewBanned() *bannedService {
 
 func (bs *bannedService) BannedGetList(pager *business.Pager, filter *Word) ([]BannedList, int64) {
 	list := make([]BannedList, 0)
-	table := db.DB().Table(bannedTableName)
+	table := gorm.GetInstance().GetDB("").Table(bannedTableName)
 	total := int64(0)
 	table.Select("count(*)").Count(&total)
 	pager.SetTotal(int(total))
@@ -81,7 +80,7 @@ func (bs *bannedService) BannedCreate(inData BannedCreateForm) (*Banned, error) 
 		IsDel:      1,
 		CreateTime: int(datetime.NowTimestamp()),
 	}
-	err := db.DB().Transaction(func(tx *gorm.DB) error {
+	err := gorm.GetInstance().GetDB("").Transaction(func(tx *orm.DB) error {
 		ret := tx.Table(bannedTableName).Create(&outData)
 		if ret.Error != nil {
 			return ret.Error
@@ -110,7 +109,7 @@ type BannedUpdateForm struct {
 func (bs *bannedService) BannedUpdateById(id int, inData BannedUpdateForm) error {
 	updateData, _ := syntax.StructToMap(inData, "json")
 	updateData["update_time"] = int(datetime.NowTimestamp())
-	ret := db.DB().Table(bannedTableName).Where("id = ?", id).Updates(updateData)
+	ret := gorm.GetInstance().GetDB("").Table(bannedTableName).Where("id = ?", id).Updates(updateData)
 	if ret.Error != nil {
 		return ret.Error
 	}
@@ -137,7 +136,7 @@ type BannedMultipleDeleteForm struct {
 }
 
 func (bs *bannedService) BannedDeleteByIds(inData BannedMultipleDeleteForm) error {
-	ret := db.DB().Table(bannedTableName).Where("id", inData.Ids).Update("is_del", 1)
+	ret := gorm.GetInstance().GetDB("").Table(bannedTableName).Where("id", inData.Ids).Update("is_del", 1)
 	if ret.Error != nil {
 		return ret.Error
 	}

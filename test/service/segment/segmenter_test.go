@@ -1,23 +1,24 @@
 package segment_test
 
 import (
-	"comma/pkg/library/db"
 	"comma/pkg/service/segment"
 	"fmt"
 	"regexp"
 	"testing"
 
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/setting"
 )
 
 func Test_Segmenter(t *testing.T) {
-	db.New(&setting.DBSetting{
+	config := &setting.DBSetting{
 		Host:     "127.0.0.1",
 		Port:     "3306",
 		Username: "root",
 		Password: "123456",
 		DbName:   "comma",
-	})
+	}
+	gorm.GetInstance().AddConnWithConfig(config, "")
 	// sego.LoadDb("s913_yanfa:Xuxinxin_s913@tcp(127.0.0.1:3312)/db_699pic_words?charset=utf8")
 
 	var seg segment.SegmenterService

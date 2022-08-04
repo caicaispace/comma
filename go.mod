@@ -5,7 +5,7 @@ go 1.18
 replace golang.org/x/sys => github.com/golang/sys v0.0.0-20190322080309-f49334f85ddc
 
 require (
-	github.com/caicaispace/gohelper v0.0.7
+	github.com/caicaispace/gohelper v0.0.9
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/kataras/tablewriter v0.0.0-20180708051242-e063d29b7c23
@@ -17,7 +17,6 @@ require (
 	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4
 	google.golang.org/grpc v1.41.0
 	google.golang.org/protobuf v1.28.0
-	gorm.io/driver/mysql v1.3.5
 	gorm.io/gorm v1.23.8
 )
 
@@ -79,4 +78,5 @@ require (
 	google.golang.org/genproto v0.0.0-20210602131652-f16073e35f0c // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+	gorm.io/driver/mysql v1.3.5 // indirect
 )

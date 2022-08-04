@@ -3,9 +3,8 @@ package segment
 import (
 	"strings"
 
-	dbGorm "comma/pkg/library/db"
-
-	"gorm.io/gorm"
+	"github.com/caicaispace/gohelper/orm/gorm"
+	orm "gorm.io/gorm"
 )
 
 const (
@@ -17,7 +16,7 @@ const (
 func GetLastCreateTime() int {
 	sqlStr := "select max(create_time) as last_create_time from dict_version"
 	var lastCreateTime int
-	dbGorm.DB().Raw(sqlStr).Scan(&lastCreateTime)
+	gorm.GetInstance().GetDB("").Raw(sqlStr).Scan(&lastCreateTime)
 	return lastCreateTime
 }
 
@@ -32,7 +31,7 @@ type wordModel struct {
 func LoadDictFromDB() ([]*wordModel, error) {
 	outData := make([]*wordModel, 0)
 	// models := make([]*wordModel, 0)
-	table := dbGorm.DB().Table(dicWordTable)
+	table := gorm.GetInstance().GetDB("").Table(dicWordTable)
 	table.Where("is_del", 0).Find(&outData)
 	// table.FindInBatches(&models, 5000, func(tx *gorm.DB, batch int) error {
 	// 	outData = append(outData, models...)
@@ -50,7 +49,7 @@ type synonymsModel struct {
 func LoadSynonymsDictFromDB(projectId int) (*map[string][]string, error) {
 	outData := make(map[string][]string)
 	models := make([]*synonymsModel, 0)
-	dbGorm.DB().Table("dict_synonyms").Where("is_del", 0).Where("project_id", projectId).Find(&models)
+	gorm.GetInstance().GetDB("").Table("dict_synonyms").Where("is_del", 0).Where("project_id", projectId).Find(&models)
 	var wordSynonymsIds []string
 	var rates []string
 	for _, model := range models {
@@ -77,7 +76,7 @@ type highFrequencyModel struct {
 // LoadHighFrequencyDictFromDB
 func LoadHighFrequencyDictFromDB(projectId int) (*map[string]bool, error) {
 	models := make([]*highFrequencyModel, 0)
-	table := dbGorm.DB().Table("dict_high_frequency")
+	table := gorm.GetInstance().GetDB("").Table("dict_high_frequency")
 	table.Select(`
 dict_high_frequency.id AS id,
 dict_high_frequency.word_id AS word_id,
@@ -103,7 +102,7 @@ type stopModel struct {
 // LoadStopDictFromDB
 func LoadStopDictFromDB() (*map[string]bool, error) {
 	modes := make([]*stopModel, 0)
-	table := dbGorm.DB().Table("dict_stop")
+	table := gorm.GetInstance().GetDB("").Table("dict_stop")
 	table.Select(`
 dict_stop.id AS id,
 dict_stop.word_id AS word_id,
@@ -128,7 +127,7 @@ type bannedModel struct {
 // LoadBannedDictFromDB
 func LoadBannedDictFromDB() (*map[string]bool, error) {
 	models := make([]*bannedModel, 0)
-	table := dbGorm.DB().Table("dict_banned")
+	table := gorm.GetInstance().GetDB("").Table("dict_banned")
 	table.Select(`
 dict_banned.id AS id,
 dict_banned.word_id AS word_id,
@@ -148,10 +147,10 @@ dict_word.word AS word
 func LoadBannedDictV3FromDB() (*map[string]bool, error) {
 	outData := make(map[string]bool)
 	models := make([]*bannedModel, 0)
-	table := dbGorm.DB().Table("cd_word_blacklist")
+	table := gorm.GetInstance().GetDB("").Table("cd_word_blacklist")
 	table.Order("id DESC")
 	// table.Where("id < 10000")
-	table.FindInBatches(&models, 5000, func(tx *gorm.DB, batch int) error {
+	table.FindInBatches(&models, 5000, func(tx *orm.DB, batch int) error {
 		for _, row := range models {
 			outData[row.Word] = true
 		}
@@ -171,7 +170,7 @@ type hyponymModel struct {
 // 返回参数第二参数是 上位词列表 这个有没有必要进行上位词处理 暂不处理上位词 主要在无搜索结果情况下可以使用上位 暂时舍弃
 func LoadHyponymDictFromDB() (*map[string][]string, error) {
 	models := make([]*hyponymModel, 0)
-	table := dbGorm.DB().Table("dict_hyponym")
+	table := gorm.GetInstance().GetDB("").Table("dict_hyponym")
 	table.Select(`
 dict_hyponym.id AS id,
 dict_word.word AS word,
@@ -206,9 +205,9 @@ type ProjectOutData struct {
 // LoadProjectFromDB
 func LoadProjectFromDB() *ProjectOutData {
 	var total int64
-	dbGorm.DB().Table("dict_project").Select("count(*)").Count(&total)
+	gorm.GetInstance().GetDB("").Table("dict_project").Select("count(*)").Count(&total)
 	list := make([]*ProjectModel, 0)
-	dbGorm.DB().Table("dict_project").Select("id").Order("id DESC").Find(&list)
+	gorm.GetInstance().GetDB("").Table("dict_project").Select("id").Order("id DESC").Find(&list)
 	return &ProjectOutData{
 		List:   list,
 		Total:  total,
@@ -223,7 +222,7 @@ type synonymsAggField struct {
 // synonymsAgg
 func synonymsAgg(wordSynonymsIds string, rate string) *map[string][]string {
 	models := make([]*synonymsAggField, 0)
-	table := dbGorm.DB().Table("dict_word")
+	table := gorm.GetInstance().GetDB("").Table("dict_word")
 	table.Where("is_del", 0)
 	table.Where("id", strings.Split(wordSynonymsIds, ",")).Find(&models)
 	words := make([]string, 0)

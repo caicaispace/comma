@@ -1,21 +1,22 @@
 package main
 
 import (
-	"comma/pkg/library/db"
 	segmentJsonRpc "comma/pkg/server/jsonrpc/segment"
 
+	"github.com/caicaispace/gohelper/orm/gorm"
 	jsonrpcServer "github.com/caicaispace/gohelper/server/jsonrpc"
 	"github.com/caicaispace/gohelper/setting"
 )
 
 func init() {
-	db.New(&setting.DBSetting{
+	config := &setting.DBSetting{
 		Host:     "127.0.0.1",
 		Port:     "3306",
 		Username: "root",
 		Password: "123456",
 		DbName:   "comma",
-	})
+	}
+	gorm.New().AddConnWithConfig(config, connName).GetDB(connName)
 }
 
 func main() {

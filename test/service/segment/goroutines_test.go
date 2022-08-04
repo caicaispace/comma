@@ -4,7 +4,6 @@ package segment_test
 
 import (
 	"bufio"
-	"comma/pkg/library/db"
 	"fmt"
 	"log"
 	"os"
@@ -12,6 +11,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/setting"
 
 	participleService "comma/pkg/service/segment"
@@ -37,13 +37,14 @@ func Test_Goroutines(t *testing.T) {
 	runtime.GOMAXPROCS(numThreads)
 
 	// 载入词典
-	db.New(&setting.DBSetting{
+	config := &setting.DBSetting{
 		Host:     "127.0.0.1",
 		Port:     "3306",
 		Username: "root",
 		Password: "123456",
 		DbName:   "comma",
-	})
+	}
+	gorm.GetInstance().AddConnWithConfig(config, "")
 	// sego.LoadDb("root:phpcj@tcp(localhost:3306)/es_help?charset=utf8")
 	segmenter.LoadDict()
 
