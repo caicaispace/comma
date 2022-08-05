@@ -1,7 +1,7 @@
 package main
 
 import (
-	"comma/pkg/demo/http/controller"
+	"comma/pkg/_example/server/http/controller"
 
 	httpServer "github.com/caicaispace/gohelper/server/http"
 )

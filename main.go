@@ -1,18 +1,17 @@
 package main
 
 import (
-	"comma/pkg/library/db"
-
 	httpServer "github.com/caicaispace/gohelper/server/http"
 
 	"comma/pkg/model"
-	adminHttpServer "comma/pkg/server/http/admin"
-	gatewayHttpServer "comma/pkg/server/http/gateway"
 	"embed"
 	"io/fs"
+	"log"
 	"net/http"
 	"time"
 
+	adminHttpServer "comma/pkg/server/http/admin"
+	gatewayHttpServer "comma/pkg/server/http/gateway"
 	gatewayJsonRpc "comma/pkg/server/jsonrpc/gateway"
 	segmentJsonRpc "comma/pkg/server/jsonrpc/segment"
 
@@ -20,10 +19,10 @@ import (
 
 	//bannedJsonRpc `comma/pkg/service/banned/server/jsonrpc`
 	bannedService "comma/pkg/service/banned"
-	"log"
 
 	"github.com/caicaispace/gohelper/config"
 	"github.com/caicaispace/gohelper/metric"
+	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/server"
 	"github.com/caicaispace/gohelper/setting"
 	"github.com/caicaispace/gohelper/task"
@@ -53,10 +52,10 @@ var (
 
 func beforeStart() {
 	if config.GetInstance().GetEnv() == "dev" {
-		db.NewWithAddr(config.GetInstance().GetDB())
+		gorm.GetInstance().AddConnWithDns(config.GetInstance().GetDbDns(), "")
 	}
 	if setting.Database.AutoMigrate {
-		db.DB().AutoMigrate(
+		gorm.GetInstance().GetDB("").AutoMigrate(
 			&model.DictBanned{},
 			&model.DictFestival{},
 			&model.DictHighFrequency{},
@@ -89,7 +88,7 @@ func loadService() {
 
 func adminServerStart(serverAddr string) error {
 	s := httpServer.NewServer()
-	s.SetServerAddr(serverAddr)
+	s.AddServerAddr(serverAddr)
 	// s.UseTrace(TRACE_URL, "comma-admin", serverAddr)
 	// s.UseGrafana()
 	adminHttpServer.NewServer(s.Engine)
@@ -101,7 +100,7 @@ func adminServerStart(serverAddr string) error {
 
 func gatewayServerStart(serverAddr string) error {
 	s := httpServer.NewServer()
-	s.SetServerAddr(serverAddr)
+	s.AddServerAddr(serverAddr)
 	// s.UseTrace(TRACE_URL, "gateway", serverAddr)
 	gatewayHttpServer.NewServer(s)
 	s.Start()
