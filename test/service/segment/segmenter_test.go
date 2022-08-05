@@ -1,10 +1,11 @@
 package segment_test
 
 import (
-	"comma/pkg/service/segment"
 	"fmt"
 	"regexp"
 	"testing"
+
+	"comma/pkg/service/segment"
 
 	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/setting"

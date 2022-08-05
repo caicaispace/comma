@@ -26,7 +26,6 @@ package segment_test
 
 import (
 	"bufio"
-	"comma/pkg/service/segment"
 	"flag"
 	"fmt"
 	"log"
@@ -35,6 +34,8 @@ import (
 	"runtime/pprof"
 	"testing"
 	"time"
+
+	"comma/pkg/service/segment"
 
 	"github.com/caicaispace/gohelper/orm/gorm"
 	"github.com/caicaispace/gohelper/setting"

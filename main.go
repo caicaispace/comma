@@ -1,7 +1,7 @@
 package main
 
 import (
-	"comma/pkg/library/db"
+	"github.com/caicaispace/gohelper/orm/gorm"
 
 	httpServer "github.com/caicaispace/gohelper/server/http"
 
@@ -53,10 +53,10 @@ var (
 
 func beforeStart() {
 	if config.GetInstance().GetEnv() == "dev" {
-		db.NewWithAddr(config.GetInstance().GetDB())
+		gorm.GetInstance().AddConnWithDns(config.GetInstance().GetDB(), "")
 	}
 	if setting.Database.AutoMigrate {
-		db.DB().AutoMigrate(
+		gorm.GetInstance().GetDB("").AutoMigrate(
 			&model.DictBanned{},
 			&model.DictFestival{},
 			&model.DictHighFrequency{},

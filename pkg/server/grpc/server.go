@@ -1,10 +1,11 @@
 package gateway
 
 import (
-	gatewayServer "comma/pkg/server/grpc/gateway"
-	gatewayService "comma/pkg/service/gateway"
 	"fmt"
 	"time"
+
+	gatewayServer "comma/pkg/server/grpc/gateway"
+	gatewayService "comma/pkg/service/gateway"
 
 	"github.com/caicaispace/gohelper/cluster/etcd"
 	"github.com/caicaispace/gohelper/server/grpc/server"

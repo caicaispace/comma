@@ -1,10 +1,11 @@
 package gateway
 
 import (
-	gatewayService "comma/pkg/service/gateway"
 	context "context"
 	"encoding/json"
 	"fmt"
+
+	gatewayService "comma/pkg/service/gateway"
 )
 
 type Service struct{}
