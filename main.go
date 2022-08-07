@@ -13,12 +13,12 @@ import (
 	gatewayJsonRpc "comma/pkg/server/jsonrpc/gateway"
 	segmentJsonRpc "comma/pkg/server/jsonrpc/segment"
 
-	jsonrpcServer "github.com/caicaispace/gohelper/server/jsonrpc"
 	httpServer "github.com/caicaispace/gohelper/server/http"
+	jsonrpcServer "github.com/caicaispace/gohelper/server/jsonrpc"
 
 	//bannedJsonRpc `comma/pkg/service/banned/server/jsonrpc`
 	bannedService "comma/pkg/service/banned"
-	"github.com/caicaispace/gohelper/orm/gorm"
+
 	"github.com/caicaispace/gohelper/config"
 	"github.com/caicaispace/gohelper/metric"
 	"github.com/caicaispace/gohelper/orm/gorm"
