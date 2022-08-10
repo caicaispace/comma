@@ -21,15 +21,15 @@ clean:
 	rm -rf manager
 	go clean -i .
 
+# go install mvdan.cc/gofumpt@latest
 fmt:
-	# go install mvdan.cc/gofumpt@latest
-	gofumpt -l -w ./pkg/
-	gofumpt -l -w ./test/
+	@gofumpt -l -w ./pkg/
+	@gofumpt -l -w ./test/
 	# go fmt ./pkg/...
 	# find ./pkg -name "*.go" | xargs gofumpt -l -w
 
+# go install github.com/xxjwxc/gormt@master
 gen-model:
-	# go install github.com/xxjwxc/gormt@master
 	@gormt
 
 gen-proto:
@@ -47,7 +47,7 @@ install:
 upgrade-go:
 	@wget https://go.dev/dl/go1.18.4.linux-amd64.tar.gz
 	@sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.18.4.linux-amd64.tar.gz
-	rm -rf go1.18.4.linux-amd64.tar.gz
+	@rm -rf go1.18.4.linux-amd64.tar.gz
 
 help:
 	@echo "make: compile packages and dependencies"
