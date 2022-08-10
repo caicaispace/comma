@@ -4,15 +4,23 @@
 
 ### 特性
 
-- 中文分词
-- 繁简转换
-- ElasticSearch 中间件
-- 违禁词
-- 汉字转拼音
-- jsonrpc
-- 管理ui
-- 监控（grafana）
-- 日志收集（loki）
+*   中文分词
+
+*   繁简转换
+
+*   ElasticSearch 中间件
+
+*   违禁词
+
+*   汉字转拼音
+
+*   jsonrpc
+
+*   管理ui
+
+*   监控（grafana）
+
+*   日志收集（loki）
 
 ### UI
 
@@ -30,19 +38,21 @@
 
 #### 2.0
 
-- [ ] 新词发现
-- [ ] grpc
-- [ ] 分布式
+*   [ ] 新词发现
+
+*   [ ] grpc
+
+*   [ ] 分布式
 
 #### docker
 
-- 启动容器：
+*   启动容器：
 
 ```shell
 docker-compose up -d
 ```
 
-- 滚动启动:
+*   滚动启动:
 
 ```shell
 docker-compose pull && docker-compose up -d
