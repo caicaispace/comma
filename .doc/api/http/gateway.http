@@ -1,8 +1,4 @@
-# es ip 地址 192.168.2.131:9400
-
-# @baseUrl = http://127.0.0.1:3231
-# @baseUrl = http://127.0.0.1:8081
-@baseUrl = http://127.0.0.1:8083
+@baseUrl = http://127.0.0.1:9400
 
 ### Ping
 GET {{baseUrl}}/ping
@@ -13,7 +9,7 @@ GET {{baseUrl}}/check
 # 这里只是展示es推荐搜索语法 其他的请使用es原生查询语句
 
 ### 1 查询pr最大最小值
-POST {{baseUrl}}/gateway/search_all_v3/all/_search
+POST {{baseUrl}}/search_test/all/_search
 
 {
   "size": 0,
@@ -24,7 +20,7 @@ POST {{baseUrl}}/gateway/search_all_v3/all/_search
         {
           "query_string": {
             "default_field": "key",
-            "query": "可口可乐 ",
+            "query": "安阳 ",
             "minimum_should_match": "50%"
           }
         }
@@ -32,60 +28,15 @@ POST {{baseUrl}}/gateway/search_all_v3/all/_search
     }
   },
   "aggs": {
-    "view_pr_min": {
+    "show_pr_min": {
       "min": {
-        "field": "view_pr"
-      }
-    },
-    "view_pr_max": {
-      "max": {
-        "field": "view_pr"
-      }
-    },
-    "pass_time_pr_min": {
-      "min": {
-        "field": "pass_time_pr"
-      }
-    },
-    "pass_time_pr_max": {
-      "max": {
-        "field": "pass_time_pr"
-      }
-    },
-    "sort_def_pr_min": {
-      "min": {
-        "field": "sort_def_pr"
-      }
-    },
-    "sort_def_pr_max": {
-      "max": {
-        "field": "sort_def_pr"
-      }
-    },
-    "sort_hot_pr_min": {
-      "min": {
-        "field": "sort_hot_pr"
-      }
-    },
-    "sort_hot_pr_max": {
-      "max": {
-        "field": "sort_hot_pr"
-      }
-    },
-    "sort_new_pr_min": {
-      "min": {
-        "field": "sort_new_pr"
-      }
-    },
-    "sort_new_pr_max": {
-      "max": {
-        "field": "sort_new_pr"
+        "field": "show_pr"
       }
     }
   }
 }
 
-### 获取返回值
+### return data
 
 #{
 #  "took": 6,
@@ -102,22 +53,10 @@ POST {{baseUrl}}/gateway/search_all_v3/all/_search
 #    "hits": []
 #  },
 #  "aggregations": {
-#    "collect_pr_max": {
+#    "show_pr_max": {
 #      "value": 0.0
 #    },
-#    "pass_time_pr_max": {
-#      "value": 0.0
-#    },
-#    "pass_time_pr_min": {
-#      "value": 0.0
-#    },
-#    "collect_pr_min": {
-#      "value": 0.0
-#    },
-#    "view_pr_max": {
-#      "value": 0.0
-#    },
-#    "view_pr_min": {
+#    "show_pr_min": {
 #      "value": 0.0
 #    }
 #  }
@@ -126,35 +65,13 @@ POST {{baseUrl}}/gateway/search_all_v3/all/_search
 ###
 
 # 2 将第一步查询中的max min作为第二次查询的参数 搜索条件与上次相同
-POST {{baseUrl}}/gateway/search_all_v3/all/_search
+POST {{baseUrl}}/search_test/all/_search
 Content-Type: application/json
 
 {
   "_source": [
     "id", 
-    "original_id", 
-    "weight", 
-    "is_prime", 
-    "view_num", 
-    "download_num", 
-    "online_timestamp", 
-    "original_type", 
-    "source_type", 
-    "display_title", 
-    "display_tags", 
-    "sale_type", 
-    "author_uid", 
-    "author_name", 
-    "price", 
-    "width", 
-    "height", 
-    "duration", 
-    "rate", 
-    "category", 
-    "category_name", 
-    "cover_image", 
-    "cover_video", 
-    "cover_audio"
+    "show"
   ], 
   "query": {
     "function_score": {
@@ -162,7 +79,7 @@ Content-Type: application/json
         "bool": {
           "must": {
             "query_string": {
-              "query": "城市", 
+              "query": "安阳", 
               "default_field": "key", 
               "minimum_should_match": "99%"
             }
@@ -170,21 +87,16 @@ Content-Type: application/json
           "filter": [
             {
               "term": {
-                "is_display": 1
-              }
-            }, 
-            {
-              "term": {
-                "sale_type": "100"
+                "is_show": 1
               }
             }
           ], 
           "must_not": {
             "multi_match": {
-              "query": "2021", 
+              "query": "看不见", 
               "fields": [
                 "key", 
-                "display_tags"
+                "tags"
               ]
             }
           }
@@ -194,25 +106,12 @@ Content-Type: application/json
         {
           "script_score": {
             "script": {
-              "source": "han", 
+              "source": "comma", 
               "lang": "payloadscore", 
               "params": {
-                "terms": "城市", 
-                "pay_money_min": 0, 
-                "pay_money_max": 72000, 
-                "pay_money_rate": 0.05, 
-                "download_num_min": 0, 
-                "download_num_max": 15759, 
-                "download_num_rate": 0.1, 
-                "people_pr_min": -96, 
-                "people_pr_max": 14, 
-                "people_pr_rate": 0.05, 
-                "last_pay_time_min": 0, 
-                "last_pay_time_max": 1653659394, 
-                "last_pay_time_rate": 0.5, 
-                "pass_time_pr_min": 0, 
-                "pass_time_pr_max": 1, 
-                "pass_time_pr_rate": 0.3, 
+                "terms": "安阳", 
+                "show_pr_min": 0, 
+                "show_pr_max": 72000, 
                 "es_score_rate": 0.6, 
                 "self_score_rate": 0.4
               }
@@ -241,49 +140,6 @@ Content-Type: application/json
 ### dict
 GET {{baseUrl}}/gateway/dict?word=科技&mode=0
 
-######## jsonrpc ########
-
-### 分词
-POST {{baseUrl}}
-Content-Type: application/json
-
-{
-  "jsonrpc": "2.0",
-  "id": "id",
-  "method": "segment/Segment",
-  "params": {
-      "title":"杭州西湖风景区天下第一财神庙4K风景视频",
-      "tags": "杭州,西湖,江南,江南水乡,4K风景,江南风光,江南建筑,风景,寺庙,禅院,财神庙,灵顺寺"
-   }
-}
-
-### 批量分词
-POST {{baseUrl}}
-Content-Type: application/json
-
-{
-  "jsonrpc": "2.0",
-  "id": "id",
-  "method": "segment/BatchSegment",
-  "params": {
-      "list": {
-        "1":{
-            "title":"杭州西湖风景区天下第一财神庙4K风景视频",
-            "tags": "杭州,西湖,江南,江南水乡,4K风景,江南风光,江南建筑,风景,寺庙,禅院,财神庙,灵顺寺"
-        },
-        "2":{
-            "title":"装饰装修风格展示AE模板",
-            "tags": "装饰,装修,装修风格,房屋设计展示,AE模板,家装节,房屋设计,房屋装修构图"
-        },
-        "3":{
-            "title":"葡萄园里的翡翠香印葡萄",
-            "tags": "葡萄,葡萄园,翡翠香印,青提,绿葡萄,葡萄藤,夏天,阳光,种植园,丰收,农业"
-        }
-      }
-  }
-}
-
-
 ### 搜索
 POST {{baseUrl}}
 Content-Type: application/json
@@ -293,98 +149,28 @@ Content-Type: application/json
   "id": "id",
   "method": "gateway/Search",
   "params": {
-      "index":"search_all_v3",
-      "type": "all",
-      "body": {
-        "_source": [
-          "id",
-          "original_id",
-          "weight",
-          "is_prime",
-          "view_num",
-          "download_num",
-          "online_timestamp",
-          "original_type",
-          "source_type",
-          "display_title",
-          "display_tags",
-          "sale_type",
-          "author_uid",
-          "author_name",
-          "price",
-          "width",
-          "height",
-          "duration",
-          "rate",
-          "category",
-          "category_name",
-          "cover_image",
-          "cover_video",
-          "cover_audio"
-        ],
+    "query": {
+      "function_score": {
         "query": {
-          "function_score": {
-            "query": {
-              "bool": {
-                "must": {
-                  "query_string": {
-                    "query": "朗诵 片头",
-                    "default_field": "key",
-                    "minimum_should_match": "100%"
-                  }
-                },
-                "filter": [
-                  {
-                    "term": {
-                      "is_display": 1
-                    }
-                  }
-                ]
+          "bool" : {
+            "must"   : {
+              "multi_match" : {
+                "query" : "安阳",
+                "fields" : [
+                    "name^20",
+                    "nickname",
+                    "job"
+                ],
+                "type" : "most_fields",
+                "minimum_should_match" : "100%"
               }
-            },
-            "functions": [
-              {
-                "script_score": {
-                  "script": {
-                    "source": "han",
-                    "lang": "payloadscore",
-                    "params": {
-                      "terms": "朗诵 片头",
-                      "pay_money_min": 0,
-                      "pay_money_max": 1800,
-                      "pay_money_rate": 0.8,
-                      "people_pr_min": 0,
-                      "people_pr_max": 5,
-                      "people_pr_rate": 0.5,
-                      "last_pay_time_pr_min": 0,
-                      "last_pay_time_pr_max": 9.21424418,
-                      "last_pay_time_pr_rate": 0.8,
-                      "pass_time_pr_min": 9.17536401,
-                      "pass_time_pr_max": 9.20984338,
-                      "pass_time_pr_rate": 0.3,
-                      "es_score_rate": 0.2,
-                      "self_score_rate": 0.8
-                    }
-                  }
-                }
-              }
-            ],
-            "boost_mode": "replace"
-          }
-        },
-        "highlight": {
-          "fields": {
-            "display_title": {}
-          },
-          "require_field_match": false
-        },
-        "from": 0,
-        "size": 60,
-        "sort": {
-          "_score": {
-            "order": "desc"
+            }
           }
         }
       }
+    },
+    "size": 10,
+    "from": 0,
+    "sort": []
    }
 }
