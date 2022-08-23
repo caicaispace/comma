@@ -10,6 +10,7 @@ import (
 
 	adminHttpServer "comma/pkg/server/http/admin"
 	gatewayHttpServer "comma/pkg/server/http/gateway"
+	"comma/pkg/server/http/gateway/middleware"
 	gatewayJsonRpc "comma/pkg/server/jsonrpc/gateway"
 	segmentJsonRpc "comma/pkg/server/jsonrpc/segment"
 
@@ -100,6 +101,9 @@ func adminServerStart(serverAddr string) error {
 func gatewayServerStart(serverAddr string) error {
 	s := httpServer.NewServer()
 	s.AddServerAddr(serverAddr)
+	s.AddMiddlewares(
+		middleware.NewStats(),
+	)
 	// s.UseTrace(TRACE_URL, "gateway", serverAddr)
 	gatewayHttpServer.NewServer(s)
 	s.Start()
