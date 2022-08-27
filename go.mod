@@ -9,6 +9,7 @@ require (
 	github.com/caicaispace/gohelper v0.1.1
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-resty/resty/v2 v2.7.0
+	github.com/jianfengye/collection v1.4.2
 	github.com/kataras/tablewriter v0.0.0-20180708051242-e063d29b7c23
 	github.com/landoop/tableprinter v0.0.0-20201125135848-89e81fc956e7
 	github.com/mozillazg/go-pinyin v0.19.0
