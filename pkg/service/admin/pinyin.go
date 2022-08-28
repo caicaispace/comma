@@ -46,7 +46,9 @@ func (ws *pinyinService) PinyinGetList(pager *business.Pager, filter *Pinyin) ([
 	pager.SetTotal(int(total))
 	table.Select("*")
 	table.Order("id DESC")
-	table.Limit(pager.GetLimit()).Offset(pager.GetOffset())
+	if (business.Pager{} != *pager) {
+		table.Limit(pager.GetLimit()).Offset(pager.GetOffset())
+	}
 	table.Find(&outData)
 	return outData, total
 }
