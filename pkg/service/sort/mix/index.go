@@ -1,9 +1,9 @@
-package sort
+package mix
 
 import (
 	"fmt"
 
-	"comma/pkg/service/sort/collection"
+	"comma/pkg/service/sort/mix/collection"
 )
 
 type MixSort struct {

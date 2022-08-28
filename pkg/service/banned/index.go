@@ -1,12 +1,12 @@
 package banned
 
 import (
-	"fmt"
 	"os"
 	"strconv"
 	"sync"
 	"time"
 
+	"github.com/caicaispace/gohelper/logx"
 	"github.com/caicaispace/gohelper/orm/gorm"
 	orm "gorm.io/gorm"
 )
@@ -40,7 +40,7 @@ func (fs *Banned) LoadData() {
 	}()
 	words, err = _loadDataFromDb(10)
 	if err != nil {
-		fmt.Print(err)
+		logx.Error(err)
 		os.Exit(0)
 	}
 	f.AddWord(words...)

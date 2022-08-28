@@ -8,7 +8,7 @@ type First struct {
 	*Base
 }
 
-func New(objs any) *First {
+func NewFirst(objs any) *First {
 	base := &Base{
 		PageLimit:  2,
 		PageTotal:  5,
