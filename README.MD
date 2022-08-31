@@ -16,6 +16,8 @@ Chinese segment,dictionary manage, banned words filtering, Chinese to pinyin
 
 *   jsonrpc
 
+*   grpc
+
 *   manage ui
 
 *   monitor with grafana
@@ -40,7 +42,9 @@ Chinese segment,dictionary manage, banned words filtering, Chinese to pinyin
 
 *   [ ] new word discovery
 
-*   [ ] grpc
+*   [ ] spell correction
+
+*   [ ] mix sort a boutique sort
 
 *   [ ] distributed Services
 
