@@ -13,6 +13,7 @@ require (
 	github.com/kataras/tablewriter v0.0.0-20180708051242-e063d29b7c23
 	github.com/landoop/tableprinter v0.0.0-20201125135848-89e81fc956e7
 	github.com/mozillazg/go-pinyin v0.19.0
+	github.com/smallnest/zhuge v0.0.0-20220620115810-6953a0671c8b
 	github.com/stretchr/testify v1.8.0
 	github.com/unknwon/com v1.0.1
 	go.etcd.io/etcd/client/v3 v3.5.4
@@ -60,6 +61,7 @@ require (
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
+	github.com/pyroscope-io/client v0.2.4-0.20220607180407-0ba26860ce5b // indirect
 	github.com/rivo/uniseg v0.3.4 // indirect
 	github.com/shiena/ansicolor v0.0.0-20200904210342-c7312218db18 // indirect
 	github.com/ugorji/go/codec v1.2.7 // indirect

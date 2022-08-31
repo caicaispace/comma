@@ -151,6 +151,16 @@ services:
       - default
     # restart: always
 
+  pyroscope:
+    image: ./docker/services/pyroscope
+    ports:
+      - "${PYROSCOPE}:4040"
+    command:
+      - "server"
+    networks:
+      - default
+    # restart: always
+
 networks:
   default:
     driver: bridge

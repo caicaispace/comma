@@ -89,8 +89,6 @@ func loadService() {
 func adminServerStart(serverAddr string) error {
 	s := httpServer.NewServer()
 	s.AddServerAddr(serverAddr)
-	// s.UseTrace(TRACE_URL, "comma-admin", serverAddr)
-	// s.UseGrafana()
 	adminHttpServer.NewServer(s.Engine)
 	fe, _ := fs.Sub(static, "static")
 	s.Engine.StaticFS("ui", http.FS(fe))
@@ -103,8 +101,8 @@ func gatewayServerStart(serverAddr string) error {
 	s.AddServerAddr(serverAddr)
 	s.AddMiddlewares(
 		middleware.NewStats(),
+		// middleware.NewPyroscope(),
 	)
-	// s.UseTrace(TRACE_URL, "gateway", serverAddr)
 	gatewayHttpServer.NewServer(s)
 	s.Start()
 	return nil
