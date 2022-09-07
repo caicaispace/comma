@@ -8,15 +8,11 @@ Chinese segment,dictionary manage, banned words filtering, Chinese to pinyin
 
 *   traditional chinese to simplified chinese
 
-*   elasticSearch proxy middleware
+*   elasticSearch proxy middleware(http,jsonrpc,grpc)
 
 *   banned words filtering
 
 *   chinese to pinyin
-
-*   jsonrpc
-
-*   grpc
 
 *   manage ui
 

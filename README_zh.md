@@ -4,19 +4,13 @@
 
 ### 特性
 
-*   中文分词
+*   中文分词（同义词、停词、上位词、下位词、节日词、违禁词）
 
 *   繁简转换
 
-*   ElasticSearch 中间件
-
-*   违禁词
-
 *   汉字转拼音
 
-*   jsonrpc
-
-*   grpc
+*   ElasticSearch 代理中间件（http、jsonrpc、grpc）
 
 *   管理ui
 
